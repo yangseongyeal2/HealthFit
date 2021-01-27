@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>crawl_test</title>
+</head>
+<body>
+  <form action="/crawling/"  class="crawl_form" method="POST">
+    {% csrf_token %}
+    categori: <input type="text" name="categori"><br>
+    url: <input type="text" name="crawl_url"><br>
+    brand: <input type="text" name="crawl_brand"><br>
+    number: <input type="number" name="crawl_number"><br>
+    selectname: <input type="text" name="crawl_selectname"><br>
+    price: <input type="text" name="crawl_price"><br>
+    image: <input type="text" name="crawl_image"><br>
+    <input type="submit">
+  </form>
+</body>
+</html>

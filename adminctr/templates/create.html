@@ -1,0 +1,67 @@
+{% if messg%}
+<script>
+    alert('{{messg}}');
+</script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sign</title>
+    </head>
+    <body>
+        <H2>관리자 사이트</H2>
+        <form action="/create_admin/" method="POST">
+            {% csrf_token %}
+            Title:
+            <input type="text" name="Title" required><br><br>
+            Detail:
+            <textarea rows="5" cols="40" name="Detail" required></textarea><br><br>
+            Picture Upload
+            <input type="file" name="file[]" id="file"><br><br>
+            <input type="hidden" name="url" id="url" >
+            <button type="button" onclick="uploadimage()">Upload</button><br><br>
+            카테고리:
+            <input type="text" name="categori" required></button><br><br>
+            <input type="submit" value="Submit">
+
+        </form>
+    </body>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+        apiKey: 'AIzaSyAFN2apSBQwHIiGioEKyyQORxceIR22VMs',
+        authDomain: 'healthstore-de3c3.firebaseapp.com',
+        databaseURL: 'https://healthstore-de3c3-default-rtdb.firebaseio.com',
+        storageBucket: 'healthstore-de3c3.appspot.com',
+        messagingSenderId: "838060678239",
+        };
+       firebase.initializeApp(firebaseConfig);
+
+       // Get a reference to the storage service, which is used to create references in your storage bucket
+       function uploadimage(){
+        var storage = firebase.storage();
+        var file =document.getElementById("file").files[0];
+        var storageRef=storage.ref();
+        var thisref=storageRef.child(file.name).put(file);
+
+        thisref.on('state_changed',function(snapshot){
+            console.log("file uploaded successfully");
+        },
+        function(error){
+
+        },
+        function(){
+            var downloadURL=thisref.snapshot.downloadURL;
+            console.log("got url");
+          
+            document.getElementById("url").value=downloadURL;
+            alert("file uploaded successfully");
+
+        });
+
+
+       }
+       
+    </script>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="contents">
+
+    <div class="inner">
+      <div class="index-item">
+      {% for product in product_lis %}
+      
+        <ul role="list" class="item-list w-list-unstyled">
+          <li class="item-list-arg">
+            <a href="{% url 'detail' product.documentId %}"><img src="{{product.downloadurl}}" class="image-3"></a> 
+            <div class="item-list-arg-header">{{product.name}}</div>
+            <div class="item-list-arg-text">{{product.price}}</div>
+          </li>
+        </ul>
+      {% endfor %}
+     </div>
+    </div>
+
+  </div>
+
+{% endblock %}
+      
+      
+
+

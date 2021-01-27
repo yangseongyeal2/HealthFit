@@ -1,0 +1,997 @@
+
+from django.shortcuts import render,get_object_or_404,redirect
+import pyrebase
+#from pyrebase import pyrebase
+#from django.contrib import auth
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from firebase_admin import auth
+#from firebase_admin import auth
+from .models import Product
+from django.http import HttpResponse,HttpResponseRedirect
+from .models import UserModel
+from .models import Cart
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+import requests
+
+# from google_images_download import google_images_download   #importing the library
+
+# response = google_images_download.googleimagesdownload()   #class instantiation
+
+# arguments = {"keywords":"Polar bears,baloons,Beaches","limit":20,"print_urls":True}   #creating list of arguments
+# paths = response.download(arguments)   #passing the arguments to the function
+# print(paths)   #printing absolute paths of the downloaded images
+
+
+
+config={
+    'apiKey': "AIzaSyAFN2apSBQwHIiGioEKyyQORxceIR22VMs",
+    'authDomain': "healthstore-de3c3.firebaseapp.com",
+    'databaseURL': "https://healthstore-de3c3-default-rtdb.firebaseio.com",
+    'projectId': "healthstore-de3c3",
+    'storageBucket': "healthstore-de3c3.appspot.com",
+    'messagingSenderId': "838060678239",
+    'appId': "1:838060678239:web:d861eca1e8639cc3a14fea",
+    'measurementId': "G-3T3MCBWTZ8"
+}
+firebase =pyrebase.initialize_app(config)
+authe=firebase.auth()
+database=firebase.database()
+
+
+####
+cred=credentials.Certificate('myapp/service-account.json')
+firebase_admin.initialize_app(cred)
+db=firestore.client()
+
+
+
+# Create your views here.
+def home(request):
+    uid=None
+    print("홈시작")
+    try:
+        print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+    except:
+        print("로그인안댐")
+  
+   
+    #if request.session['uid']:
+        #uid=authe.current_user['localId']
+      
+    # doc_ref_random=db.collection("product").document()
+    # doc_ref_random.set(
+    #     Product('양성열','25',doc_ref_random).to_dict()
+    # )
+    # # doc_ref.document().set(
+    # #     Product('남종경','25').to_dict()
+    # # )
+    
+    # try:
+    #     docs=doc_ref.document('test').get()
+    #     print('Document data: {}'.format(docs.to_dict()))
+    #     #print(product)
+    #     products=Product.from_dict(docs.to_dict())
+       
+    # except:
+    #     print('No such document!')
+
+   #파이어스토어 데이터 불러오기
+    # doc_ref=db.collection("product")
+    # alldocs=doc_ref.stream()
+    # name_lis=[]
+    # age_lis=[]
+    # documentId_lis=[]
+    # url_lis=[]
+    # for doc in alldocs:
+    #     products=Product.from_dict(doc.to_dict())
+    #     #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+    #     name_lis.append(products.name)
+    #     age_lis.append(products.price)
+    #     documentId_lis.append(products.documentId)
+    #     url_lis.append(products.downloadurl)
+    #     # print(products.name)
+    #     # print(products.age)
+    #     # print(products.documentId)
+
+    # comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
+
+    #로그인 유무
+   # user = auth.get_user(uid)
+   # print('Successfully fetched user data: {0}'.format(user.uid))
+    # if user :
+    #     print(user)
+    # else:
+    #     print(user)
+    
+    # uid=auth.get_user()
+    # print(uid)
+    #return render(request,'home.html',{'comb_lis':comb_lis,'uid':uid})
+
+    # email=request.POST.get('email')
+    # #print(email)
+    # passw=request.POST.get('pass')
+    # #print(passw)
+    
+    # if email != None :
+    #     try:
+    #         user=authe.sign_in_with_email_and_password(email,passw)
+            
+    #     except:
+    #         message="Invalid credentials"
+    #         return render(request,"signIn.html",{"messg":message})
+    #         #return redirect('/signIn/')
+    #         #return render(request,"welcom.html",{"messg":message})
+    #         # print(user['localId'])    
+    #     #uid=user['localId']
+    #     uid=authe.current_user['localId']
+    #     print(uid)
+       
+        #print(uid)
+        #session_id=user['idToken']
+        #request.session['uid']=str(session_id)
+
+    #return render(request,'home.html',{'comb_lis':comb_lis,'uid':uid})
+    return render(request,'home.html',{'uid':uid})
+    #return render(request,'base2.html')
+    
+
+def hello(request):
+    doc_ref=db.collection("product")
+    # doc_ref_random=db.collection("product").document()
+    # doc_ref_random.set(
+    #     Product('양성열','25',doc_ref_random).to_dict()
+    # )
+    # # doc_ref.document().set(
+    # #     Product('남종경','25').to_dict()
+    # # )
+    
+    # try:
+    #     docs=doc_ref.document('test').get()
+    #     print('Document data: {}'.format(docs.to_dict()))
+    #     #print(product)
+    #     products=Product.from_dict(docs.to_dict())
+       
+    # except:
+    #     print('No such document!')
+
+   #파이어스토어 데이터 불러오기
+    alldocs=doc_ref.stream()
+    name_lis=[]
+    age_lis=[]
+    documentId_lis=[]
+    url_lis=[]
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+        name_lis.append(products.name)
+        age_lis.append(products.price)
+        documentId_lis.append(products.documentId)
+        url_lis.append(products.downloadurl)
+        # print(products.name)
+        # print(products.age)
+        # print(products.documentId)
+
+    comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
+   
+    return render(request,'hello.html',{'comb_lis':comb_lis})
+
+
+
+
+
+
+
+def signIn(request):
+    return render(request,"signIn.html")
+
+def postsign(request):
+    email=request.POST.get('email')
+    passw=request.POST.get('pass')
+    try:
+        user=authe.sign_in_with_email_and_password(email,passw)
+    except:
+        message="Invalid credentials"
+        return render(request,"signIn.html",{"messg":message})
+        #return redirect('/signIn/')
+        #return render(request,"welcom.html",{"messg":message})
+   # print(user['localId'])    
+    uid=user['localId']
+    print("localId: "+uid)
+    session_id=user['idToken']
+    print("idtoken: "+session_id)
+    #request.session['uid']=str(session_id)
+    request.session['uid']=str(uid)
+    print("포스트사인"+request.session['uid'])
+    
+    doc_ref=db.collection("product")
+    alldocs=doc_ref.stream()
+    name_lis=[]
+    age_lis=[]
+    documentId_lis=[]
+    url_lis=[]
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+        name_lis.append(products.name)
+        age_lis.append(products.price)
+        documentId_lis.append(products.documentId)
+        url_lis.append(products.downloadurl)
+       # print(products.name)
+       # print(products.age)
+       # print(products.documentId)
+
+    comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
+    #return render(request,"welcom.html",{"e":email})
+    return render(request,"home.html",{"uid":uid,"comb_lis":comb_lis})
+    #return HttpResponse("OK")
+    
+    #return redirect('/homelogined/')
+
+
+def logout(request):
+    #auth.logout(request)
+    #authe.current_user = None
+    request.session['uid']=None
+   
+    
+    
+    return render(request,'home.html')
+
+def signUp(request):
+
+    return render(request,"signUp.html")
+
+    
+def postsignup(request):
+    # print("시작")
+    email=request.POST.get('email')
+    emailcheck=request.POST.get('emailcheck')
+    password=request.POST.get('password')
+    passwordre=request.POST.get('passwordre')
+    checkbox=request.POST.get('checkbox')
+    name=request.POST.get('name')
+    male=request.POST.get('male')
+    female=request.POST.get('female')
+    zipcode=request.POST.get('zipcode')
+    adress=request.POST.get('adress')
+    adressdetail=request.POST.get('adressdetail')
+    adresscf=request.POST.get('adresscf')
+    uid={}
+    if emailcheck=="인증":
+
+        if len(password) >5 :
+            if password==passwordre :
+                try:
+                    user=authe.create_user_with_email_and_password(email,password)
+                    uid =user['localId']
+                except:
+                    msg="unalbe to create account try again"
+                    return render(request,"signUp.html",{"msg":msg})
+                
+        else :
+            msg="비밀번호를 6자리 이상 입력하시오"
+            return render(request ,"signUp.html",{"msg":msg} )
+            #return render(request,"home.html",{"msg":msg})
+    else :
+        msg="ID중복을 하시오"
+        return render(request,"signUp.html",{"msg":msg})
+    
+    # print("유저 도큐 앞")
+    user_doc_ref=db.collection("users").document(uid)
+    # print("유저 도큐 뒤")
+    #data={"name":name,"status":"1","uid":uid}
+
+    user_doc_ref.set(
+        UserModel(email,password,checkbox,name,male,zipcode,adress,adressdetail).to_dict()
+    )
+
+    
+
+
+
+
+
+    # doc_ref=db.collection('employee').document('empdoc')
+    # doc_ref.set({
+    #     'name':"양성열",
+    #     '나이':"25"
+    # })
+    
+    return render(request,"signIn.html")
+
+    
+
+
+
+
+
+# def create_admin(request):
+#     Title=request.POST.get('Title')
+#     Detail=request.POST.get('Detail')
+#     url=request.POST.get('url')
+    
+#     #file=request.POST.get('file')
+
+#     doc_ref=db.collection("product")
+#     doc_ref_random=db.collection("product").document()
+#     doc_ref_random.set(
+#     Product(Title,Detail,doc_ref_random,url).to_dict()
+#     )
+    
+#     return render(request,"create.html")
+
+def detail(request,documentId):
+    #테스트
+    uid=None
+    if authe.current_user:
+        uid=authe.current_user['localId']
+    print(documentId)
+    doc_ref=db.collection(u'product').document(documentId)
+    doc = doc_ref.get()
+    products=None
+    if doc.exists:
+        print(u'Document data: {}'.format(doc.to_dict()))
+        products=Product.from_dict(doc.to_dict())
+
+    else:
+        print(u'No such document!')
+
+    
+   
+
+    return render(request,"detail.html",{'products':products,'documentId':documentId,'uid':uid})
+
+def index(request):
+    return render(request,"index.html")
+def musinsa(request):
+    return render(request,"dumex.html")
+
+
+def top(request):
+    #doc_ref=db.collection("product")
+    uid=None
+    try:
+        print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+    except:
+        print("로그인안댐")
+
+    doc_ref=db.collection(u'product').where(u"categori", u"==","TOP")
+    alldocs=doc_ref.stream()
+    product_lis=[]
+    # name_lis=[]
+    # age_lis=[]
+    # documentId_lis=[]
+    # url_lis=[]
+    # categori_lis=[]
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+        # name_lis.append(products.name)
+        # age_lis.append(products.price)
+        # documentId_lis.append(products.documentId)
+        # url_lis.append(products.downloadurl)
+        # categori_lis.append(products.categori)
+        # print(products.name)
+        # print(products.price)
+        # print(products.documentId)
+        product_lis.append(products)
+
+
+    #comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis,categori_lis)
+    
+    return render(request ,'top.html',{"product_lis":product_lis,'uid':uid})
+
+def bottom(request):
+    uid=None
+    try:
+        print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+    except:
+        print("로그인안댐")
+     #doc_ref=db.collection("product")
+    doc_ref=db.collection(u'product').where(u"categori", u"==",1)
+    alldocs=doc_ref.stream()
+    name_lis=[]
+    age_lis=[]
+    documentId_lis=[]
+    url_lis=[]
+    categori_lis=[]
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+        name_lis.append(products.name)
+        age_lis.append(products.price)
+        documentId_lis.append(products.documentId)
+        url_lis.append(products.downloadurl)
+        categori_lis.append(products.categori)
+        # print(products.name)
+        # print(products.age)
+        # print(products.documentId)
+
+    comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis,categori_lis)
+    
+
+    return render(request ,'bottom.html',{"comb_lis":comb_lis,'uid':uid})
+
+def bag(request):
+    uid=None
+    try:
+        print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+    except:
+        print("로그인안댐")
+     #doc_ref=db.collection("product")
+    doc_ref=db.collection(u'product').where(u"categori", u"==",2)
+    alldocs=doc_ref.stream()
+    name_lis=[]
+    age_lis=[]
+    documentId_lis=[]
+    url_lis=[]
+    categori_lis=[]
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+        name_lis.append(products.name)
+        age_lis.append(products.price)
+        documentId_lis.append(products.documentId)
+        url_lis.append(products.downloadurl)
+        categori_lis.append(products.categori)
+        # print(products.name)
+        # print(products.age)
+        # print(products.documentId)
+
+    comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis,categori_lis)
+    
+    
+    return render(request ,'bag.html',{"comb_lis":comb_lis,'uid':uid})
+
+def etc(request):
+    uid=None
+    try:
+        print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+    except:
+        print("로그인안댐")
+     #doc_ref=db.collection("product")
+    doc_ref=db.collection(u'product').where(u"categori", u"==",3)
+    alldocs=doc_ref.stream()
+    name_lis=[]
+    age_lis=[]
+    documentId_lis=[]
+    url_lis=[]
+    categori_lis=[]
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+        name_lis.append(products.name)
+        age_lis.append(products.price)
+        documentId_lis.append(products.documentId)
+        url_lis.append(products.downloadurl)
+        categori_lis.append(products.categori)
+        # print(products.name)
+        # print(products.age)
+        # print(products.documentId)
+
+    comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis,categori_lis)
+    
+    
+    return render(request ,'etc.html',{"comb_lis":comb_lis,'uid':uid})
+
+def pay(request):
+    return render(request,'pay.html')
+def thumbdetail(request):
+    return render(request,'thumbdetail.html')
+def cart(request):
+    uid=None
+    total_price=0
+    total_amount=0;
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
+        alldocs=aldoc_ref.stream()
+        product_lis=[]
+        option={}
+        for doc in alldocs:
+            cart=Cart.from_dict(doc.to_dict())
+            product_lis.append(cart)
+            total_price+=cart.totalprice
+            total_amount+=cart.sizedic['s']+cart.sizedic['m']+cart.sizedic['l']+cart.sizedic['xl']
+        return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price})
+    except:
+        print("로그인안댐")
+        return render(request, 'signIn.html')
+    # if authe.current_user:
+    #     uid=authe.current_user['localId']
+    #     #print(authe.get_account_info())
+        
+    #     aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
+    #     alldocs=aldoc_ref.stream()
+    #     product_lis=[]
+    #     option={}
+    #     for doc in alldocs:
+    #         cart=Cart.from_dict(doc.to_dict())
+    #         print("카트포문")
+    #         product_lis.append(cart)
+    #         total_price+=cart.totalprice
+    #         total_amount+=cart.sizedic['s']+cart.sizedic['m']+cart.sizedic['l']+cart.sizedic['xl']
+    #     return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price})
+    # else :
+    #     return render(request, 'signIn.html')
+
+def addcart(request):
+    total_amount=0
+    uid=None
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        products_name=request.POST.get('product_name')
+        product_price=request.POST.get('product_price')
+        product_id=request.POST.get('product_id')
+        amount_s=request.POST.get('amount_s')
+        amount_m=request.POST.get('amount_m')
+        amount_l=request.POST.get('amount_l')
+        amount_xl=request.POST.get('amount_xl')
+        option={'s':0,'m':0,'l':0,'xl':0}
+    #user=authe.currentUser
+    #print(user)
+        if amount_s !='':
+            option.update(s=int(amount_s))
+            total_amount+=int(amount_s)
+        if amount_m !='':
+            option.update(m=int(amount_m))
+            total_amount+=int(amount_m)
+        if amount_l !='':
+            option.update(l=int(amount_l))
+            total_amount+=int(amount_l)
+        if amount_xl !='':
+            option.update(xl=int(amount_xl))
+            total_amount+=int(amount_xl)
+        print(amount_s)
+        #print(int(amount_s))
+        print(total_amount)
+        #수량 선택이 안되었을때 파이썬편
+        if total_amount <1 :
+            return HttpResponseRedirect(request.POST['path'])
+
+
+        
+        doc_ref=db.collection(u'product').document(product_id)
+        doc = doc_ref.get()
+        products=None
+        if doc.exists:
+        #print(u'Document data: {}'.format(doc.to_dict()))
+            products=Product.from_dict(doc.to_dict())
+        else:
+            print(u'No such document!')
+
+        doc_ref2=db.collection(u'users').document(uid)
+        doc2 = doc_ref2.get()
+        usermodel=None
+        if doc2.exists:
+            print(u'Document data: {}'.format(doc2.to_dict()))
+            usermodel=UserModel.from_dict(doc2.to_dict())
+        else:
+            print(u'No such document!')
+
+        price3=""
+        price=products.price.split('원')[0]
+        price2=price.split(',')
+        for a in price2:
+            price3+=a
+        total_price=int(price3)*total_amount
+        
+        if doc.exists and doc2.exists :
+            doc_usercart=doc_ref2.collection(u'cart').document(products.documentId)
+            doc_usercart.set(
+                Cart(products.name,products.price,products.documentId,products.downloadurl,products.categori,products.brand,option,total_price,total_amount).to_dict()
+            )
+            
+        
+
+        aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
+        alldocs=aldoc_ref.stream()
+        product_lis=[]
+        total_price=0
+       
+        for doc in alldocs:
+            cart=Cart.from_dict(doc.to_dict())
+            print("카트포문")
+            product_lis.append(cart)
+            total_price+=cart.totalprice
+           
+        return render(request, 'cart.html',{'product_lis':product_lis,'option':option,'uid':uid,'usermodel':usermodel,'total_price':total_price})
+
+    except:
+        print("로그인안댐")
+        return render(request, 'signIn.html')
+  
+
+def order(request):
+   
+    total_amount=0
+    uid=None
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        products_name=request.POST.get('product_name')
+        product_price=request.POST.get('product_price')
+        product_id=request.POST.get('product_id')
+        amount_s=request.POST.get('amount_s')
+        amount_m=request.POST.get('amount_m')
+        amount_l=request.POST.get('amount_l')
+        amount_xl=request.POST.get('amount_xl')
+        option={'s':0,'m':0,'l':0,'xl':0}
+    #user=authe.currentUser
+    #print(user)
+        if amount_s !='':
+            option.update(s=int(amount_s))
+            total_amount+=int(amount_s)
+        if amount_m !='':
+            option.update(m=int(amount_m))
+            total_amount+=int(amount_m)
+        if amount_l !='':
+            option.update(l=int(amount_l))
+            total_amount+=int(amount_l)
+        if amount_xl !='':
+            option.update(xl=int(amount_xl))
+            total_amount+=int(amount_xl)
+        print(amount_s)
+        #print(int(amount_s))
+        print(total_amount)
+        #수량 선택이 안되었을때 파이썬편
+        if total_amount <1 :
+            return HttpResponseRedirect(request.POST['path'])
+        
+            
+
+       
+        doc_ref=db.collection(u'product').document(product_id)
+        doc = doc_ref.get()
+        products=None
+        if doc.exists:
+        #print(u'Document data: {}'.format(doc.to_dict()))
+            products=Product.from_dict(doc.to_dict())
+        else:
+            print(u'No such document!')
+
+        doc_ref2=db.collection(u'users').document(uid)
+        doc2 = doc_ref2.get()
+        usermodel=None
+        if doc2.exists:
+            print(u'Document data: {}'.format(doc2.to_dict()))
+            usermodel=UserModel.from_dict(doc2.to_dict())
+        else:
+            print(u'No such document!')
+        price3=""
+        price=products.price.split('원')[0]
+        price2=price.split(',')
+        for a in price2:
+            price3+=a
+        
+
+        total_price=int(price3)*total_amount
+        return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price})
+    except:
+        return render(request, 'signIn.html')
+
+    # if authe.current_user:
+    #     uid=authe.current_user['localId']
+    #     products_name=request.POST.get('product_name')
+    #     product_price=request.POST.get('product_price')
+    #     product_id=request.POST.get('product_id')
+    #     amount_s=request.POST.get('amount_s')
+    #     amount_m=request.POST.get('amount_m')
+    #     amount_l=request.POST.get('amount_l')
+    #     amount_xl=request.POST.get('amount_xl')
+    #     option={'s':0,'m':0,'l':0,'xl':0}
+    # #user=authe.currentUser
+    # #print(user)
+    #     if amount_s !='':
+    #         option.update(s=int(amount_s))
+    #         total_amount+=int(amount_s)
+    #     if amount_m !='':
+    #         option.update(m=int(amount_m))
+    #         total_amount+=int(amount_m)
+    #     if amount_l !='':
+    #         option.update(l=int(amount_l))
+    #         total_amount+=int(amount_l)
+    #     if amount_xl !='':
+    #         option.update(xl=int(amount_xl))
+    #         total_amount+=int(amount_xl)
+    #     print(amount_s)
+    #     #print(int(amount_s))
+    #     print(total_amount)
+    #     #수량 선택이 안되었을때 파이썬편
+    #     if total_amount <1 :
+    #         return HttpResponseRedirect(request.POST['path'])
+        
+            
+
+       
+    #     doc_ref=db.collection(u'product').document(product_id)
+    #     doc = doc_ref.get()
+    #     products=None
+    #     if doc.exists:
+    #     #print(u'Document data: {}'.format(doc.to_dict()))
+    #         products=Product.from_dict(doc.to_dict())
+    #     else:
+    #         print(u'No such document!')
+
+    #     doc_ref2=db.collection(u'users').document(uid)
+    #     doc2 = doc_ref2.get()
+    #     usermodel=None
+    #     if doc2.exists:
+    #         print(u'Document data: {}'.format(doc2.to_dict()))
+    #         usermodel=UserModel.from_dict(doc2.to_dict())
+    #     else:
+    #         print(u'No such document!')
+    #     price3=""
+    #     price=products.price.split('원')[0]
+    #     price2=price.split(',')
+    #     for a in price2:
+    #         price3+=a
+        
+
+    #     total_price=int(price3)*total_amount
+    #     return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price})
+    # else :
+    #      return render(request, 'signIn.html')
+
+
+
+def mypage(request):
+    uid=None
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        return render(request, 'mypage.html',{'uid':uid})
+    except:
+        return render(request, 'signin.html',{'uid':uid})
+   
+       
+
+def kakaologin(request):
+   
+
+    client_id ='d63d18102aece9a328725d556a1fc114'
+    #redirect_uri='http://127.0.0.1:8000/oauth/'
+    redirect_uri='http://3.35.247.69/oauth/'
+
+    access_token_request_uri="https://kauth.kakao.com/oauth/authorize?"
+    access_token_request_uri+='client_id='+client_id
+    access_token_request_uri+="&redirect_uri="+redirect_uri
+    access_token_request_uri+="&response_type=code"
+    print(access_token_request_uri)
+
+    return redirect(access_token_request_uri)
+def oauth(request):
+
+    code=request.GET['code']
+    print(code);
+    
+    client_id ='d63d18102aece9a328725d556a1fc114'
+    #redirect_uri='http://127.0.0.1:8000/oauth/'
+    redirect_uri='http://3.35.247.69/oauth/'
+
+    access_token_request_uri="https://kauth.kakao.com/oauth/token?grant_type=authorization_code&"
+    access_token_request_uri+='client_id='+client_id
+    access_token_request_uri+="&redirect_uri="+redirect_uri
+    access_token_request_uri+="&code="+code
+    print(access_token_request_uri)
+    access_token_request_uri_data=requests.get(access_token_request_uri)
+    json_data=access_token_request_uri_data.json()
+    access_token=json_data['access_token']
+    print("accesstoken="+access_token)
+    user_profile_info_uri="https://kapi.kakao.com/v2/user/me?access_token="
+    user_profile_info_uri +=str(access_token)
+    print("유저 딕션어리:"+user_profile_info_uri)
+    user_profile_info_uri_data=requests.get(user_profile_info_uri)
+    user_json_data=user_profile_info_uri_data.json()
+    #이메일로그인
+    #user_email=user_json_data['kakao_account']['email']
+    user_id=user_json_data['id']
+    user_email=str(user_id)+"@kakao.com"
+    print(user_email)
+    #전화번호 로그인
+    user_nickname=user_json_data['properties']['nickname']
+    password="kakaologin"
+    ##이미 계정이 있을경우
+    try: 
+        user = auth.get_user_by_email(user_email)
+        try:
+            firebaseuser=authe.sign_in_with_email_and_password(user_email,password)
+            uid =firebaseuser['localId']
+            request.session['uid']=str(uid)
+            return render(request,"home.html",{"uid":uid})
+            
+        except:
+            message="Invalid credentials"
+            return render(request,"signIn.html",{"messg":message})
+    ##처음 로그인 하는경우
+    except :
+        ##계정생성
+        firebaseuser=authe.create_user_with_email_and_password(user_email,password)
+        uid =firebaseuser['localId']
+        request.session['uid']=str(uid)
+        user_doc_ref=db.collection("users").document(uid)
+
+        user_doc_ref.set(
+            UserModel(user_email,password,"",user_nickname,"","","","").to_dict()
+        )
+
+        try:
+            firebaseuser=authe.sign_in_with_email_and_password(user_email,password)
+            uid =firebaseuser['localId']
+            return render(request,"home.html",{"uid":uid})
+        except:
+            message="Invalid credentials"
+            return render(request,"signIn.html",{"messg":message})
+
+        
+  
+    #print('Successfully fetched user data: {0}'.format(user.uid))
+    # result = auth.get_users([
+    # auth.EmailIdentifier("ysy96pashon@naver.com")
+    # ])
+    # print('Successfully fetched user data:')
+    # for user in result.users:
+    #     print(user.uid)
+
+    # print('Unable to find users corresponding to these identifiers:')
+    # for uid in result.not_found:
+    #     print(uid)
+
+    
+    return render(request, 'home.html')
+
+def navercallback(request):
+    NAVER_CLIENT_ID = 'gyHDnkTYKAXVqlUIyVLp'
+    # NAVER_SECRET_KEY = 'aK3xMSwH14'
+
+    code=request.GET['code']
+    state=request.GET['state']
+    print(code)
+    req_info_info='https://nid.naver.com/oauth2.0/token?client_id='
+    req_info_info+='gyHDnkTYKAXVqlUIyVLp'+'&client_secret='
+    req_info_info+='aK3xMSwH14'+'&grant_type=authorization_code&state='
+    req_info_info+=state+'&code='+code
+    print(req_info_info)
+    access_token_request_uri_data=requests.get(req_info_info)
+    json_data=access_token_request_uri_data.json()
+    print(json_data)
+    accesstoken=json_data['access_token']
+    print(accesstoken)
+    user_profile_info_uri="https://openapi.naver.com/v1/nid/me?access_token="+accesstoken
+    print(user_profile_info_uri)
+    naverid=requests.get(user_profile_info_uri).json()['response']['id']
+    print(naverid)
+
+    user_email=str(naverid)+"@naver.com"
+    print(user_email)
+    #전화번호 로그인
+    #user_nickname=user_json_data['properties']['nickname']
+    user_nickname=None
+    password="naverlogin"
+    ##이미 계정이 있을경우
+    try: 
+        user = auth.get_user_by_email(user_email)
+        try:
+            firebaseuser=authe.sign_in_with_email_and_password(user_email,password)
+            uid =firebaseuser['localId']
+            request.session['uid']=str(uid)
+            return render(request,"home.html",{"uid":uid})
+            
+        except:
+            message="Invalid credentials"
+            return render(request,"signIn.html",{"messg":message})
+    ##처음 로그인 하는경우
+    except :
+        ##계정생성
+        firebaseuser=authe.create_user_with_email_and_password(user_email,password)
+        uid =firebaseuser['localId']
+        request.session['uid']=str(uid)
+        user_doc_ref=db.collection("users").document(uid)
+
+        user_doc_ref.set(
+            UserModel(user_email,password,"",user_nickname,"","","","").to_dict()
+        )
+
+        try:
+            firebaseuser=authe.sign_in_with_email_and_password(user_email,password)
+            uid =firebaseuser['localId']
+            return render(request,"home.html",{"uid":uid})
+        except:
+            message="Invalid credentials"
+            return render(request,"signIn.html",{"messg":message})
+
+
+
+ 
+
+    return render(request, 'home.html')
+
+def googlelogin(request,uid):
+    print("구글로그인"+uid)
+    # print("구글이름"+name)
+    request.session['uid']=uid
+
+    user_doc_ref=db.collection("users").document(uid)
+   
+
+    doc = user_doc_ref.get()
+    if doc.exists:
+        print(u'Document data: {}'.format(doc.to_dict()))
+    else:
+        user_doc_ref.set(
+        UserModel("","","","","","","","").to_dict()
+        )
+        print(u'No such document!')
+
+    
+
+
+    return render(request,"home.html",{'uid':uid})
+
+    
+
+   
+    
+
+
+    
+    
+def check_email(request):
+    email=request.POST.get('email')
+    password=request.POST.get('password')
+    passwordre=request.POST.get('passwordre')
+    checkbox=request.POST.get('checkbox')
+    name=request.POST.get('name')
+    male=request.POST.get('male')
+    female=request.POST.get('female')
+    zipcode=request.POST.get('zipcode')
+    adress=request.POST.get('adress')
+    adressdetail=request.POST.get('adressdetail')
+    adresscf=request.POST.get('adresscf')
+    try:
+        user = auth.get_user_by_email(email)
+        msg="이미 아이디가 존재합니다"
+        return render(request,'signUp.html',{'email':email,'password':password
+        ,'checkbox':checkbox,'name':name,'male':male,'female':female
+        ,'zipcode':zipcode,'adress':adress,'adressdetail':adressdetail,'adresscf':adresscf,'msg':msg})
+    except:
+        msg="사용할수있는 ID입니다"
+        flag="인증"
+        return render(request,'signUp.html',{'email':email,'password':password
+        ,'checkbox':checkbox,'name':name,'male':male,'female':female
+        ,'zipcode':zipcode,'adress':adress,'adressdetail':adressdetail,'adresscf':adresscf,'flag':flag,'msg':msg})
+
+   
+    
+
+    
+    
+    
+    # print(request.user.is_authenticated)
+    # if uid != None :
+    #     print("로그인")
+
+
+  
+
+
+    
+
+
+
+
+
+
+
+
+

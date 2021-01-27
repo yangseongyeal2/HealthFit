@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+
+
+{% load static %}
+{% static 'media/naverlogin_green.PNG' as naverbutton_green%}
+{% static 'media/naverlogin_white.PNG' as naverbutton_white%}
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+
+
+{% if messg%}
+<script>
+    alert('{{messg}}');
+
+</script>
+{% endif %}
+
+{% block content %}
+{% load static %}
+
+<div class="contents">
+
+  <div class="location">
+    <div class="location-text">로그인</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+    <form name="loginform" action="/postsign/" method="post" style="width: 600px;">
+      {% csrf_token %}
+      <div>
+        <input type="text" name="email" class="text-field w-input" placeholder="이메일(아이디)" style="margin: 10px 0px; width: 100%; height: 50px;">
+        <input type="password" name="pass" class="text-field w-input" placeholder="비밀번호" style="margin: 10px 0px; width: 100%; height: 50px;">
+        <div style="text-align: right;"><a href="#">아이디 찾기</a> / <a href="#">비밀번호 찾기</a></div>
+      </div>
+
+      <div class="div-submit">
+        <input type="submit" value="로그인" data-wait="Please wait..." class="btn-normal btn-buynow">
+        <a href="{% url 'home' %}" class="btn-normal btn-cancle">취소</a>
+      </div>
+    </form>
+
+    <div class="test-login">
+
+      <div class="test-login2">
+        <a href="{% url 'kakaologin'%}" id="loginWithKakao">
+            <img src="../../static/media/kakao.png" alt="kakaoLogin">
+        </a>
+      </div>
+
+      <div onclick="naverLogin()" class="test-login2">
+        <!-- <img src="{{naverbutton_green}}" > -->
+          <a href="#" alt="naverLogin">
+            <img src="../../static/media/naver.png" alt="naverLogin">
+          </a>
+      </div>
+
+      <div onclick="google_login()" class="test-login2">
+        <a href="#" alt="googleLogin">
+          <img src="../../static/media/btn_google_signin_dark_pressed_web2x.png" alt="googleLogin">
+        </a>
+      </div>
+
+        {% comment %} <button onclick="facebook_login()">페이스북 로그인</button> {% endcomment %}
+        {% comment %} <form action="/kakaologin/" method="POST">
+            {%csrf_token%}
+            <input type="hidden" value="" id="kakaoEmail" name='kaemail'>
+            <input type="submit" value="카카오로그인" class="kakao" id="loginWithKakao"
+                onclick="KakaoLogin();">
+        {% endcomment %}
+        {% comment %}
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=d63d18102aece9a328725d556a1fc114&redirect_uri=http://127.0.0.1:8000/kakaologin/&response_type=code">
+        kakaologin</a>
+        {% endcomment %}
+
+      </div>
+
+    
+
+
+
+  </div>
+
+</div>
+<script src="{% static 'js/sociallogin.js' %}"></script>
+
+{% endblock content %}
+        
+        
+        
+
+
+
+
+
+            
+            
+            
+          

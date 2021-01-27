@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% if messg%}
+<script>
+    alert('{{messg}}');
+</script>
+{% endif %}
+
+{% block content %}
+<div class="contents">
+
+  <div class="inner">
+    <div data-animation="slide" data-duration="500" data-infinite="1" class="slider-2 w-slider">
+      <div class="w-slider-mask">
+        <div class="slide w-slide"><img src="https://dumbstruck.kr/main/main_1.jpg" alt="dumbstruck-main-logo" class="slide__img"></div>
+        <div class="slide2 w-slide"><img src="https://underarmour.scene7.com/is/image/Underarmour/KR_SS20_M_TRN_PRM_011520?wid=1600" alt="underarmour-main-logo" class="slide__img"></div>
+      </div>
+      <div class="w-slider-arrow-left">
+        <div class="w-icon-slider-left"></div>
+      </div>
+      <div class="w-slider-arrow-right">
+        <div class="w-icon-slider-right"></div>
+      </div>
+      <div class="w-slider-nav w-round"></div>
+    </div>
+    
+    <div class="index-item">
+      <ul role="list" class="item-list w-list-unstyled">
+        <li class="item-list-arg"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="image-3">
+          <div class="item-list-arg-header">NIKE</div>
+          <div class="item-list-arg-text">나이키 브랜드</div>
+        </li>
+        <li class="item-list-arg"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="image-3">
+          <div class="item-list-arg-header">DUMB STRUCK</div>
+          <div class="item-list-arg-text">옷 전문 쇼핑몰</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+    
+
+{% endblock %}
+    
+      
+      
+
+

@@ -1,0 +1,11 @@
+{% for name,age,documentId,url in comb_lis %}
+
+    <div class="card-colums" style="width: 20%;">
+      <img src={{url}} class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{name}}</h5>
+        <p class="card-text">{{age}}</p>
+        <a href="{% url 'detail' %}" class="btn btn-primary">옷사러가기</a>
+      </div>
+    </div> 
+{% endfor %}
