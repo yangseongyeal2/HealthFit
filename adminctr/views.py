@@ -60,12 +60,15 @@ def create_admin(request):
     print("메인이미지:"+adminProuctMaimImage)
 
     cnt=request.POST.get('cnt')
-    print("카운트:"+adminProuctMaimImage)
+    print("카운트:"+cnt)
+    cnt=int(cnt)
     lis_detail_img=[]
     if cnt !=None :
-        for count in range(1,cnt):
-                adminProuctDetailImageCnt="adminProuctDetailImage"+cnt
+        for count in range(1,cnt+1):
+                adminProuctDetailImageCnt="adminProuctDetailImage"+str(count)
+                print("count:"+adminProuctDetailImageCnt)
                 img=request.POST.get(adminProuctDetailImageCnt)
+                print("가져온 이미지:"+img)
                 lis_detail_img.append(img)
 
     adminDetailText=request.POST.get('adminDetailText')

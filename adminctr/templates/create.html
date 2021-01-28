@@ -139,12 +139,14 @@
         span.setAttribute("onclick", `deleteAppend(${cnt})`);
         const text = document.createTextNode('[제거하기]');
 
+
         div.appendChild(input);
         div.appendChild(span);
         span.appendChild(text);
         
 
         document.getElementById('cnt').value=cnt;
+
        }
 
        function deleteAppend(event) {
@@ -154,7 +156,6 @@
 
          div.remove();
          cnt--;
-
          document.getElementById('cnt').value=cnt;
        }
        

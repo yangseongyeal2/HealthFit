@@ -22,8 +22,8 @@ function naverLogin() { // 네이버 로그인
     params = {
         response_type: 'code',
         client_id:'gyHDnkTYKAXVqlUIyVLp',
-        redirect_uri: location.origin + '/naver/callback/',
-        //redirect_uri: 'http://3.35.247.69/naver/callback/',
+        //redirect_uri: location.origin + '/naver/callback/',
+        redirect_uri: 'http://3.35.247.69/naver/callback/',
         state: document.querySelector('[name=csrfmiddlewaretoken]').value
     }
     url = buildUrl('https://nid.naver.com/oauth2.0/authorize', params);

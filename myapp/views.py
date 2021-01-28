@@ -970,6 +970,23 @@ def check_email(request):
     # print(request.user.is_authenticated)
     # if uid != None :
     #     print("로그인")
+def product_categoti(request , categori):
+           #doc_ref=db.collection("product")
+    uid=None
+    try:
+        # print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+    except:
+        print("로그인안댐")
+
+    doc_ref=db.collection(u'product').where(u"categori", u"==",categori)
+    alldocs=doc_ref.stream()
+    product_lis=[]
+
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        product_lis.append(products)
+    return render(request ,'product.html',{"product_lis":product_lis,'uid':uid})
 
 
   
