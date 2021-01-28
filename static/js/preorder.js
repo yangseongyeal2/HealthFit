@@ -3,12 +3,20 @@ mtotal=0
 stotal=0
 ltotal=0
 xltotal=0
+let mySet = new Set();
 
 function paintOption(size) {
+   
+    var sizevalue=size.value
+    if (!mySet.has(sizevalue)){
+
+
     const paint = document.getElementById(`optionList`);
 
     const ul = document.createElement(`ul`);
     ul.setAttribute(`class`, `optionListAlign`);
+    var ulid="ulid"+sizevalue
+    ul.setAttribute(`id`,`${ulid}`)
 
     paint.appendChild(ul);
 
@@ -37,15 +45,17 @@ function paintOption(size) {
     const counter = document.createElement(`input`);
     counter.setAttribute(`type`, `number`);
     counter.setAttribute(`name`, `amount_s`);
-    counter.setAttribute(`id`, `amountsid`);
-    counter.setAttribute(`onchange`, `amountprice(this,${size})`);
+    var amountid="amountId"+sizevalue
+    counter.setAttribute(`id`, `${amountid}`);
+    
+    counter.setAttribute(`onchange`, `amountprice(this,'${sizevalue}')`);
     counter.setAttribute(`placeholder`, `1`);
     countList.appendChild(counter);
 
     const closeBtn = document.createElement(`i`);
     closeBtn.setAttribute(`class`, `fa fa-trash fa-2x`);
     closeBtn.setAttribute(`aria-hidden`, `true`);
-    closeBtn.setAttribute(`onchange`, `cancel(${ul})`);
+    closeBtn.setAttribute(`onclick`, `cancel('${sizevalue}')`);
     countList.appendChild(closeBtn);
     //counstList li END
 
@@ -53,13 +63,18 @@ function paintOption(size) {
     const priceList =document.createElement('li');
     ul.appendChild(priceList);
     const priceDiv=document.createElement('div');
-    let productPrice=document.getElementById(`product_price`).value;
+    let productPrice=document.getElementById(`product_price`).value+"원";
     const priceText = document.createTextNode(productPrice);
-    let priceId = size + `_amount`;
+    let priceId = size.value + `_amount`;
     priceDiv.setAttribute(`id`, priceId);
     
     priceList.appendChild(priceDiv);
     priceDiv.appendChild(priceText);
+
+    mySet.add(sizevalue)
+
+    }
+    
 }
 
 
@@ -72,58 +87,46 @@ function optionshow(e) {
     var int_price=parseInt(price3);
     
     if (e.value=="S"){
-        
+        paintOption(e);
+
         stotal=int_price
-      
-        $("#option_ul_s").show();
-        //stotal=int_price;
+        // $("#option_ul_s").show();
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
-
-        paintOption(e);
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-        document.getElementById('amountsid').value='1';
-        //$('#product_amounts_s').val('1');
-        // console.log(document.getElementById("product_amounts_s").value);
-        
-        //document.getElementById("option_ul_s").style.display="block";
-        
+        document.getElementById('amountIdS').value='1';
     }
     if (e.value=="M"){
+        paintOption(e);
        // document.getElementById("option_ul_m").style.display="block";
-        $("#option_ul_m").show();
+        // $("#option_ul_m").show();
+
         mtotal=int_price
-        //mtotal=0
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
-        paintOption(e);
-
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-        document.getElementById('amountmid').value='1';
+        document.getElementById('amountIdM').value='1';
     }
     if (e.value=="L"){
+        paintOption(e);
        // document.getElementById("option_ul_l").style.display="block";
-        $("#option_ul_l").show();
+        // $("#option_ul_l").show();
         ltotal=int_price
-        //ltotal=0
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
-        paintOption(e);
-
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-        document.getElementById('amountlid').value='1';
+        document.getElementById('amountIdL').value='1';
+
     }
     if (e.value=="XL"){
-       // document.getElementById("option_ul_xl").style.display="block";
-        $("#option_ul_xl").show();
+        paintOption(e);
+
+        // $("#option_ul_xl").show();
         xltotal=int_price
-        //xltotal=0
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
-        paintOption(e);
-        
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-        document.getElementById('amountxlid').value='1';
+        document.getElementById('amountIdXL').value='1';
     }
 
     
@@ -134,25 +137,34 @@ function optionshow(e) {
   }
 
   function cancel(e){
+    console.log("취소클릭")
     var a =document.getElementById("product_price").value;
     var price=a.split('원');
     var price2=price[0].split(',');
     var price3=price2[0]+price2[1];
     var int_price=parseInt(price3);
     
-   
-        if (e=='s'){
+    // const div = document.getElementById(`adminProuctDetailDiv${cnt}`);
+    // const admin = document.getElementById(`adminAppend`);
+    // const input = document.getElementById(`adminProuctDetailImage${cnt}`);
+
+    // div.remove();
+
+
+        if (e=='S'){
             stotal=0
-            $("#option_ul_s").hide();
+            // $("#option_ul_s").hide();
            
             //document.getElementById("total").innerHTML= document.getElementById("total").value;
             total=mtotal+ltotal+xltotal+stotal;
             strtotal=String(total)+"원";
             document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-            document.getElementById("amountsid").value=0;
-            
-            document.getElementById("s_amount").innerHTML=String(int_price)+"원";
-        }else if (e=='m') {
+            document.getElementById("amountIdS").value=0;
+            document.getElementById("S_amount").innerHTML=String(int_price)+"원";
+            var ul=document.getElementById("ulidS")
+            ul.remove()
+            mySet.delete('S')
+        }else if (e=='M') {
             mtotal=0
             $("#option_ul_m").hide();
            
@@ -160,28 +172,35 @@ function optionshow(e) {
             total=mtotal+ltotal+xltotal+stotal;
             strtotal=String(total)+"원";
             document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-            document.getElementById("amountmid").value=0;
-            document.getElementById("m_amount").innerHTML=String(int_price)+"원";
-        }else if (e=='l'){
+            document.getElementById("amountIdM").value=0;
+            document.getElementById("M_amount").innerHTML=String(int_price)+"원";
+            var ul=document.getElementById("ulidM")
+            ul.remove()
+            mySet.delete('M')
+        }else if (e=='L'){
             ltotal=0;
             //document.getElementById("total").innerHTML= document.getElementById("total").value;
             total=mtotal+ltotal+xltotal+stotal;
             strtotal=String(total)+"원";
             document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-            document.getElementById("amountlid").value=0;
-            document.getElementById("l_amount").innerHTML=String(int_price)+"원";
-            $("#option_ul_l").hide();
+            document.getElementById("amountIdL").value=0;
+            document.getElementById("L_amount").innerHTML=String(int_price)+"원";
+            var ul=document.getElementById("ulidL")
+            ul.remove()
+            mySet.delete('L')
             
-        }else if(e=='xl'){
+        }else if(e=='XL'){
             xltotal=0;
            
             //document.getElementById("total").innerHTML= document.getElementById("total").value;
             total=mtotal+ltotal+xltotal+stotal;
             strtotal=String(total)+"원";
             document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-            document.getElementById("amountxlid").value=0;
-            document.getElementById("xl_amount").innerHTML=String(int_price)+"원";
-            $("#option_ul_xl").hide();
+            document.getElementById("amountIdXL").value=0;
+            document.getElementById("XL_amount").innerHTML=String(int_price)+"원";
+            var ul=document.getElementById("ulidXL")
+            ul.remove()
+            mySet.delete('XL')
         }
   }
 
@@ -201,25 +220,25 @@ function optionshow(e) {
     
     
     var str_price=String(int_price)+"원";
-    if (size=='s'){
+    if (size=='S'){
         stotal=int_price;
-        document.getElementById("s_amount").innerHTML=str_price;
-        document.getElementById("s_amount").value=int_price;
+        document.getElementById("S_amount").innerHTML=str_price;
+        //document.getElementById("S_amount").value=int_price;
         
         //document.getElementById("s_amount").value
        
-    }else if (size=='m') {
+    }else if (size=='M') {
         mtotal=int_price;
-        document.getElementById("m_amount").innerHTML=str_price;
-        document.getElementById("m_amount").value=int_price;
-    }else if (size=='l'){
+        document.getElementById("M_amount").innerHTML=str_price;
+        //document.getElementById("M_amount").value=int_price;
+    }else if (size=='L'){
         ltotal=int_price;
-        document.getElementById("l_amount").innerHTML=str_price;
-        document.getElementById("l_amount").value=int_price;
-    }else if(size=='xl'){
+        document.getElementById("L_amount").innerHTML=str_price;
+       // document.getElementById("L_amount").value=int_price;
+    }else if(size=='XL'){
         xltotal=int_price;
-        document.getElementById("xl_amount").innerHTML=str_price;
-        document.getElementById("xl_amount").value=int_price;
+        document.getElementById("XL_amount").innerHTML=str_price;
+        //document.getElementById("XL_amount").value=int_price;
     }
     total=mtotal+ltotal+xltotal+stotal;
     strtotal=String(total)+"원";
