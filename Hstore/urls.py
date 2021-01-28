@@ -12,6 +12,8 @@ import admincrawling.views
 
 urlpatterns = [
     path('adminctr/', adminctr.views.adminctr,name="adminctr"),
+    path('adminctr/create/', adminctr.views.create,name="create"),
+    #path('adminsite/', adminctr.views.adminsite,name="adminsite"),
     path('', myapp.views.home,name="home"),
     #path('', myapp.views.index,name="index"),
     #path('', myapp.views.musinsa,name="musinsa"),
@@ -22,7 +24,7 @@ urlpatterns = [
     path('signUp/', myapp.views.signUp,name="signUp"),
     path('postsignup/', myapp.views.postsignup,name="postsignup"),
 #   path('postsign_admin/', adminctr.views.postsign_admin,name="postsign_admin"),
-    path('create/', adminctr.views.create,name="create"),
+   
     path('create_admin/', adminctr.views.create_admin,name="create_admin"),
     #path('detail/', myapp.views.detail,name="detail"),
     path('detail/<str:documentId>', myapp.views.detail, name="detail" ) ,
@@ -32,7 +34,7 @@ urlpatterns = [
     path('bag/',myapp.views.bag,name="bag"),
     path('etc/',myapp.views.etc,name="etc"),
     path('pay/',myapp.views.pay,name="pay"),
-    path('admincr/',admincrawling.views.admincr,name="admincr"),
+    #path('admincr/',admincrawling.views.admincr,name="admincr"),
     path('crawling/',admincrawling.views.crawling,name="crawling"),
     path('thumbdetail/',myapp.views.thumbdetail,name="thumbdetail"),
     path('addcart/', myapp.views.addcart,name="addcart"),

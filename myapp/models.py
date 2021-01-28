@@ -10,6 +10,8 @@ class Product(object):
      ,downloadurl
      ,categori
      ,brand
+     ,detail_img_list
+     ,detail_text
      #1:top 2:bottom 3:bag 4:etc 
      ):
         self.name = name
@@ -18,6 +20,8 @@ class Product(object):
         self.downloadurl=downloadurl
         self.categori=categori
         self.brand=brand
+        self.detail_img_list=detail_img_list
+        self.detail_text=detail_text
        
         
 
@@ -31,7 +35,9 @@ class Product(object):
         ,source[u'downloadurl']
         ,source[u'categori']
         ,source[u'brand']
-         )
+        ,source[u'detail_img_list']
+        ,source[u'detail_text']
+        )
         if u'name' in source:
             product.name = source[u'name']
         if u'price' in source:
@@ -44,6 +50,10 @@ class Product(object):
             product.categori = source[u'categori']
         if u'brand' in source:
             product.brand=source[u'brand']
+        if u'detail_img_list' in source:
+            product.detail_img_list=source[u'detail_img_list']
+        if u'detail_text' in source:
+            product.detail_text=source[u'detail_text']
         
         return product
       
@@ -58,6 +68,8 @@ class Product(object):
             u'downloadurl':self.downloadurl,
             u'categori':self.categori,
             u'brand':self.brand,
+            u'detail_img_list':self.detail_img_list,
+            u'detail_text':self.detail_text,
           
         }
 
@@ -79,6 +91,11 @@ class Product(object):
         if self.brand:
             dest[u'brand']=self.brand
 
+        if self.detail_img_list:
+            dest[u'detail_img_list']=self.detail_img_list
+        if self.detail_text:
+            dest[u'detail_text']=self.detail_text
+
         return dest
 
     def __repr__(self):
@@ -90,6 +107,8 @@ class Product(object):
             ,self.downloadurl
             ,self.categori
             ,self.brand
+            ,self.detail_img_list
+            ,self.detail_text
             )
             )
 
