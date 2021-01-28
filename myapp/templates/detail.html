@@ -100,22 +100,25 @@
             </ul>
           </div>
 
+          <div id="optionList">
+
+          </div>
+
           <ul role="list" class="table-l" id="option_ul_s" style="display: none;">
             <li>
-              <div>
                 <div class="text-block-13">{{products.name}}</div>
-              </div>
-              <div>
                 <div id="option_size">S</div>
-              </div>
             </li>
-            <li class="list-item-6"><input type="number" style="width:50px" min="0" placeholder="1"
+            
+            <li class="list-item-6">
+              <input type="number" style="width:50px" min="0" placeholder="1"
                 class="text-field-3 w-input" maxlength="256" name="amount_s" data-name="count" placeholder="1"
                 id='amountsid' onchange="amountprice(this,'s')">
 
               <!-- <a href="#" class="button-3 w-button">X</a> -->
               <span onclick="cancel('s')">X</span>
             </li>
+
             <li>
               <div id="s_amount">{{products.price}}</div>
             </li>

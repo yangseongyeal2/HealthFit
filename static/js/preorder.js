@@ -3,8 +3,68 @@ mtotal=0
 stotal=0
 ltotal=0
 xltotal=0
+
+function paintOption(size) {
+    const paint = document.getElementById(`optionList`);
+
+    const ul = document.createElement(`ul`);
+    ul.setAttribute(`class`, `optionListAlign`);
+
+    paint.appendChild(ul);
+
+    // nameList li 
+    const nameList = document.createElement(`li`);
+    nameList.setAttribute(`class`, `optionListAlign test`);
+    ul.appendChild(nameList);
+    const productName = document.createElement(`div`);
+    let nameId = document.getElementById(`product_name`).value;
+    const nameText = document.createTextNode(`${nameId}`);
+
+    nameList.appendChild(productName);
+    productName.appendChild(nameText);
+    // productName CSS 작성해야됨@@
+
+    const optionSize = document.createElement(`div`);
+    const sizeText = document.createTextNode(`${size.value}`);
+
+    nameList.appendChild(optionSize);
+    optionSize.appendChild(sizeText);
+    //nameList li END
+
+    //countList li 
+    const countList = document.createElement(`li`);
+    ul.appendChild(countList);
+    const counter = document.createElement(`input`);
+    counter.setAttribute(`type`, `number`);
+    counter.setAttribute(`name`, `amount_s`);
+    counter.setAttribute(`id`, `amountsid`);
+    counter.setAttribute(`onchange`, `amountprice(this,${size})`);
+    counter.setAttribute(`placeholder`, `1`);
+    countList.appendChild(counter);
+
+    const closeBtn = document.createElement(`i`);
+    closeBtn.setAttribute(`class`, `fa fa-trash fa-2x`);
+    closeBtn.setAttribute(`aria-hidden`, `true`);
+    closeBtn.setAttribute(`onchange`, `cancel(${ul})`);
+    countList.appendChild(closeBtn);
+    //counstList li END
+
+    //priceList li
+    const priceList =document.createElement('li');
+    ul.appendChild(priceList);
+    const priceDiv=document.createElement('div');
+    let productPrice=document.getElementById(`product_price`).value;
+    const priceText = document.createTextNode(productPrice);
+    let priceId = size + `_amount`;
+    priceDiv.setAttribute(`id`, priceId);
+    
+    priceList.appendChild(priceDiv);
+    priceDiv.appendChild(priceText);
+}
+
+
 function optionshow(e) {
-   
+    
     var a =document.getElementById("product_price").value;
     var price=a.split('원');
     var price2=price[0].split(',');
@@ -12,14 +72,16 @@ function optionshow(e) {
     var int_price=parseInt(price3);
     
     if (e.value=="S"){
+        
         stotal=int_price
       
         $("#option_ul_s").show();
         //stotal=int_price;
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
+
+        paintOption(e);
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
-        
         document.getElementById('amountsid').value='1';
         //$('#product_amounts_s').val('1');
         // console.log(document.getElementById("product_amounts_s").value);
@@ -34,6 +96,8 @@ function optionshow(e) {
         //mtotal=0
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
+        paintOption(e);
+
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
         document.getElementById('amountmid').value='1';
     }
@@ -44,6 +108,8 @@ function optionshow(e) {
         //ltotal=0
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
+        paintOption(e);
+
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
         document.getElementById('amountlid').value='1';
     }
@@ -54,6 +120,8 @@ function optionshow(e) {
         //xltotal=0
         total=mtotal+ltotal+xltotal+stotal;
         strtotal=String(total)+"원";
+        paintOption(e);
+        
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
         document.getElementById('amountxlid').value='1';
     }
@@ -64,6 +132,7 @@ function optionshow(e) {
     // var p=document.getElementById("option_ul");
     // option_result.appendChild(p);
   }
+
   function cancel(e){
     var a =document.getElementById("product_price").value;
     var price=a.split('원');
@@ -158,16 +227,38 @@ function optionshow(e) {
 
     document.getElementById("total").innerHTML="TOTAL:"+strtotal;
     document.getElementById("total").value=total;
-
-    
-
-   
-    
-
-
     // alert(String(int_price));
       //document.getElementById("s_amount").in
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   function newadress(){
       document.getElementById("recipient").value=""
       document.getElementById("id").value=""
