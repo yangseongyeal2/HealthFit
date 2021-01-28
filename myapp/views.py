@@ -355,30 +355,17 @@ def top(request):
     #doc_ref=db.collection("product")
     uid=None
     try:
-        print("홈에서"+request.session['uid'])
+        # print("홈에서"+request.session['uid'])
         uid=request.session['uid']
     except:
-        print("로그인안댐")
+         print("로그인안댐")
 
-    doc_ref=db.collection(u'product').where(u"categori", u"==","TOP")
+    doc_ref=db.collection(u'product').where(u"categori", u"==","상의")
     alldocs=doc_ref.stream()
     product_lis=[]
-    # name_lis=[]
-    # age_lis=[]
-    # documentId_lis=[]
-    # url_lis=[]
-    # categori_lis=[]
+
     for doc in alldocs:
         products=Product.from_dict(doc.to_dict())
-        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
-        # name_lis.append(products.name)
-        # age_lis.append(products.price)
-        # documentId_lis.append(products.documentId)
-        # url_lis.append(products.downloadurl)
-        # categori_lis.append(products.categori)
-        # print(products.name)
-        # print(products.price)
-        # print(products.documentId)
         product_lis.append(products)
 
 
