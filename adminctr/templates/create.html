@@ -5,29 +5,84 @@
 {% endif %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Sign</title>
-    </head>
-    <body>
-        <H2>관리자 사이트</H2>
-        <form action="/create_admin/" method="POST">
-            {% csrf_token %}
-            Title:
-            <input type="text" name="Title" required><br><br>
-            Detail:
-            <textarea rows="5" cols="40" name="Detail" required></textarea><br><br>
-            Picture Upload
-            <input type="file" name="file[]" id="file"><br><br>
-            <input type="hidden" name="url" id="url" >
-            <button type="button" onclick="uploadimage()">Upload</button><br><br>
-            카테고리:
-            <input type="text" name="categori" required></button><br><br>
-            <input type="submit" value="Submit">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h2>관리자 사이트</h2>
 
-        </form>
-    </body>
-    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+  <form action="/create_admin/" method="POST">
+      {% csrf_token %}
+      <table>
+
+        <tr>
+          <th colspan="2">상품 등록</th>
+        </tr>
+
+        <tr>
+          <td>브랜드 넘버:</td>
+          <td><input type="number" name="adminBrandNumber" required></td>
+        </tr>
+        <tr>
+          <td>브랜드 이름</td>
+          <td><input type="name" name="adminBrandName" required></td>
+        </tr>
+        <tr>
+          <td>카테고리</td>
+          <td>
+            <select name="adminProductCategory" id="adminProductCategory">
+              <optgroup label="상의">
+                <option value="반팔">반팔</option>
+                <option value="긴팔">긴팔</option>
+              </optgroup>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>상품 번호</td>
+          <td><input type="number" name="adminProductNumber"></td>
+        </tr>
+        <tr>
+          <td>상품 이름</td>
+          <td><input type="text" name="adminProductName"></td>
+        </tr>
+        <tr>
+          <td>상품 가격</td>
+          <td><input type="number" name="adminProductPrice"></td>
+        </tr>
+        <tr>
+          <td>대표 이미지 주소</td>
+          <td><input type="text" name="adminProuctMaimImage"></td>
+        </tr>
+        <tr>
+          <td>상세 설명 이미지</td>
+          <td>
+            <div onclick="inputAppend(this.form)">추가하기</div>
+            <div id="adminAppend">
+
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>상세 설명</td>
+          <td>
+            <textarea name="adminDetailText" id="adminDetailText" cols="30" rows="10"></textarea>
+          </td>
+        </tr>
+      </table>
+
+
+      <input type="submit" value="등록">
+
+  </form>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
     <script>
         var firebaseConfig = {
         apiKey: 'AIzaSyAFN2apSBQwHIiGioEKyyQORxceIR22VMs',
@@ -62,6 +117,29 @@
 
 
        }
+
+       let cnt = 0;
+
+       function inputAppend(data) {
+         cnt++;
+         const test = document.getElementById("adminAppend");
+
+         test.innerHTML += `<input type=text id="adminProuctDetailImage${cnt}" name=adminProuctDetailImage${cnt}><span id = "adminDelete${cnt}"onclick="deleteAppend(${cnt})">[제거하기]</span>`
+       }
+
+       function deleteAppend(event) {
+          
+          //const test = document.getElementById(`adminDelete${cnt}`);
+         // test.remove(test);
+         console.log(event);
+         const test = document.getElementById(`adminProuctDetailImage${cnt}`);
+         const btn = document.getElementById(`adminDelete${cnt}`);
+         const admin = document.getElementById("adminAppend");
+         admin.removeChild(test);
+         admin.removeChild(btn);
+         cnt--;
+       }
        
     </script>
+</body>
 </html>

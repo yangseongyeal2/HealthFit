@@ -57,3 +57,7 @@ def create_admin(request):
     )
     
     return render(request,"createadmin.html")
+
+
+def adminProductManager(request):
+    return render(request,"productmanager.html")
