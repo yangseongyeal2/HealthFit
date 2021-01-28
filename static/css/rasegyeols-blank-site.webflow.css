@@ -1128,6 +1128,27 @@ a {
   align-items: center;
   list-style-type: none;
 }
+.optionListAlign {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  list-style-type: none;
+}
+.optionListAlign .test {
+  display: flex;
+  flex-direction: column;
+}
 
 .list-7 {
   display: -webkit-box;
@@ -1302,3 +1323,9 @@ a {
 .test-login2 {
   margin-bottom: 10px;
 }
+
+.btn-close {
+  
+}
+
+
