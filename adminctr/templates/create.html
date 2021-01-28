@@ -31,7 +31,6 @@
             <select name="adminBrandName" id="adminBrandName">
                 <option value="ThumbStruck">ThumbStruck</option>
                 <option value="PTOC">PTOC</option>
-  
             </select>
           </td>
          
@@ -121,27 +120,41 @@
 
 
        }
-
+       //상세 이미지 생성, 삭제
        let cnt = 0;
-
        function inputAppend(data) {
-         cnt++;
-         const test = document.getElementById("adminAppend");
+        cnt++;
 
-         test.innerHTML += `<input type=text id="adminProuctDetailImage${cnt}" name=adminProuctDetailImage${cnt}><span id = "adminDelete${cnt}"onclick="deleteAppend(${cnt})">[제거하기]</span>`
-         document.getElementById('cnt').value=cnt;
+        const append = document.getElementById("adminAppend");
+
+        const div = document.createElement('div');
+        div.setAttribute("id", `adminProuctDetailDiv${cnt}`);
+        append.appendChild(div);
+        
+        const input = document.createElement('input');
+        input.setAttribute("type", "text");
+        input.setAttribute("name", `adminProuctDetailImage${cnt}`);
+
+        const span = document.createElement('span');
+        span.setAttribute("onclick", `deleteAppend(${cnt})`);
+        const text = document.createTextNode('[제거하기]');
+
+
+        div.appendChild(input);
+        div.appendChild(span);
+        span.appendChild(text);
+        
+
+        document.getElementById('cnt').value=cnt;
+
        }
 
        function deleteAppend(event) {
-          
-          //const test = document.getElementById(`adminDelete${cnt}`);
-         // test.remove(test);
-         console.log(event);
-         const test = document.getElementById(`adminProuctDetailImage${cnt}`);
-         const btn = document.getElementById(`adminDelete${cnt}`);
-         const admin = document.getElementById("adminAppend");
-         admin.removeChild(test);
-         admin.removeChild(btn);
+         const div = document.getElementById(`adminProuctDetailDiv${cnt}`);
+         const admin = document.getElementById(`adminAppend`);
+         const input = document.getElementById(`adminProuctDetailImage${cnt}`);
+
+         div.remove();
          cnt--;
          document.getElementById('cnt').value=cnt;
        }
