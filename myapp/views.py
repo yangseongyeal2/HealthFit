@@ -971,6 +971,9 @@ def check_email(request):
         ,'checkbox':checkbox,'name':name,'male':male,'female':female
         ,'zipcode':zipcode,'adress':adress,'adressdetail':adressdetail,'adresscf':adresscf,'flag':flag,'msg':msg})
 
+
+
+
    
     
 
