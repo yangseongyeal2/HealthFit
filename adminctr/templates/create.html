@@ -27,24 +27,27 @@
         </tr>
         <tr>
           <td>브랜드 이름</td>
-          <td><input type="name" name="adminBrandName" required></td>
+          <td>
+            <select name="adminBrandName" id="adminBrandName">
+                <option value="ThumbStruck">ThumbStruck</option>
+                <option value="PTOC">PTOC</option>
+  
+            </select>
+          </td>
+         
         </tr>
         <tr>
           <td>카테고리</td>
           <td>
             <select name="adminProductCategory" id="adminProductCategory">
-              <optgroup label="상의">
-                <option value="반팔">반팔</option>
-                <option value="긴팔">긴팔</option>
-              </optgroup>
+             
+                <option value="상의">상의</option>
+                <option value="하의">하의</option>
+           
             </select>
           </td>
         </tr>
 
-        <tr>
-          <td>상품 번호</td>
-          <td><input type="number" name="adminProductNumber"></td>
-        </tr>
         <tr>
           <td>상품 이름</td>
           <td><input type="text" name="adminProductName"></td>

@@ -29,32 +29,69 @@ def create(request):
 #     return render(request,"create.html")
 
 def create_admin(request):
-    Title=request.POST.get('Title')
-    Detail=request.POST.get('Detail')
-    url=request.POST.get('url')
-    categori=request.POST.get('categori')
-    if not Title :
-            messg="Title 입력하세요"
-            return render(request ,'create.html',{"messg":messg})
-    if not Detail :
-            messg="Detail 입력하세요"
-            return render(request ,'create.html',{"messg":messg})
-    if not url :
-            messg="url을 업로드 하세요"
-            return render(request ,'create.html',{"messg":messg})
-    if not categori :
-            messg="categori 업로드 하세요"
-            return render(request ,'create.html',{"messg":messg})
-
-
+#     Title=request.POST.get('Title')
+#     Detail=request.POST.get('Detail')
+#     url=request.POST.get('url')
+#     categori=request.POST.get('categori')
+#     if not Title :
+#             messg="Title 입력하세요"
+#             return render(request ,'create.html',{"messg":messg})
+#     if not Detail :
+#             messg="Detail 입력하세요"
+#             return render(request ,'create.html',{"messg":messg})
+#     if not url :
+#             messg="url을 업로드 하세요"
+#             return render(request ,'create.html',{"messg":messg})
+#     if not categori :
+#             messg="categori 업로드 하세요"
+#             return render(request ,'create.html',{"messg":messg})
     
-    #file=request.POST.get('file')
+    adminBrandNumber=request.POST.get('adminBrandNumber')
+    print("브랜드넘버:"+adminBrandNumber)
+    adminBrandName=request.POST.get('adminBrandName')
+    print("브랜드이름:"+adminBrandName)
+    adminProductCategory=request.POST.get('adminProductCategory')
+    print("카테고리:"+adminProductCategory)
+    adminProductName=request.POST.get('adminProductName')
+    print("상품이름:"+adminProductName)
+    adminProductPrice=request.POST.get('adminProductPrice')
+    print("가격:"+adminProductPrice)
+    adminProuctMaimImage=request.POST.get('adminProuctMaimImage')
+    print("메인이미지:"+adminProuctMaimImage)
 
+    cnt=request.POST.get('cnt')
+    print("카운트:"+adminProuctMaimImage)
+    lis_detail_img=[]
+    if cnt !=None :
+        for count in range(1,cnt):
+                adminProuctDetailImageCnt="adminProuctDetailImage"+cnt
+                img=request.POST.get(adminProuctDetailImageCnt)
+                lis_detail_img.append(img)
+
+    adminDetailText=request.POST.get('adminDetailText')
+    print("상세텍스트:"+adminDetailText)
+
+
+   
+
+
+
+
+    documentId=adminBrandName+adminBrandNumber
+    #file=request.POST.get('file')
     doc_ref=db.collection("product")
-    doc_ref_random=db.collection("product").document()
+    doc_ref_random=db.collection("product").document(documentId)
     doc_ref_random.set(
-    Product(Title,Detail,doc_ref_random,url,categori).to_dict()
-    )
+    Product(
+            adminProductName
+            ,adminProductPrice
+            ,documentId
+            ,adminProuctMaimImage
+            ,adminProductCategory
+            ,adminBrandName
+            ,lis_detail_img
+            ,adminDetailText
+            ).to_dict())
     
     return render(request,"createadmin.html")
 
