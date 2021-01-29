@@ -514,16 +514,26 @@ def cart(request):
 def addcart(request):
     total_amount=0
     uid=None
+    amount_s=""
+    amount_m=""
+    amount_l=""
+    amount_xl=""
+    amount_xxl=""
     try:
         print("카트"+request.session['uid'])
         uid=request.session['uid']
         products_name=request.POST.get('product_name')
         product_price=request.POST.get('product_price')
         product_id=request.POST.get('product_id')
-        amount_s=request.POST.get('amount_s')
-        amount_m=request.POST.get('amount_m')
-        amount_l=request.POST.get('amount_l')
-        amount_xl=request.POST.get('amount_xl')
+        if request.POST.get('amount_S'):
+            amount_s=request.POST.get('amount_S')
+            print(amount_s)
+        if request.POST.get('amount_M'):
+            amount_m=request.POST.get('amount_M')
+        if request.POST.get('amount_L'):
+            amount_l=request.POST.get('amount_L')
+        if request.POST.get('amount_XL'):
+            amount_xl=request.POST.get('amount_XL')
         option={'s':0,'m':0,'l':0,'xl':0}
     #user=authe.currentUser
     #print(user)
@@ -603,16 +613,27 @@ def order(request):
    
     total_amount=0
     uid=None
+    amount_s=""
+    amount_m=""
+    amount_l=""
+    amount_xl=""
+    amount_xxl=""
+
     try:
-        print("카트"+request.session['uid'])
+        print("오더"+request.session['uid'])
         uid=request.session['uid']
         products_name=request.POST.get('product_name')
         product_price=request.POST.get('product_price')
         product_id=request.POST.get('product_id')
-        amount_s=request.POST.get('amount_s')
-        amount_m=request.POST.get('amount_m')
-        amount_l=request.POST.get('amount_l')
-        amount_xl=request.POST.get('amount_xl')
+        if request.POST.get('amount_S'):
+            amount_s=request.POST.get('amount_S')
+            print(amount_s)
+        if request.POST.get('amount_M'):
+            amount_m=request.POST.get('amount_M')
+        if request.POST.get('amount_L'):
+            amount_l=request.POST.get('amount_L')
+        if request.POST.get('amount_XL'):
+            amount_xl=request.POST.get('amount_XL')
         option={'s':0,'m':0,'l':0,'xl':0}
     #user=authe.currentUser
     #print(user)
@@ -626,6 +647,9 @@ def order(request):
             option.update(l=int(amount_l))
             total_amount+=int(amount_l)
         if amount_xl !='':
+            option.update(xl=int(amount_xl))
+            total_amount+=int(amount_xl)
+        if amount_xxl !='':
             option.update(xl=int(amount_xl))
             total_amount+=int(amount_xl)
         print(amount_s)
@@ -664,9 +688,9 @@ def order(request):
 
         total_price=int(price3)*total_amount
         return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price})
+
     except:
         return render(request, 'signIn.html')
-
     # if authe.current_user:
     #     uid=authe.current_user['localId']
     #     products_name=request.POST.get('product_name')
