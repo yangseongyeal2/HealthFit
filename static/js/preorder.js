@@ -23,7 +23,7 @@ function paintOption(size) {
 
     // nameList li 
     const nameList = document.createElement(`li`);
-    nameList.setAttribute(`class`, `optionListAlign test`);
+    //nameList.setAttribute(`class`, `optionListAlign product-item`);
     ul.appendChild(nameList);
     const productName = document.createElement(`div`);
     let nameId = document.getElementById(`product_name`).value;
@@ -43,20 +43,22 @@ function paintOption(size) {
     //countList li 
     const countList = document.createElement(`li`);
     ul.appendChild(countList);
+
     const counter = document.createElement(`input`);
-    counter.setAttribute(`type`, `number`);
+    counter.setAttribute(`type`, `text`);
     var gaesuID="amount_"+sizevalue
     counter.setAttribute(`name`, `${gaesuID}`);
     var amountid="amountId"+sizevalue
     counter.setAttribute(`id`, `${amountid}`);
     
     counter.setAttribute(`onchange`, `amountprice(this,'${sizevalue}')`);
-    counter.setAttribute(`placeholder`, `1`);
+    counter.setAttribute(`min`, `1`);
     countList.appendChild(counter);
 
     const closeBtn = document.createElement(`i`);
-    closeBtn.setAttribute(`class`, `fa fa-trash fa-2x`);
+    closeBtn.setAttribute(`class`, `fa fa-trash fa-lg`);
     closeBtn.setAttribute(`aria-hidden`, `true`);
+    // closeBtn.setAttribute(`style`, `cursor: pointer;`);
     closeBtn.setAttribute(`onclick`, `cancel('${sizevalue}')`);
     countList.appendChild(closeBtn);
     //counstList li END
@@ -88,6 +90,8 @@ function optionshow(e) {
     var price2=price[0].split(',');
     var price3=price2[0]+price2[1];
     var int_price=parseInt(price3);
+
+    
     
     if (e.value=="S"){
         paintOption(e);
@@ -148,6 +152,9 @@ function optionshow(e) {
         document.getElementById("total").innerHTML="TOTAL:"+strtotal;
         document.getElementById('amountIdXXL').value='1';
     }
+
+    const resetText = document.getElementById(`size`);
+    resetText.value = `first`;
 
     
     // document.getElementById("option_size").innerHTML=e.value;
