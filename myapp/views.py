@@ -983,11 +983,6 @@ def check_email(request):
         ,'zipcode':zipcode,'adress':adress,'adressdetail':adressdetail,'adresscf':adresscf,'flag':flag,'msg':msg})
 
 
-
-
-   
-    
-
     
     
     
@@ -1011,6 +1006,36 @@ def product_categoti(request , categori):
         products=Product.from_dict(doc.to_dict())
         product_lis.append(products)
     return render(request ,'product.html',{"product_lis":product_lis,'uid':uid})
+
+def cartdelete(request ,d_id) :
+    print(d_id)
+    uid=None
+    try:
+        # print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+        db.collection(u'users').document(uid).collection('cart').document(d_id).delete()
+
+
+        
+        aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
+        alldocs=aldoc_ref.stream()
+        product_lis=[]
+        total_price=0
+       
+        for doc in alldocs:
+            cart=Cart.from_dict(doc.to_dict())
+            print("카트포문")
+            product_lis.append(cart)
+            total_price+=cart.totalprice
+           
+        return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price})
+
+
+    except:
+        print("로그인안댐")
+        return render(request,'signIn.html')
+
+
 
 
   

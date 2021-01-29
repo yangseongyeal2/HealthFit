@@ -22,26 +22,33 @@
           <li>제거</li>
         </ul>
         {% for products in product_lis%}
+        <input type="hidden" value={{products.documentId}} id="products_documentId">
         <ul role="list" class="board-left__list">
           <li>
             <img src="{{products.downloadurl}}" loading="lazy" width="100" height="80"
                   
                   sizes="(max-width: 479px) 25.296875px, 7vw" alt=""></li>
           <li>
-            <a href="#">{{products.name}}</a>
+            <a href="{% url 'detail' products.documentId %}">{{products.name}}</a>
             {{products.sizedic}}
           </li>
           <li>
-            {{products.price}}
+            {{products.price}}원
           </li>
           <li>
             {{products.totalamount}}
           </li>
           <li>
-            <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+            <a href="{% url 'cartdelete' products.documentId %}">
+            <i class="fa fa-trash fa-2x" aria-hidden="true"  ></i>
+            </a>
+
+  
+            {% comment %} <i class="fa fa-trash fa-2x" aria-hidden="true"></i> {% endcomment %}
           </li>
         </ul>
         {% endfor %}
+
       </div>
     </div>
 

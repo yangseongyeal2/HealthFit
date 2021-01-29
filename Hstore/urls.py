@@ -48,6 +48,7 @@ urlpatterns = [
     #path('google/<str:uid>/<str:name>/', myapp.views.googlelogin, name="googlelogin" ) ,
     path('google/<str:uid>/', myapp.views.googlelogin, name="googlelogin" ) ,
     path('signup/check_email/', myapp.views.check_email, name="check_email" ) ,
+    path('cart/delete/<str:d_id>', myapp.views.cartdelete,name="cartdelete"),
    
     
     
