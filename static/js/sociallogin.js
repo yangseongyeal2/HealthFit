@@ -17,7 +17,7 @@ var firebaseConfig = {
 
 
 function naverLogin() { // 네이버 로그인
-    alert("네이버로그인클릭");
+    //alert("네이버로그인클릭");
     console.log("네이버로그인클릭");
     params = {
         response_type: 'code',
@@ -57,7 +57,7 @@ function KakaoLogin(){
     })
 }
 function google_login(){
-    alert("구글로그인클릭");
+    //alert("구글로그인클릭");
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth()
     .signInWithPopup(provider)
