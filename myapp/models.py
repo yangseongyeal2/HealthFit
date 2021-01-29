@@ -12,6 +12,8 @@ class Product(object):
      ,brand
      ,detail_img_list
      ,detail_text
+     ,timestamp
+     ,fiexdPrice
      #1:top 2:bottom 3:bag 4:etc 
      ):
         self.name = name
@@ -22,6 +24,8 @@ class Product(object):
         self.brand=brand
         self.detail_img_list=detail_img_list
         self.detail_text=detail_text
+        self.timestamp=timestamp
+        self.fiexdPrice=fiexdPrice
        
         
 
@@ -37,6 +41,8 @@ class Product(object):
         ,source[u'brand']
         ,source[u'detail_img_list']
         ,source[u'detail_text']
+        ,source[u'timestamp']
+        ,source[u'fiexdPrice']
         )
         if u'name' in source:
             product.name = source[u'name']
@@ -54,6 +60,10 @@ class Product(object):
             product.detail_img_list=source[u'detail_img_list']
         if u'detail_text' in source:
             product.detail_text=source[u'detail_text']
+        if u'timestamp' in source:
+            product.timestamp=source[u'timestamp']
+        if u'fiexdPrice' in source:
+            product.fiexdPrice=source[u'fiexdPrice']
         
         return product
       
@@ -70,6 +80,8 @@ class Product(object):
             u'brand':self.brand,
             u'detail_img_list':self.detail_img_list,
             u'detail_text':self.detail_text,
+            u'timestamp':self.timestamp,
+            u'fiexdPrice':self.fiexdPrice,
           
         }
 
@@ -95,6 +107,10 @@ class Product(object):
             dest[u'detail_img_list']=self.detail_img_list
         if self.detail_text:
             dest[u'detail_text']=self.detail_text
+        if self.timestamp:
+                dest[u'timestamp']=self.timestamp
+        if self.fiexdPrice:
+                dest[u'fiexdPrice']=self.fiexdPrice
 
         return dest
 
@@ -109,6 +125,8 @@ class Product(object):
             ,self.brand
             ,self.detail_img_list
             ,self.detail_text
+            ,self.timestamp
+            ,self.fiexdPrice
             )
             )
 
