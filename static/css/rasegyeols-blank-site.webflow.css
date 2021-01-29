@@ -1133,8 +1133,6 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 0px;
-  padding-left: 0px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -1144,11 +1142,36 @@ a {
   -ms-flex-align: center;
   align-items: center;
   list-style-type: none;
+
+  font-size: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+  padding-left: 0px;
+
 }
-.optionListAlign .test {
+.optionListAlign li:nth-child(1) {
   display: flex;
   flex-direction: column;
 }
+.optionListAlign li:nth-child(1) div:nth-child(1) {
+  font-weight: 700;
+}
+.optionListAlign li:nth-child(1) div:nth-child(2) {
+  font-weight: 700;
+  margin-left: 5px;
+  font-size: 16px;
+}
+.optionListAlign input {
+  width: 50px;
+}
+.optionListAlign i {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.optionListAlign li:nth-child(3) {
+  width: 80px;
+}
+
 
 .list-7 {
   display: -webkit-box;
