@@ -378,11 +378,31 @@ function optionshow(e) {
 
 function checkstock(e){
     totalstock=0;
-    var s=document.getElementById('amountIdS').value;
-    var m=document.getElementById('amountIdM').value;
-    var l=document.getElementById('amountIdL').value;
-    var xl=document.getElementById('amountIdXL').value;
-    var xxl=document.getElementById('amountIdXXL').value;
+    let s=''
+    var m=''
+    var l=''
+    var xl=''
+    var xxl=''
+    if (document.getElementById('amountIdS') ){
+        s=document.getElementById('amountIdS').value;
+    }
+    if (document.getElementById('amountIdM') ){
+        m=document.getElementById('amountIdM').value;
+    }
+    if (document.getElementById('amountIdL') ){
+        l=document.getElementById('amountIdL').value;
+    }
+    if (document.getElementById('amountIdXL') ){
+        xl=document.getElementById('amountIdXL').value;
+    }
+    if (document.getElementById('amountIdXXL') ){
+        xxl=document.getElementById('amountIdXXL').value;
+    }
+       
+    // var m=document.getElementById('amountIdM').value;
+    // var l=document.getElementById('amountIdL').value;
+    // var xl=document.getElementById('amountIdXL').value;
+    // var xxl=document.getElementById('amountIdXXL').value;
     if (s !=''){
         totalstock+=Number(s);
     }else if (m !=''){
