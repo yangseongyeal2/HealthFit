@@ -11,7 +11,7 @@
           <li class="item-list-arg">
             <a href="{% url 'detail' product.documentId %}"><img src="{{product.downloadurl}}" class="image-3"></a> 
             <div class="item-list-arg-header">{{product.name}}</div>
-            <div class="item-list-arg-text">{{product.price}}원</div>
+            <div class="item-list-arg-text">{{product.fiexdPrice}}원</div>
           </li>
         </ul>
       {% endfor %}

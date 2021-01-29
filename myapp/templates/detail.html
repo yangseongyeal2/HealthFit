@@ -78,7 +78,7 @@
                 <div>PRICE</div>
               </li>
               <li>
-                <div>{{products.price}}원</div>
+                <div>{{products.fiexdPrice}}원</div>
                 <input type="hidden" id="product_price" name="product_price" value="{{ products.price }}">
                 <input type="hidden" id="product_name" name="product_name" value="{{ products.name}}">
                 <input type="hidden" id="product_id" name="product_id" value="{{documentId}}">
@@ -116,11 +116,6 @@
                 <input type="number" style="width:50px" min="0" placeholder="1" class="text-field-3 w-input"
                   maxlength="256" name="amount_s" data-name="count" placeholder="1" id='amountsid'
                   onchange="amountprice(this,'s')">
-
-                <!-- <a href="#" class="button-3 w-button">X</a> -->
-                <span onclick="cancel('s')">X</span>
-              </li>
-
               <li>
                 <div id="s_amount">{{products.price}}</div>
               </li>
@@ -201,6 +196,7 @@
   </div>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 {% endblock %}
    
    

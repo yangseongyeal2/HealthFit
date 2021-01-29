@@ -2,6 +2,10 @@ from django.shortcuts import render
 from myapp.views import db
 from myapp.models import Product
 
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
 # Create your views here.
 def adminctr(request):
 
@@ -58,12 +62,13 @@ def create_admin(request):
     print("가격:"+adminProductPrice)
     adminProuctMaimImage=request.POST.get('adminProuctMaimImage')
     print("메인이미지:"+adminProuctMaimImage)
-
+    
     cnt=request.POST.get('cnt')
     print("카운트:"+cnt)
-    cnt=int(cnt)
+    
     lis_detail_img=[]
-    if cnt !=None :
+    if cnt !="" :
+        cnt=int(cnt)
         for count in range(1,cnt+1):
                 adminProuctDetailImageCnt="adminProuctDetailImage"+str(count)
                 print("count:"+adminProuctDetailImageCnt)
@@ -94,7 +99,15 @@ def create_admin(request):
             ,adminBrandName
             ,lis_detail_img
             ,adminDetailText
+            ,firestore.SERVER_TIMESTAMP
+            ,format(int(adminProductPrice), ',')
             ).to_dict())
+
+    print(firestore.SERVER_TIMESTAMP)
+    number =  12345
+
+    number =  format(number, ',')
+    print(number)
     
     return render(request,"createadmin.html")
 
