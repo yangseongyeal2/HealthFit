@@ -6,6 +6,35 @@ xltotal=0
 xxltotal=0;
 let mySet = new Set();
 
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+       event.preventDefault();
+       if( document.getElementById("amountIdS")){
+        document.getElementById("amountIdS").blur()
+       }
+       if( document.getElementById("amountIdM")){
+        document.getElementById("amountIdM").blur()
+       }
+       if(document.getElementById("amountIdL")) {
+        document.getElementById("amountIdL").blur()
+       }
+       if( document.getElementById("amountIdXL")){
+        document.getElementById("amountIdXL").blur()
+       }
+       if( document.getElementById("amountIdXXL")){
+        document.getElementById("amountIdXXL").blur()
+       }
+    };
+  },
+   true);
+
+//   $('input[type="text"]').keydown(function() {
+//     if (event.keyCode === 13) {
+//       //event.preventDefault();
+//       alert("앤터키눌림")
+//     };
+//   });
+
 function paintOption(size) {
    
     var sizevalue=size.value

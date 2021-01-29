@@ -687,6 +687,7 @@ def order(request):
         
 
         total_price=int(price3)*total_amount
+        total_price =  format(total_price, ',')
         return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price})
 
     except:

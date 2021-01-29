@@ -68,7 +68,7 @@
 
       <div class="w-form">
 
-        <form id="email-form" name="form" data-name="Email Form" action="/order/" method="POST" onsubmit="return false">
+        <form id="email-form" name="form" data-name="Email Form" action="/order/" method="POST" >
           {% csrf_token %}
 
           <input type="hidden" name="path" value="{{request.path}}" />
@@ -136,8 +136,9 @@
           </div>
 
           <div class="details-info-wrap__submit">
+         
             <input type="submit" value="바로 구매" data-wait="Please wait..." class="btn-normal btn-buynow" id="buynow"
-              onclick="checkstock('a')">
+              onclick="checkstock('a')" formaction="/order/" >
             <input type="submit" value="장바구니에 추가" data-wait="Please wait..." class="btn-normal btn-addcart"
               id="addtocart" onclick="checkstock('b')" formaction="/addcart/">
           </div>
