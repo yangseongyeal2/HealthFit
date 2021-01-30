@@ -689,9 +689,11 @@ def order(request):
             price3+=a
         
 
-        total_price=int(price3)*total_amount
-        total_price =  format(total_price, ',')
-        return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price})
+        #total_price=int(price3)*total_amount
+     
+        inisisPrice=int(price3)*total_amount
+        total_price =  format(inisisPrice, ',')
+        return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price,'inisisPrice':inisisPrice})
 
     except:
         return render(request, 'signIn.html')
