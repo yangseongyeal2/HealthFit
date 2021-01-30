@@ -327,9 +327,12 @@ def postsignup(request):
 def detail(request,documentId):
     #테스트
     uid=None
-    if authe.current_user:
-        uid=authe.current_user['localId']
-    print(documentId)
+    print("홈시작")
+    try:
+        print("홈에서"+request.session['uid'])
+        uid=request.session['uid']
+    except:
+        print("로그인안댐")
     doc_ref=db.collection(u'product').document(documentId)
     doc = doc_ref.get()
     products=None
