@@ -1,10 +1,4 @@
 {% extends 'base.html' %}
-
-
-
-
-
-
     <!-- <meta charset="utf-8" />
 
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -47,7 +41,8 @@
   
 
 
-    {% block content %}
+{% block content %}
+{% load static %}
     <!-- <script>
       document.getElementById("option_result").style.display="none";
     </script> -->
@@ -200,8 +195,9 @@
 
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{% static 'js/preorder.js' %}" type="text/javascript"></script>
 {% endblock %}
-   
+
    
 
 

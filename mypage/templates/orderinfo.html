@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="contents">
+  <div class="location">
+    <div class="location-text">주문 정보</div>
+  </div>
+
+  <div class="orderinfo inner">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>주문일자</th>
+          <th>이미지</th>
+          <th>상품정보</th>
+          <th>수량</th>
+          <th>구매금액</th>
+          <th>처리현황</th>
+          <th>취소/교환/반품</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr>
+          <td>2021/02/02</td>
+          <td><img src="../../static/media/test.jpg" alt="test"></td>
+          <td>테스트용 사진입니다</td>
+          <td>69</td>
+          <td>6,974원</td>
+          <td>배송 완료</td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td>2020/01/03</td>
+          <td><img src="../../static/media/test.jpg" alt="test"></td>
+          <td>테스트용 사진입니다2</td>
+          <td>74</td>
+          <td>6,974원</td>
+          <td>반품 완료</td>
+          <td>반품</td>
+        </tr>
+      </tbody>
+  
+    </table>
+
+    <div class="inner">
+      <nav>
+        <ul class="pagination">
+          <!-- <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">이전</span>
+            </a>
+          </li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">다음</span>
+            </a>
+          </li> -->
+        </ul>
+      </nav>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+<script src="{% static 'js/myorderinfo.js' %}" type="text/javascript"></script>
+{% endblock content %}
