@@ -8,6 +8,7 @@ import address.views
 import adminctr.views
 import admincrawling.views
 import mypage.views
+import delivery.views
 
 
 
@@ -51,6 +52,13 @@ urlpatterns = [
     path('google/<str:uid>/', myapp.views.googlelogin, name="googlelogin" ) ,
     path('signup/check_email/', myapp.views.check_email, name="check_email" ) ,
     path('cart/delete/<str:d_id>', myapp.views.cartdelete,name="cartdelete"),
+    path('delivery/', delivery.views.index,name="cartdelete"),
+   
+    path('delivery/getdata', delivery.views.getdata,name="getdata"),
+   
+    path('order/complete/<str:brandname>/<str:product_name>/<str:option>/<int:price>/<str:username>/<int:phonenum>/<str:address>/<str:uid>/', delivery.views.getdata,name="complete"),
+    
+
    
     
     
