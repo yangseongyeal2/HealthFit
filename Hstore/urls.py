@@ -7,6 +7,7 @@ import myapp.views
 import address.views
 import adminctr.views
 import admincrawling.views
+import mypage.views
 
 
 
@@ -40,7 +41,7 @@ urlpatterns = [
     path('thumbdetail/',myapp.views.thumbdetail,name="thumbdetail"),
     path('addcart/', myapp.views.addcart,name="addcart"),
     path('order/', myapp.views.order,name="order"),
-    path('mypage/', myapp.views.mypage,name="mypage"),
+    path('mypage/', mypage.views.mypage,name="mypage"),
     path('cart/', myapp.views.cart,name="cart"),
     path('kakaologin/', myapp.views.kakaologin,name="kakaologin"),
     path('oauth/', myapp.views.oauth,name="oauth"),

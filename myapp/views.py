@@ -492,27 +492,14 @@ def cart(request):
             product_lis.append(cart)
             total_price+=cart.totalprice
             total_amount+=cart.sizedic['s']+cart.sizedic['m']+cart.sizedic['l']+cart.sizedic['xl']
-        return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price})
+        inisisPrice=int(total_price)
+        total_price =  format(inisisPrice, ',')
+        
+        return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price,'inisisPrice':inisisPrice})
     except:
         print("로그인안댐")
         return render(request, 'signIn.html')
-    # if authe.current_user:
-    #     uid=authe.current_user['localId']
-    #     #print(authe.get_account_info())
-        
-    #     aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
-    #     alldocs=aldoc_ref.stream()
-    #     product_lis=[]
-    #     option={}
-    #     for doc in alldocs:
-    #         cart=Cart.from_dict(doc.to_dict())
-    #         print("카트포문")
-    #         product_lis.append(cart)
-    #         total_price+=cart.totalprice
-    #         total_amount+=cart.sizedic['s']+cart.sizedic['m']+cart.sizedic['l']+cart.sizedic['xl']
-    #     return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price})
-    # else :
-    #     return render(request, 'signIn.html')
+
 
 def addcart(request):
     total_amount=0
@@ -538,8 +525,7 @@ def addcart(request):
         if request.POST.get('amount_XL'):
             amount_xl=request.POST.get('amount_XL')
         option={'s':0,'m':0,'l':0,'xl':0}
-    #user=authe.currentUser
-    #print(user)
+
         if amount_s !='':
             option.update(s=int(amount_s))
             total_amount+=int(amount_s)
@@ -552,9 +538,7 @@ def addcart(request):
         if amount_xl !='':
             option.update(xl=int(amount_xl))
             total_amount+=int(amount_xl)
-        print(amount_s)
-        #print(int(amount_s))
-        print(total_amount)
+        
         #수량 선택이 안되었을때 파이썬편
         if total_amount <1 :
             return HttpResponseRedirect(request.POST['path'])
@@ -565,7 +549,6 @@ def addcart(request):
         doc = doc_ref.get()
         products=None
         if doc.exists:
-        #print(u'Document data: {}'.format(doc.to_dict()))
             products=Product.from_dict(doc.to_dict())
         else:
             print(u'No such document!')
@@ -585,11 +568,24 @@ def addcart(request):
         for a in price2:
             price3+=a
         total_price=int(price3)*total_amount
+        print(format(int(total_price), ','))
+        test=format(int(total_price), ',')
         
         if doc.exists and doc2.exists :
             doc_usercart=doc_ref2.collection(u'cart').document(products.documentId)
             doc_usercart.set(
-                Cart(products.name,products.price,products.documentId,products.downloadurl,products.categori,products.brand,option,total_price,total_amount).to_dict()
+                Cart(
+                 products.name
+                ,products.price
+                ,products.documentId
+                ,products.downloadurl
+                ,products.categori
+                ,products.brand
+                ,option
+                ,total_price
+                ,total_amount
+                ,format(int(total_price), ',')
+                ).to_dict()
             )
             
         
@@ -604,8 +600,10 @@ def addcart(request):
             print("카트포문")
             product_lis.append(cart)
             total_price+=cart.totalprice
+        inisisPrice=int(total_price)
+        total_price =  format(inisisPrice, ',')
            
-        return render(request, 'cart.html',{'product_lis':product_lis,'option':option,'uid':uid,'usermodel':usermodel,'total_price':total_price})
+        return render(request, 'cart.html',{'product_lis':product_lis,'option':option,'uid':uid,'usermodel':usermodel,'total_price':total_price,'inisisPrice':inisisPrice})
 
     except:
         print("로그인안댐")
@@ -762,15 +760,7 @@ def order(request):
 
 
 
-def mypage(request):
-    uid=None
-    try:
-        print("카트"+request.session['uid'])
-        uid=request.session['uid']
-        return render(request, 'mypage.html',{'uid':uid})
-    except:
-        return render(request, 'signin.html',{'uid':uid})
-   
+
        
 
 def kakaologin(request):
@@ -1033,8 +1023,10 @@ def cartdelete(request ,d_id) :
             print("카트포문")
             product_lis.append(cart)
             total_price+=cart.totalprice
+        inisisPrice=int(total_price)
+        total_price =  format(inisisPrice, ',')
            
-        return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price})
+        return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price,'inisisPrice':inisisPrice})
 
 
     except:

@@ -263,6 +263,7 @@ class Cart(object):
      ,sizedic
      ,totalprice
      ,totalamount
+     ,fixedPrice
      
      ):
         self.name = name
@@ -274,6 +275,7 @@ class Cart(object):
         self.sizedic=sizedic
         self.totalprice=totalprice
         self.totalamount=totalamount
+        self.fixedPrice=fixedPrice
 
        
         
@@ -291,6 +293,7 @@ class Cart(object):
         ,source[u'sizedic']
         ,source[u'totalprice']
         ,source[u'totalamount']
+        ,source[u'fixedPrice']
          )
         if u'name' in source:
             cart.name = source[u'name']
@@ -310,6 +313,8 @@ class Cart(object):
             cart.totalprice=source[u'totalprice']
         if u'totalamount' in source:
             cart.totalamount=source[u'totalamount']
+        if u'fixedPrice' in source:
+            cart.fixedPrice=source[u'fixedPrice']
         
         return cart
       
@@ -327,6 +332,7 @@ class Cart(object):
             u'sizedic':self.sizedic,
             u'totalprice':self.totalprice,
             u'totalamount':self.totalamount,
+            u'fixedPrice':self.fixedPrice,
           
         }
 
@@ -355,6 +361,8 @@ class Cart(object):
             dest[u'totalprice']=self.totalprice
         if self.totalamount:
             dest[u'totalamount']=self.totalamount
+        if self.fixedPrice:
+            dest[u'fixedPrice']=self.fixedPrice
 
         return dest
 
@@ -370,5 +378,6 @@ class Cart(object):
             ,self.sizedic
             ,self.totalprice
             ,self.totalamount
+            ,self.fixedPrice
             )
             )
