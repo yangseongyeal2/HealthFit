@@ -42,6 +42,7 @@ urlpatterns = [
     path('addcart/', myapp.views.addcart,name="addcart"),
     path('order/', myapp.views.order,name="order"),
     path('mypage/', mypage.views.mypage,name="mypage"),
+    path('orderinfo/', mypage.views.orderinfo,name="orderinfo"),
     path('cart/', myapp.views.cart,name="cart"),
     path('kakaologin/', myapp.views.kakaologin,name="kakaologin"),
     path('oauth/', myapp.views.oauth,name="oauth"),
