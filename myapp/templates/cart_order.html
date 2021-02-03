@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+{%load static%}
+
+
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<div class="contents">
+
+  <div class="location">
+    <div class="location-text">주문하기</div>
+  </div>
+
+  <div class="w-form">
+    <form id="order-form" name="order-form" data-name="Order Form" >
+        {% csrf_token %}
+        <input type="hidden" id="uid" name="productname" value="{{uid}}">
+         <input type="hidden" id="id" name="productname" value="{{usermodel.email}}">
+
+      <div class="board-wrap">
+  
+        <div class="board-left">
+          
+          
+        {% for products in product_lis%}
+        {% comment %} <input type="hidden" value={{products.documentId}} id="products_documentId"> {% endcomment %}
+       
+        
+        <ul role="list" class="board-left__list">
+          <li>
+            <img src="{{products.downloadurl}}" loading="lazy" width="100" height="80"
+                  
+                  sizes="(max-width: 479px) 25.296875px, 7vw" alt=""></li>
+          <li>
+            <a href="{% url 'detail' products.documentId %}">{{products.name}}</a>
+            {{products.sizedic}}
+          </li>
+          <li>
+            {{products.fixedPrice}}원
+          </li>
+          <li>
+            {{products.totalamount}}
+          </li>
+          <li>
+            <a href="{% url 'cartdelete' products.documentId %}">
+            <i class="fa fa-trash fa-2x" aria-hidden="true"  ></i>
+            </a>
+
+  
+            {% comment %} <i class="fa fa-trash fa-2x" aria-hidden="true"></i> {% endcomment %}
+          </li>
+        </ul>
+        {% endfor %}
+  
+            <div class="head-text">배송 정보</div>            
+            <ul role="list" class="board-left__order-info">
+              <li>
+                <div class="order-info__head">배송지 선택</div>
+                <div class="radio-address">
+                <label class="radio-button-field w-radio">
+                <input type="radio" data-name="delivery" id="user" value="user" name="delivery" class="w-form-formradioinput radio-button-2 w-radio-input" checked="true" onclick="useradress()">
+                <span for="user"class="radio-button-label-2 w-form-label">기존 배송지</span>
+                </label>
+
+                <label class="w-radio">
+                <input type="radio" data-name="delivery" id="new" value="new" name="delivery" class="w-form-formradioinput radio-button-2 w-radio-input" onclick="newadress()">
+                <span for="new"class="radio-button-label-2 w-form-label">새로운 배송지</span>
+                </label>
+                </div>
+              </li>
+
+              <li>
+                <div class="order-info__head">받으시는 분</div>
+                <input type="text" class="text-field w-input" maxlength="256" id="recipient"
+                  name="recipient" data-name="Field" placeholder="이름" required="" value="{{usermodel.name}}">
+                <input type="hidden" id="username" name="username" value="{{usermodel.name}}">
+              </li>
+              <li>
+                <div class="order-info__head">휴대전화</div>
+                
+                <input type="tel" class="text-field w-input" maxlength="256"
+                  name="phonenumber" data-name="frontphone" id="phonenumber" required="" placeholder="01012345678" >
+                 <div class="order-info__head" onclick="phoneAuth()">휴대전화인증</div>
+                  
+                {% comment %} <div class="text-block-10">-</div><input type="text" class="text-field w-input" maxlength="256"
+                  name="centerphone" data-name="centerphone" id="centerphone" required="">
+                <div class="text-block-10">-</div><input type="text" class="text-field w-input" maxlength="256"
+                  name="endphone" data-name="endphone" id="endphone" required="">
+                {% endcomment %}
+              </li>
+              {% comment %} <li>
+                <div class="order-info__head">이메일</div>
+                <input type="text" class="text-field w-input" maxlength="256"
+                 name="id" data-name="id" placeholder="id" id="id" required=""value="{{usermodel.email}}">
+                  <input type="hidden" id="userid" name="userid" value="{{usermodel.email}}">
+                <div class="text-block-9"></div> 
+              </li> {% endcomment %}
+              {% comment %} <li>
+                <div class="order-info__head">주소</div>
+                  <input type="text" class="text-field w-input" style="width: 380px;" maxlength="256" name="mail" data-name="mail"
+                  placeholder="주소" id="adr" required="" value="{{usermodel.adress}}{{usermodel.adressdetail}}">
+                  <input type="hidden" id="useradr" name="useradr" value="{{usermodel.adress}}{{usermodel.adressdetail}}">
+              </li> {% endcomment %}
+                <li class="signup-list">
+                            <div class="form-text">주소</div>
+                            <!-- <input type="text" class="text-field w-input"
+                                maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
+                            <a href="#" class="btn-check ">check</a> -->
+                            <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{zipcode}}>
+                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn-check"><br>
+                        </li>
+
+                        <li class="signup-address">
+                            <!-- <input type="text" maxlength="256" name="address1" data-name="address1" placeholder=""
+                                class="text-field w-input"> -->
+                            <!-- <div class="text-block-4">기본 주소</div> -->
+                            <input type="text" id="sample6_address" placeholder="주소" name="adress" class="text-field w-input" style="width: 300px;" value={{adress}}><br>
+                        </li>
+                        <li class="signup-address">
+                            <!-- <input type="text" maxlength="256" name="address2"
+                                data-name="address2" placeholder="" class="text-field w-input"> -->
+                            <!-- <div class="text-block-5">상세 주소</div> -->
+                            <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{adressdetail}}>
+                            <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="adresscf" class="text-field w-input" value={{adresscf}}>
+                        </li>
+              <li>
+                <div class="order-info__head">배송 메시지</div>
+                <textarea id="delivery-message" maxlength="5000"
+                 name="delivery-message" data-name="delivery-message" placeholder="배송 시 필요한 요구사항"
+                 class="textarea w-input"></textarea>
+              </li>
+            </ul>
+            
+        </div>
+
+        <div class="board-right">
+          <div class="inner">
+            <h4>SHOPPING SUMMRY</h4>
+
+            <ul>
+              <li>
+                <span>상품 가격</span> <strong>{{total_price}}</strong>원
+                  <input type="hidden" id="total_price" name="total_price" value="{{inisisPrice}}">
+              </li>
+              <li>
+                <span>배송비</span> <strong>0</strong>원
+              </li>
+              <li>
+                <span>총 합</span> <strong>{{total_price}}</strong>원
+              </li>
+            </ul>
+            <span class="btn-normal" onclick="inisispay()">결제하기</span>
+            {% comment %} <input type="submit" value="바로 구매" data-wait="Please wait..." class="btn-normal" id="buynow"
+              onclick="inisispay()"  > {% endcomment %}
+            <a href="{% url 'home' %}" class="btn-normal">취소하기</a>
+           
+          </div>
+        </div>
+        
+      </div>
+      
+    </form>
+    <div class="w-form-done">
+      <div>Thank you! Your submission has been received!</div>
+    </div>
+    <div class="w-form-fail">
+      <div>Oops! Something went wrong while submitting the form.</div>
+    </div>
+  </div>
+  
+
+</div>
+
+<script src="{% static 'js/preorder.js' %}" type="text/javascript"></script>
+
+
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function sample6_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+    
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var addr = ''; // 주소 변수
+                    var extraAddr = ''; // 참고항목 변수
+    
+                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        addr = data.roadAddress;
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        addr = data.jibunAddress;
+                    }
+    
+                    // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                    if(data.userSelectedType === 'R'){
+                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                            extraAddr += data.bname;
+                        }
+                        // 건물명이 있고, 공동주택일 경우 추가한다.
+                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                        if(extraAddr !== ''){
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                        // 조합된 참고항목을 해당 필드에 넣는다.
+                        document.getElementById("sample6_extraAddress").value = extraAddr;
+                    
+                    } else {
+                        document.getElementById("sample6_extraAddress").value = '';
+                    }
+    
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('sample6_postcode').value = data.zonecode;
+                    document.getElementById("sample6_address").value = addr;
+                    // 커서를 상세주소 필드로 이동한다.
+                    document.getElementById("sample6_detailAddress").focus();
+                }
+            }).open();
+        }
+
+
+    function inisispay() {
+    event.preventDefault();
+    var IMP = window.IMP;
+    var code = "imp85681890";  // FIXME: 가맹점 식별코드
+    IMP.init(code);
+    
+   // var productname=document.getElementById('productname').value
+  //  var recipient=document.getElementById('recipient').value
+    var username=document.getElementById('recipient').value
+    var id=document.getElementById('id').value
+    var phonenumber=document.getElementById('phonenumber').value
+    //var adr=document.getElementById('adr').value
+    //주소
+    var zipcode=document.getElementById('sample6_postcode').value
+    var address=document.getElementById('sample6_address').value
+   
+    var address_detail=document.getElementById('sample6_detailAddress').value
+    var address_extra=document.getElementById('sample6_extraAddress').value
+    var total_price=document.getElementById('total_price').value
+   // var brandName=document.getElementById('brandName').value
+   // var option=document.getElementById('option').value
+    var uid=document.getElementById('uid').value
+    var delivery_message=document.getElementById('delivery-message').value
+      if (!username){
+        alert("받는 사람 성함을 입력하시오")
+        return
+    }
+     if (!address){
+        alert("주소를 입력하십시오")
+        return
+    }
+      if (!delivery_message){
+        alert("배송시 요구사항을 입력하시오")
+        return
+    }
+  
+  
+  
+    var url="complete"+"/"+total_price+"/"+username+"/"+phonenumber+"/"+address+"/"+uid+"/"+delivery_message+"/"
+    // 결제요청
+    IMP.request_pay({
+        // name과 amount만 있어도 결제 진행가능
+        pg : 'html5_inicis', // pg 사 선택
+        pay_method : 'card',
+        merchant_uid : 'merchant_' + new Date().getTime(),
+        name : "cart",
+        amount : total_price,
+        buyer_email : id,
+        buyer_name : username,
+        buyer_tel : phonenumber,
+        buyer_addr : address,
+        buyer_postcode : zipcode,
+        m_redirect_url : 'https://127.0.0.1:8000/payments/complete/'
+    }
+    , function(rsp) {
+        if ( rsp.success ) {
+            var msg = '결제가 완료되었습니다.';
+          
+            msg += '고유ID : ' + rsp.imp_uid;
+            msg += '상점 거래ID : ' + rsp.merchant_uid;
+            msg += '결제 금액 : ' + rsp.paid_amount;
+            msg += '사용자이름 : ' + rsp.buyer_name;
+            msg += '사용자번호 : ' + rsp.buyer_tel;
+            msg += '주소 : ' + rsp.buyer_addr;
+            msg += '배송장주소 : ' + rsp.buyer_postcode;
+
+            location.href=url
+
+        }
+        else {
+            var msg = '결제에 실패하였습니다. 에러내용 : ' + rsp.error_msg
+        }
+        alert(msg);
+    });
+}
+    </script>
+
+
+
+{% endblock content %}
