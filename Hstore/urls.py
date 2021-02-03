@@ -55,9 +55,10 @@ urlpatterns = [
     path('delivery/', delivery.views.index,name="cartdelete"),
    
     path('delivery/getdata', delivery.views.getdata,name="getdata"),
+    path('cart/order/', myapp.views.cart_order,name="cart_order"),
+    path('order/complete/<str:brandname>/<str:product_name>/<str:option>/<int:price>/<str:username>/<int:phonenum>/<str:address>/<str:uid>/<str:delivery_message>/', delivery.views.getdata,name="complete"),
+    path('cart/order/complete/<int:total_price>/<str:username>/<int:phonenumber>/<str:address>/<str:uid>/<str:delivery_message>/', delivery.views.cart_order_complete,name="cart_order_complete"),
    
-    path('order/complete/<str:brandname>/<str:product_name>/<str:option>/<int:price>/<str:username>/<int:phonenum>/<str:address>/<str:uid>/', delivery.views.getdata,name="complete"),
-    
 
    
     

@@ -15,6 +15,7 @@ class Delivery(object):
      ,deliverynum
      ,deliverycode
      ,uid
+     ,delivery_message
      
      ):
         self.brandname = brandname
@@ -28,6 +29,7 @@ class Delivery(object):
         self.deliverynum=deliverynum
         self.deliverycode=deliverycode
         self.uid=uid
+        self.delivery_message=delivery_message
 
        
         
@@ -47,6 +49,7 @@ class Delivery(object):
         ,source[u'deliverynum']
         ,source[u'deliverycode']
         ,source[u'uid']
+        ,source[u'delivery_message']
          )
         if u'brandname' in source:
             delivery.brandname = source[u'brandname']
@@ -70,6 +73,8 @@ class Delivery(object):
             delivery.deliverycode=source[u'deliverycode']
         if u'uid' in source:
             delivery.deliverycode=source[u'uid']
+        if u'delivery_message' in source:
+            delivery.deliverycode=source[u'delivery_message']
         
         return delivery
       
@@ -89,6 +94,7 @@ class Delivery(object):
             u'deliverynum':self.deliverynum,
             u'deliverycode':self.deliverycode,
             u'uid':self.uid,
+            u'delivery_message':self.delivery_message,
           
         }
 
@@ -121,6 +127,8 @@ class Delivery(object):
             dest[u'deliverycode']=self.deliverycode
         if self.uid:
             dest[u'uid']=self.uid
+        if self.delivery_message:
+            dest[u'delivery_message']=self.delivery_message
 
         return dest
 
@@ -138,6 +146,7 @@ class Delivery(object):
             ,self.deliverynum
             ,self.deliverycode
             ,self.uid
+            ,self.delivery_message
             )
             )
 

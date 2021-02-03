@@ -501,6 +501,7 @@ def cart(request):
         return render(request, 'signIn.html')
 
 
+
 def addcart(request):
     total_amount=0
     uid=None
@@ -1025,6 +1026,9 @@ def cartdelete(request ,d_id) :
             total_price+=cart.totalprice
         inisisPrice=int(total_price)
         total_price =  format(inisisPrice, ',')
+
+        aldoc_ref=db.collection(u'users').document(uid)
+
            
         return render(request, 'cart.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price,'inisisPrice':inisisPrice})
 
@@ -1032,6 +1036,41 @@ def cartdelete(request ,d_id) :
     except:
         print("로그인안댐")
         return render(request,'signIn.html')
+
+def cart_order(request):
+   
+    uid=None
+    total_price=0
+    total_amount=0;
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
+        alldocs=aldoc_ref.stream()
+        product_lis=[]
+        option={}
+        for doc in alldocs:
+            cart=Cart.from_dict(doc.to_dict())
+            product_lis.append(cart)
+            total_price+=cart.totalprice
+            total_amount+=cart.sizedic['s']+cart.sizedic['m']+cart.sizedic['l']+cart.sizedic['xl']
+        inisisPrice=int(total_price)
+        total_price =  format(inisisPrice, ',')
+        doc_ref=db.collection(u'users').document(uid)
+        userdoc = doc_ref.get()
+        products=None
+        if doc.exists:
+            print(u'Document data: {}'.format(doc.to_dict()))
+            userModel=UserModel.from_dict(userdoc.to_dict())
+
+        else:
+            print(u'No such document!')
+
+        
+        return render(request, 'cart_order.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price,'inisisPrice':inisisPrice,'userModel':userModel})
+    except:
+        print("로그인안댐")
+        return render(request, 'signIn.html')
 
 
 
