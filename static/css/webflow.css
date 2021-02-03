@@ -297,9 +297,7 @@ fieldset {
 button,
 html input[type="button"],
 input[type="reset"] {
-  border: 0;
   cursor: pointer;
-  -webkit-appearance: button;
 }
 .w-form {
   margin: 0 0 15px;

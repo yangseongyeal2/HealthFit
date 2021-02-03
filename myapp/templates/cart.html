@@ -58,7 +58,7 @@
 
     <div class="board-right">
       <div class="inner">
-        <h4>SHOPPING SUMMRY</h4>
+        <h4>상품 정보</h4>
 
         <ul>
           <li>
@@ -71,9 +71,12 @@
             <span>총 합</span> <strong>{{total_price}}</strong>원
           </li>
         </ul>
-           {% comment %} <span class="btn-normal" onclick="inisispay()">결제하기</span> {% endcomment %}
-           <input type="submit" value="결제하기" class="btn-normal">
-          <a href="{% url 'home' %}" class="btn-normal">취소하기</a>
+
+
+ 
+           <input type="submit" value="결제하기" class="btn-normal btn-black">
+          <a href="{% url 'home' %}" class="btn-normal btn-white">취소하기</a>
+
       </div>
     </div>
 

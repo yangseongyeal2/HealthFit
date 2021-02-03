@@ -34,7 +34,7 @@
                            {% comment %} <a href="#" onclick="checkEmail()" class="btn-check">
                                 중복 확인
                             </a> {% endcomment %}
-                            <input type="submit" formaction="/signup/check_email/" class="btn-check" >
+                            <input type="submit" formaction="/signup/check_email/" class="btn-normal btn-check" value="중복확인">
                             <input type="hidden" value={{flag}} name="emailcheck" >
                             {% comment %} <script>alert('{{flag}}')</script> {% endcomment %}
                              
@@ -45,14 +45,14 @@
                         </li>
                         <li class="signup-list">
                             <div class="form-text">
-                                Password
+                                비밀번호
                             </div>
                             <input type="password" class="text-field w-input" maxlength="256"
                              name="password" data-name="password" placeholder="" id="password" value={{password}} >
                         </li>
                         <li class="signup-list">
                             <div class="form-text">
-                                PasswordRe
+                                비밀번호재확인
                             </div>
                             <input type="password" class="text-field w-input" maxlength="256" 
                             name="passwordre" data-name="passwordre" placeholder="" id="passwordre" value={{passwordre}}
@@ -61,7 +61,7 @@
                         </li>
                         <li class="signup-list">
                             <div class="form-text">
-                                이메일 수신 여부
+                                이메일수신여부
                             </div>
                             <label class="w-checkbox checkbox-field">
                                 <input
@@ -83,7 +83,7 @@
                               <input type="radio" class="w-form-formradioinput radio-button w-radio-input"
                                 id="male" name="gender" value="male" value={{male}}
                               >
-                              <span for="male" class="radio-button-label w-form-label">
+                              <span for="male" class="radio-button-field w-form-label">
                                 남자
                               </span>
                             </label>
@@ -91,18 +91,18 @@
                               <input type="radio" data-name="female" id="female" class="w-form-formradioinput radio-button w-radio-input"
                               name="gender" value="femail" value={{female}}
                               >
-                              <span for="female" class="radio-button-label w-form-label">
+                              <span for="female" class="radio-button-field w-form-label">
                               여자
                               </span>
                             </label>
                         </li>
                         <li class="signup-list">
-                            <div class="form-text">Address</div>
+                            <div class="form-text">주소</div>
                             <!-- <input type="text" class="text-field w-input"
                                 maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
                             <a href="#" class="btn-check ">check</a> -->
                             <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{zipcode}}>
-                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn-check"><br>
+                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호찾기" class="btn-normal btn-check">
                         </li>
 
                         <li class="signup-address">
@@ -121,9 +121,9 @@
                     </ul>
                 </div>
                 <div class="div-submit">
-                    <input type="submit" value="회원 가입" data-wait="Please wait..."
-                        class="btn-normal btn-buynow">
-                    <a href="{% url 'home' %}" class="btn-normal btn-cancle">취소</a>
+                    <input type="submit" value="회원가입" data-wait="Please wait..."
+                        class="btn-normal btn-black">
+                    <a href="{% url 'home' %}" class="btn-normal btn-white">취소</a>
                 </div>
             </form>
             <div class="w-form-done">
