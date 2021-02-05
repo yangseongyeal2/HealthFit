@@ -1,0 +1,81 @@
+.size__ulist {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+.size__list {
+  height: 20px;
+  margin-bottom: 0px;
+  margin-left: 50px;
+  padding: 0px;
+}
+
+.optionListAlign {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  list-style-type: none;
+
+  font-size: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+  padding-left: 0px;
+
+}
+.optionListAlign li:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+}
+.optionListAlign li:nth-child(1) div:nth-child(1) {
+  font-weight: 700;
+}
+.optionListAlign li:nth-child(1) div:nth-child(2) {
+  font-weight: 700;
+  margin-left: 5px;
+  font-size: 16px;
+}
+.optionListAlign input {
+  width: 50px;
+}
+.optionListAlign i {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.optionListAlign li:nth-child(3) {
+  width: 80px;
+}
+
+
+.list-7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+.list-item-7 {
+  margin-right: 20px;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  -ms-grid-row-align: auto;
+  align-self: auto;
+  font-size: 14px;
+  font-weight: 700;
+}

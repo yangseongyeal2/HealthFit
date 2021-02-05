@@ -16,14 +16,14 @@
 
     <div class="contents">
         <div class="location">
-            <div class="location-text">SIGN UP</div>
+            <div class="location-text">회원가입</div>
         </div>
         <div class="w-form">
             <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" class="form" action="/postsignup/" method="POST">
                 {% csrf_token %}
                 <div class="content-form">
-                    <ul role="list" class="list-signup">
-                        <li class="signup-list">
+                    <ul role="list" class="signup__ulist">
+                        <li class="signup__list">
                             <div class="form-text">
                                 이메일(ID)
                             </div>
@@ -37,20 +37,16 @@
                             <input type="submit" formaction="/signup/check_email/" class="btn-normal btn-check" value="중복확인">
                             <input type="hidden" value={{flag}} name="emailcheck" >
                             {% comment %} <script>alert('{{flag}}')</script> {% endcomment %}
-                             
-                            
-                            
                            
-                            
                         </li>
-                        <li class="signup-list">
+                        <li class="signup__list">
                             <div class="form-text">
                                 비밀번호
                             </div>
                             <input type="password" class="text-field w-input" maxlength="256"
                              name="password" data-name="password" placeholder="" id="password" value={{password}} >
                         </li>
-                        <li class="signup-list">
+                        <li class="signup__list">
                             <div class="form-text">
                                 비밀번호재확인
                             </div>
@@ -59,7 +55,7 @@
                             >
                             
                         </li>
-                        <li class="signup-list">
+                        <li class="signup__list">
                             <div class="form-text">
                                 이메일수신여부
                             </div>
@@ -68,14 +64,14 @@
                                     type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" value={{checkbox}}
                                     class="w-checkbox-input checkbox"><span class="w-form-label">동의</span></label>
                         </li>
-                        <li class="signup-list">
+                        <li class="signup__list">
                             <div class="form-text">
                                 이름
                             </div>
                             <input type="text" class="text-field w-input" maxlength="256" 
                                 name="name" data-name="Name" placeholder="" id="name" >
                         </li>
-                        <li class="signup-list">
+                        <li class="signup__list">
                             <div class="form-text">
                                 성별
                             </div>
@@ -96,7 +92,7 @@
                               </span>
                             </label>
                         </li>
-                        <li class="signup-list">
+                        <li class="signup__list">
                             <div class="form-text">주소</div>
                             <!-- <input type="text" class="text-field w-input"
                                 maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
@@ -105,13 +101,13 @@
                             <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호찾기" class="btn-normal btn-check">
                         </li>
 
-                        <li class="signup-address">
+                        <li class="form-address">
                             <!-- <input type="text" maxlength="256" name="address1" data-name="address1" placeholder=""
                                 class="text-field w-input"> -->
                             <!-- <div class="text-block-4">기본 주소</div> -->
                             <input type="text" id="sample6_address" placeholder="주소" name="adress" class="text-field w-input" style="width: 300px;" value={{adress}}><br>
                         </li>
-                        <li class="signup-address">
+                        <li class="form-address">
                             <!-- <input type="text" maxlength="256" name="address2"
                                 data-name="address2" placeholder="" class="text-field w-input"> -->
                             <!-- <div class="text-block-5">상세 주소</div> -->
@@ -120,7 +116,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="div-submit">
+                <div class="wrap-submit">
                     <input type="submit" value="회원가입" data-wait="Please wait..."
                         class="btn-normal btn-black">
                     <a href="{% url 'home' %}" class="btn-normal btn-white">취소</a>

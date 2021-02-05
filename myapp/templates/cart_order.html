@@ -28,114 +28,113 @@
   
         <div class="board-left">
           
-          
-        {% for products in product_lis%}
-        {% comment %} <input type="hidden" value={{products.documentId}} id="products_documentId"> {% endcomment %}
-       
+          <div class="board-left__head-text">상품 정보</div>
+          {% for products in product_lis%}
+          {% comment %} <input type="hidden" value={{products.documentId}} id="products_documentId"> {% endcomment %}
         
-        <ul role="list" class="board-left__list">
-          <li>
-            <img src="{{products.downloadurl}}" loading="lazy" width="100" height="80"
-                  
-                  sizes="(max-width: 479px) 25.296875px, 7vw" alt=""></li>
-          <li>
-            <a href="{% url 'detail' products.documentId %}">{{products.name}}</a>
-            {{products.sizedic}}
-          </li>
-          <li>
-            {{products.fixedPrice}}원
-          </li>
-          <li>
-            {{products.totalamount}}
-          </li>
-          <li>
-            <a href="{% url 'cartdelete' products.documentId %}">
-            <i class="fa fa-trash fa-2x" aria-hidden="true"  ></i>
-            </a>
+          
+          <ul role="list" class="board-left__list">
+            <li>
+              <img src="{{products.downloadurl}}" loading="lazy" width="100" height="80"
+                    
+                    sizes="(max-width: 479px) 25.296875px, 7vw" alt=""></li>
+            <li>
+              <a href="{% url 'detail' products.documentId %}">{{products.name}}</a>
+              {{products.sizedic}}
+            </li>
+            <li>
+              {{products.fixedPrice}}원
+            </li>
+            <li>
+              {{products.totalamount}}
+            </li>
+            <li>
+              <a href="{% url 'cartdelete' products.documentId %}">
+              <i class="fa fa-trash fa-2x" aria-hidden="true"  ></i>
+              </a>
 
+    
+              {% comment %} <i class="fa fa-trash fa-2x" aria-hidden="true"></i> {% endcomment %}
+            </li>
+          </ul>
+          {% endfor %}
   
-            {% comment %} <i class="fa fa-trash fa-2x" aria-hidden="true"></i> {% endcomment %}
-          </li>
-        </ul>
-        {% endfor %}
-  
-            <div class="head-text">배송 정보</div>            
-            <ul role="list" class="board-left__order-info">
-              <li>
-                <div class="order-info__head">배송지 선택</div>
-                <div class="radio-address">
+          <div class="board-left__head-text">배송 정보</div>            
+          <ul role="list" class="board-left__order-info">
+            <li>
+              <div class="form-text">배송지 선택</div>
+              <div class="radio-address">
                 <label class="radio-button-field w-radio">
                 <input type="radio" data-name="delivery" id="user" value="user" name="delivery" class="w-form-formradioinput radio-button-2 w-radio-input" checked="true" onclick="useradress()">
                 <span for="user"class="radio-button-label-2 w-form-label">기존 배송지</span>
                 </label>
 
-                <label class="w-radio">
+                <label class="radio-button-field w-radio">
                 <input type="radio" data-name="delivery" id="new" value="new" name="delivery" class="w-form-formradioinput radio-button-2 w-radio-input" onclick="newadress()">
                 <span for="new"class="radio-button-label-2 w-form-label">새로운 배송지</span>
                 </label>
-                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="form-text">받으시는 분</div>
+              <input type="text" class="text-field w-input" maxlength="256" id="recipient"
+                name="recipient" data-name="Field" placeholder="이름" required="" value="{{usermodel.name}}">
+              <input type="hidden" id="username" name="username" value="{{usermodel.name}}">
+            </li>
+            <li>
+              <div class="form-text">휴대전화</div>
+              
+              <input type="tel" class="text-field w-input" maxlength="256"
+                name="phonenumber" data-name="frontphone" id="phonenumber" required="" placeholder="01012345678" >
+                <div class="form-text" onclick="phoneAuth()">휴대전화인증</div>
+            </li>
+            {% comment %}
+             <li>
+              <div class="form-text">이메일</div>
+              <input type="text" class="text-field w-input" maxlength="256"
+                name="id" data-name="id" placeholder="id" id="id" required=""value="{{usermodel.email}}">
+                <input type="hidden" id="userid" name="userid" value="{{usermodel.email}}">
+              <div class="text-block-9"></div> 
+             </li> {% endcomment %}
+              {% comment %}
+              <li>
+                <div class="form-text">주소</div>
+                <input type="text" class="text-field w-input" style="width: 380px;" maxlength="256" name="mail" data-name="mail"
+                placeholder="주소" id="adr" required="" value="{{usermodel.adress}}{{usermodel.adressdetail}}">
+                <input type="hidden" id="useradr" name="useradr" value="{{usermodel.adress}}{{usermodel.adressdetail}}">
+              </li> {% endcomment %}
+              <li class="signup__list">
+                <div class="form-text">주소</div>
+                <!-- <input type="text" class="text-field w-input"
+                    maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
+                <a href="#" class="btn-check ">check</a> -->
+                <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{zipcode}}>
+                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn-check"><br>
+              </li>
+
+              <li class="form-address">
+                  <!-- <input type="text" maxlength="256" name="address1" data-name="address1" placeholder=""
+                      class="text-field w-input"> -->
+                  <!-- <div class="text-block-4">기본 주소</div> -->
+                  <input type="text" id="sample6_address" placeholder="주소" name="adress" class="text-field w-input" style="width: 300px;" value={{adress}}><br>
+              </li>
+
+              <li class="form-address">
+                  <!-- <input type="text" maxlength="256" name="address2"
+                      data-name="address2" placeholder="" class="text-field w-input"> -->
+                  <!-- <div class="text-block-5">상세 주소</div> -->
+                  <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{adressdetail}}>
+                  <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="adresscf" class="text-field w-input" value={{adresscf}}>
               </li>
 
               <li>
-                <div class="order-info__head">받으시는 분</div>
-                <input type="text" class="text-field w-input" maxlength="256" id="recipient"
-                  name="recipient" data-name="Field" placeholder="이름" required="" value="{{usermodel.name}}">
-                <input type="hidden" id="username" name="username" value="{{usermodel.name}}">
-              </li>
-              <li>
-                <div class="order-info__head">휴대전화</div>
-                
-                <input type="tel" class="text-field w-input" maxlength="256"
-                  name="phonenumber" data-name="frontphone" id="phonenumber" required="" placeholder="01012345678" >
-                 <div class="order-info__head" onclick="phoneAuth()">휴대전화인증</div>
-                  
-                {% comment %} <div class="text-block-10">-</div><input type="text" class="text-field w-input" maxlength="256"
-                  name="centerphone" data-name="centerphone" id="centerphone" required="">
-                <div class="text-block-10">-</div><input type="text" class="text-field w-input" maxlength="256"
-                  name="endphone" data-name="endphone" id="endphone" required="">
-                {% endcomment %}
-              </li>
-              {% comment %} <li>
-                <div class="order-info__head">이메일</div>
-                <input type="text" class="text-field w-input" maxlength="256"
-                 name="id" data-name="id" placeholder="id" id="id" required=""value="{{usermodel.email}}">
-                  <input type="hidden" id="userid" name="userid" value="{{usermodel.email}}">
-                <div class="text-block-9"></div> 
-              </li> {% endcomment %}
-              {% comment %} <li>
-                <div class="order-info__head">주소</div>
-                  <input type="text" class="text-field w-input" style="width: 380px;" maxlength="256" name="mail" data-name="mail"
-                  placeholder="주소" id="adr" required="" value="{{usermodel.adress}}{{usermodel.adressdetail}}">
-                  <input type="hidden" id="useradr" name="useradr" value="{{usermodel.adress}}{{usermodel.adressdetail}}">
-              </li> {% endcomment %}
-                <li class="signup-list">
-                            <div class="form-text">주소</div>
-                            <!-- <input type="text" class="text-field w-input"
-                                maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
-                            <a href="#" class="btn-check ">check</a> -->
-                            <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{zipcode}}>
-                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn-check"><br>
-                        </li>
-
-                        <li class="signup-address">
-                            <!-- <input type="text" maxlength="256" name="address1" data-name="address1" placeholder=""
-                                class="text-field w-input"> -->
-                            <!-- <div class="text-block-4">기본 주소</div> -->
-                            <input type="text" id="sample6_address" placeholder="주소" name="adress" class="text-field w-input" style="width: 300px;" value={{adress}}><br>
-                        </li>
-                        <li class="signup-address">
-                            <!-- <input type="text" maxlength="256" name="address2"
-                                data-name="address2" placeholder="" class="text-field w-input"> -->
-                            <!-- <div class="text-block-5">상세 주소</div> -->
-                            <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{adressdetail}}>
-                            <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="adresscf" class="text-field w-input" value={{adresscf}}>
-                        </li>
-              <li>
-                <div class="order-info__head">배송 메시지</div>
+                <div class="form-text">배송 메시지</div>
                 <textarea id="delivery-message" maxlength="5000"
                  name="delivery-message" data-name="delivery-message" placeholder="배송 시 필요한 요구사항"
                  class="textarea w-input"></textarea>
               </li>
+
             </ul>
             
         </div>
@@ -156,10 +155,10 @@
                 <span>총 합</span> <strong>{{total_price}}</strong>원
               </li>
             </ul>
-            <span class="btn-normal" onclick="inisispay()">결제하기</span>
+            <span class="btn-normal btn-black" onclick="inisispay()">결제하기</span>
             {% comment %} <input type="submit" value="바로 구매" data-wait="Please wait..." class="btn-normal" id="buynow"
               onclick="inisispay()"  > {% endcomment %}
-            <a href="{% url 'home' %}" class="btn-normal">취소하기</a>
+            <a href="{% url 'home' %}" class="btn-normal btn-white">취소하기</a>
            
           </div>
         </div>

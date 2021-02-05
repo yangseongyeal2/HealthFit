@@ -4,14 +4,14 @@
 {% block content %}
 <div class="contents">
   <div class="location">
-    <div class="location-text">MY PAGE</div>
+    <div class="location-text">내페이지</div>
   </div>
 
   <div class="board-wrap mypage">
 
     <div class="board-left">
       <div class="inner">
-        <div class="head-text">마일리지</div>
+        <div class="board-left__head-text">마일리지</div>
         <div class="mypage__list">
           <ul>
             <li>
@@ -48,7 +48,7 @@
         </div>
         
         
-        <div class="head-text">주문 현황</div>    
+        <div class="board-left__head-text">주문 현황</div>    
         <div class="mypage__list">
           <ul>
             <li>
@@ -93,7 +93,7 @@
         </ul>
         <ul>
           <li>
-            <a href="#">프로필</a>
+            <a href="{% url 'profile' %}">프로필</a>
           </li>
           <li>
             회원이신 고객님의 개인정보를 관리하는 공간입니다.
