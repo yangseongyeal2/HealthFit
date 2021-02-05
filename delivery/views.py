@@ -12,6 +12,7 @@ def index(request):
     return render(request,'index.html')
    
 def getdata(request,option,price,username,phonenum,address,uid,delivery_message,product_id):
+    delivery_lis=[]
   
 
     prd_ref = db.collection(u'product').document(product_id)
@@ -65,6 +66,15 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
             ,product_id
             ).to_dict()   
         )
+      
+        delievery_par=Delivery.from_dict(Delivery(brandname,product_name,option,price,username,phonenum,address,firestore.SERVER_TIMESTAMP,"배송전","","",uid,delivery_message,img,product_id).to_dict())
+       # delivery=Delivery.from_dict(delivery_docs.to_dict())
+        delivery_lis.append(delievery_par)
+        print(delivery_lis)
+
+
+        #유저에서 딜리버리 가져오기
+
 
     else:
         print(u'No such document!')
@@ -73,9 +83,10 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
 
     
 
-    return render(request,'getdata.html')
+    return render(request,'getdata.html',{'delivery_lis':delivery_lis})
 
 def cart_order_complete(request,total_price,username,phonenumber,address,uid,delivery_message):
+    delivery_lis=[]
     cart_ref=db.collection("users").document(uid).collection('cart')
     cart_alldoc=cart_ref.stream()
     for doc in cart_alldoc:
@@ -122,6 +133,10 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
         ,cart.documentId
         ).to_dict()   
         )
+        delievery_par=Delivery.from_dict(Delivery(brandname,product_name,option,price,username,phonenum,address,firestore.SERVER_TIMESTAMP,"배송전","","",uid,delivery_message,img,product_id).to_dict())
+       # delivery=Delivery.from_dict(delivery_docs.to_dict())
+        delivery_lis.append(delievery_par)
+        print(delivery_lis)
     #for문끝
    
     
@@ -142,5 +157,5 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
 
 
 
-    return render(request,'getdata.html')
+    return render(request,'getdata.html',{'delivery_lis':delivery_lis})
 

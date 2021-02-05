@@ -254,8 +254,16 @@ def postsignup(request):
     passwordre=request.POST.get('passwordre')
     checkbox=request.POST.get('checkbox')
     name=request.POST.get('name')
-    male=request.POST.get('male')
-    female=request.POST.get('female')
+
+    # male=request.POST.get('male')
+    # female=request.POST.get('female')
+    gender=request.POST.get('gender')
+    sex=None
+    if(gender =="male"):
+        sex="male"
+    if(gender== "female"):
+        sex="female"
+
     zipcode=request.POST.get('zipcode')
     adress=request.POST.get('adress')
     adressdetail=request.POST.get('adressdetail')
@@ -286,7 +294,7 @@ def postsignup(request):
     #data={"name":name,"status":"1","uid":uid}
 
     user_doc_ref.set(
-        UserModel(email,password,checkbox,name,male,zipcode,adress,adressdetail).to_dict()
+        UserModel(email,password,checkbox,name,sex,zipcode,adress,adressdetail).to_dict()
     )
 
     

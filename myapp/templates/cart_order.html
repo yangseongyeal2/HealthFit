@@ -125,7 +125,7 @@
                       data-name="address2" placeholder="" class="text-field w-input"> -->
                   <!-- <div class="text-block-5">상세 주소</div> -->
                   <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{adressdetail}}>
-                  <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="adresscf" class="text-field w-input" value={{adresscf}}>
+                 
               </li>
 
               <li>
@@ -215,10 +215,10 @@
                             extraAddr = ' (' + extraAddr + ')';
                         }
                         // 조합된 참고항목을 해당 필드에 넣는다.
-                        document.getElementById("sample6_extraAddress").value = extraAddr;
+                        //document.getElementById("sample6_extraAddress").value = extraAddr;
                     
                     } else {
-                        document.getElementById("sample6_extraAddress").value = '';
+                        //document.getElementById("sample6_extraAddress").value = '';
                     }
     
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -248,7 +248,7 @@
     var address=document.getElementById('sample6_address').value
    
     var address_detail=document.getElementById('sample6_detailAddress').value
-    var address_extra=document.getElementById('sample6_extraAddress').value
+    //var address_extra=document.getElementById('sample6_extraAddress').value
     var total_price=document.getElementById('total_price').value
    // var brandName=document.getElementById('brandName').value
    // var option=document.getElementById('option').value

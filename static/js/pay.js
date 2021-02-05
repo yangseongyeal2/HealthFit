@@ -14,7 +14,7 @@ function inisispay() {
     var address=document.getElementById('sample6_address').value
    
     var address_detail=document.getElementById('sample6_detailAddress').value
-    var address_extra=document.getElementById('sample6_extraAddress').value
+    //var address_extra=document.getElementById('sample6_extraAddress').value
     var total_price=document.getElementById('total_price').value
     var brandName=document.getElementById('brandName').value
     var option=document.getElementById('option').value

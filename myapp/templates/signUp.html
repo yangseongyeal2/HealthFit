@@ -61,7 +61,7 @@
                             </div>
                             <label class="w-checkbox checkbox-field">
                                 <input
-                                    type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" value={{checkbox}}
+                                    type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" value="1"
                                     class="w-checkbox-input checkbox"><span class="w-form-label">동의</span></label>
                         </li>
                         <li class="signup__list">
@@ -77,7 +77,7 @@
                             </div>
                             <label class="male-radio w-radio">
                               <input type="radio" class="w-form-formradioinput radio-button w-radio-input"
-                                id="male" name="gender" value="male" value={{male}}
+                                id="male" name="gender" value="male" 
                               >
                               <span for="male" class="radio-button-field w-form-label">
                                 남자
@@ -85,7 +85,7 @@
                             </label>
                             <label class="female-radio w-radio">
                               <input type="radio" data-name="female" id="female" class="w-form-formradioinput radio-button w-radio-input"
-                              name="gender" value="femail" value={{female}}
+                              name="gender" value="female" 
                               >
                               <span for="female" class="radio-button-field w-form-label">
                               여자
@@ -112,7 +112,7 @@
                                 data-name="address2" placeholder="" class="text-field w-input"> -->
                             <!-- <div class="text-block-5">상세 주소</div> -->
                             <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{adressdetail}}>
-                            <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="adresscf" class="text-field w-input" value={{adresscf}}>
+                          
                         </li>
                     </ul>
                 </div>
@@ -167,10 +167,10 @@
                             extraAddr = ' (' + extraAddr + ')';
                         }
                         // 조합된 참고항목을 해당 필드에 넣는다.
-                        document.getElementById("sample6_extraAddress").value = extraAddr;
+                       
                     
                     } else {
-                        document.getElementById("sample6_extraAddress").value = '';
+                       
                     }
     
                     // 우편번호와 주소 정보를 해당 필드에 넣는다.

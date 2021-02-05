@@ -19,22 +19,23 @@
         <li>가격</li>
         <li>수량</li>
       </ul>
-
+      {%for delivery in delivery_lis%}
       <ul role="list" class="board-left__list">
         <li>
-          <!-- 상품 이미지 -->
+          {{delivery.product_name}}
         </li>
         <li>
           <!-- 상품 이름 -->
           <!-- 상품 사이즈 -->
         </li>
         <li>
-          <!-- 상품 가격 -->
+          {{delivery.price}}
         </li>
         <li>
           <!-- 상품 수량 -->
         </li>
       </ul> 
+      {%endfor%}
 
     </div>
 
