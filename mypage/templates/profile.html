@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="contents">
+
+  <div class="location">
+      <div class="location-text">프로필</div>
+  </div>
+
+  <div class="content-form">
+    <ul role="list" class="signup__ulist">
+        <li class="signup__list">
+            <div class="form-text">
+                이메일(ID)
+            </div>
+            <input type="email" readonly
+            class="text-field w-input" maxlength="256" 
+             name="email" data-name="Email" placeholder="emailID@email.com" id="email" required="" value={{email}}>
+            <!-- <input type="submit" formaction="/signup/check_email/" class="btn-normal btn-check" value="중복확인"> -->
+            <input type="hidden" value={{flag}} name="emailcheck" >
+        </li>
+        <li class="signup__list">
+            <div class="form-text">
+                비밀번호
+            </div>
+            <input type="password" class="text-field w-input" maxlength="256"
+             name="password" data-name="password" placeholder="" id="password" value={{password}} >
+        </li>
+        <li class="signup__list">
+            <div class="form-text">
+                비밀번호재확인
+            </div>
+            <input type="password" class="text-field w-input" maxlength="256" 
+            name="passwordre" data-name="passwordre" placeholder="" id="passwordre" value={{passwordre}}
+            >
+            
+        </li>
+        <li class="signup__list">
+            <div class="form-text">
+                이메일수신여부
+            </div>
+            <label class="w-checkbox checkbox-field">
+                <input
+                    type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" value={{checkbox}}
+                    class="w-checkbox-input checkbox"><span class="w-form-label">동의</span></label>
+        </li>
+        <li class="signup__list">
+            <div class="form-text">
+                이름
+            </div>
+            <input type="text" class="text-field w-input" maxlength="256" 
+                name="name" data-name="Name" placeholder="" id="name" >
+        </li>
+        <li class="signup__list">
+            <div class="form-text">
+                성별
+            </div>
+            <label class="male-radio w-radio">
+              <input type="radio" class="w-form-formradioinput radio-button w-radio-input"
+                id="male" name="gender" value="male" value={{male}}
+              >
+              <span for="male" class="radio-button-field w-form-label">
+                남자
+              </span>
+            </label>
+            <label class="female-radio w-radio">
+              <input type="radio" data-name="female" id="female" class="w-form-formradioinput radio-button w-radio-input"
+              name="gender" value="femail" value={{female}}
+              >
+              <span for="female" class="radio-button-field w-form-label">
+              여자
+              </span>
+            </label>
+        </li>
+        <li class="signup__list">
+            <div class="form-text">주소</div>
+            <!-- <input type="text" class="text-field w-input"
+                maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
+            <a href="#" class="btn-check ">check</a> -->
+            <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{zipcode}}>
+            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호찾기" class="btn-normal btn-check">
+        </li>
+
+        <li class="form-address">
+            <!-- <input type="text" maxlength="256" name="address1" data-name="address1" placeholder=""
+                class="text-field w-input"> -->
+            <!-- <div class="text-block-4">기본 주소</div> -->
+            <input type="text" id="sample6_address" placeholder="주소" name="adress" class="text-field w-input" style="width: 300px;" value={{adress}}><br>
+        </li>
+        <li class="form-address">
+            <!-- <input type="text" maxlength="256" name="address2"
+                data-name="address2" placeholder="" class="text-field w-input"> -->
+            <!-- <div class="text-block-5">상세 주소</div> -->
+            <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{adressdetail}}>
+            <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="adresscf" class="text-field w-input" value={{adresscf}}>
+        </li>
+    </ul>
+  </div>
+
+  <div class="wrap-submit">
+    <input type="submit" value="수정하기" data-wait="Please wait..." class="btn-normal btn-black">
+    <a href="{% url 'home' %}" class="btn-normal btn-white">취소</a>
+  </div>
+
+</div>
+
+{% endblock content %}

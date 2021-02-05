@@ -24,9 +24,13 @@ function nextClick(pageNumber) {
 
 
 
-function paging (currentPage, totlaData) {
+function paging (currentPage, totalData) {
 
-  const totalPage = Math.ceil(totlaData / dataInPage); //총 페이지 수
+  if(totalData === 0) {
+    totalData = 1;
+  }
+
+  const totalPage = Math.ceil(totalData / dataInPage); //총 페이지 수
   const pageGroup = Math.ceil(currentPage / pageCount); // 1 = 현재 페이지 1 = 1~5, 2 = 6~10
 
   console.log(totalPage);
@@ -82,4 +86,10 @@ function paging (currentPage, totlaData) {
   }
 }
 
-paging(1, 89); //100에 DB DATA
+function inputTotalData() {
+
+}
+
+
+
+paging(1, 0); //100에 DB DATA

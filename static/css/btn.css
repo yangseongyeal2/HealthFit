@@ -1,0 +1,64 @@
+.btn-normal {
+  display: inline-block;
+  border: 1px solid #bbb3b3;
+  border-radius: 1px;
+  background-color: transparent;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition-duration: 1.2s;
+}
+.btn-normal:hover {
+  background: black;
+  color: #F8F8F8;
+}
+.btn-black {
+  width: 130px;
+  padding: 10px;
+  height: 40px;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: #393939;
+  color: #F8F8F8;
+}
+.btn-white {
+  width: 130px;
+  padding: 10px;
+  margin-left: 50px;
+  height: 40px;
+  box-sizing: border-box;
+  transition-duration: 1.2s;
+}
+.btn-check {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  margin-left: 10px;
+  padding: 0px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 2px;
+  background-color: transparent;
+  color: #000000;
+  font-size: 13px;
+  line-height: 10px;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #bbb3b3;
+}

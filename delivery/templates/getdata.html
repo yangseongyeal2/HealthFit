@@ -1,1 +1,67 @@
-getdata
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="contents">
+
+  <div class="location">
+    <div class="location-text">주문완료</div>
+  </div>
+
+  <div class="board-wrap">
+
+    <div class="board-left">
+      
+      <ul role="list" class="board-left__head-list">
+        <li>상품</li>
+        <li>이름</li>
+        <li>가격</li>
+        <li>수량</li>
+      </ul>
+
+      <ul role="list" class="board-left__list">
+        <li>
+          <!-- 상품 이미지 -->
+        </li>
+        <li>
+          <!-- 상품 이름 -->
+          <!-- 상품 사이즈 -->
+        </li>
+        <li>
+          <!-- 상품 가격 -->
+        </li>
+        <li>
+          <!-- 상품 수량 -->
+        </li>
+      </ul> 
+
+    </div>
+
+    <div class="board-right getdata">
+      <div class="inner">
+        <h4>주문 정보</h4>
+
+        <ul>
+          <li>
+            <span>상품 가격</span> <strong><!-- 상품 가격 --></strong>원
+          </li>
+          <li>
+            <span>배송비</span> <strong>20</strong>원
+          </li>
+          <li>
+            <span>총 합</span> <strong><!-- 상품 총합 --></strong>원
+          </li>
+        </ul>
+ 
+        <a href="{% url 'home' %}" class="btn-normal btn-white">쇼핑하기</a>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+{% endblock content %}

@@ -70,7 +70,7 @@
 
           <input type="hidden" name="path" value="{{request.path}}" />
           <div class="details-info-wrap">
-            <ul role="list" class="list-4">
+            <ul role="list" class="detail-price__list">
               <li>
                 <div>PRICE</div>
               </li>
@@ -84,11 +84,11 @@
           </div>
 
           <div class="details-info-wrap">
-            <ul role="list" class="list-5">
+            <ul role="list" class="size__ulist">
               <li>
                 <div>SIZE</div>
               </li>
-              <li><select id="size" name="size" data-name="size" class="select-field-2 w-select"
+              <li><select id="size" name="size" data-name="size" class="size__list w-select"
                   onchange="optionshow(this)">
                   <option value="first">사이즈</option>
                   <option value="S">S</option>
@@ -100,25 +100,9 @@
           </div>
 
           <div id="optionList">
+            <!-- optionListAlign -->
 
           </div>
-
-            {% comment %} <ul role="list" class="table-l" id="option_ul_s" style="display: none;">
-              <li>
-                <div class="text-block-13">{{products.name}}</div>
-                <div id="option_size">S</div>
-              </li>
-
-              <li class="list-item-6">
-                <input type="number" style="width:50px" min="0" placeholder="1" class="text-field-3 w-input"
-                  maxlength="256" name="amount_s" data-name="count" placeholder="1" id='amountsid'
-                  onchange="amountprice(this,'s')">
-              <li>
-                <div id="s_amount">{{products.price}}</div>
-              </li>
-            </ul> {% endcomment %}
-
-          
 
           <div class="details-info-wrap">
             <ul role="list" class="list-7">

@@ -34,3 +34,12 @@ def orderinfo(request):
         return render(request, 'orderinfo.html',{'uid':uid,'deliverylist':deliverylist})
     except:
         return render(request, 'signin.html',{'uid':uid})
+
+def profile(request):
+    uid=None
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        return render(request, 'profile.html',{'uid':uid})
+    except:
+        return render(request, 'signin.html',{'uid':uid})

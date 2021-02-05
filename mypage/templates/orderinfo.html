@@ -5,7 +5,7 @@
 
 <div class="contents">
   <div class="location">
-    <div class="location-text">주문 정보</div>
+    <div class="location-text">주문정보</div>
   </div>
 
   <div class="orderinfo inner">
@@ -18,12 +18,12 @@
           <th>수량</th>
           <th>구매금액</th>
           <th>처리현황</th>
-          <th>취소/교환/반품</th>
+          <th>취소 / 교환 / 반품</th>
         </tr>
       </thead>
 
       <tbody>
-       {% for delivery in deliverylist%}
+       {% for delivery in deliverylist %}
         <tr>
           <td>{{delivery.timestamp}}</td>
           <td><img src="{{delivery.img}}" alt="test"></td>
@@ -31,7 +31,7 @@
           <td>{{delivery.option}}</td>
           <td>{{delivery.price}}</td>
           <td>{{delivery.deliverystate}}</td>
-          <td> </td>
+          <td></td>
         </tr>
         {% endfor %}
      
