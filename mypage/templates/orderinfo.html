@@ -21,26 +21,20 @@
           <th>취소/교환/반품</th>
         </tr>
       </thead>
-  
+
       <tbody>
+       {% for delivery in deliverylist%}
         <tr>
-          <td>2021/02/02</td>
-          <td><img src="../../static/media/test.jpg" alt="test"></td>
-          <td>테스트용 사진입니다</td>
-          <td>69</td>
-          <td>6,974원</td>
-          <td>배송 완료</td>
+          <td>{{delivery.timestamp}}</td>
+          <td><img src="{{delivery.img}}" alt="test"></td>
+          <td>{{delivery.product_name}}</td>
+          <td>{{delivery.option}}</td>
+          <td>{{delivery.price}}</td>
+          <td>{{delivery.deliverystate}}</td>
           <td> </td>
         </tr>
-        <tr>
-          <td>2020/01/03</td>
-          <td><img src="../../static/media/test.jpg" alt="test"></td>
-          <td>테스트용 사진입니다2</td>
-          <td>74</td>
-          <td>6,974원</td>
-          <td>반품 완료</td>
-          <td>반품</td>
-        </tr>
+        {% endfor %}
+     
       </tbody>
   
     </table>

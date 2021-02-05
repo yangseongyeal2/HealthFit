@@ -20,6 +20,8 @@ function inisispay() {
     var option=document.getElementById('option').value
     var uid=document.getElementById('uid').value
     var delivery_message=document.getElementById('delivery-message').value
+    var img=document.getElementById('img').value
+    var product_id=document.getElementById('product_id').value
     if (!address){
         alert("주소를 입력하십시오")
         return
@@ -33,7 +35,7 @@ function inisispay() {
         alert("배송시 필요한 요구사항을 입력하시오")
        return
     }
-    var url="complete"+"/"+brandName+"/"+productname+"/"+option+"/"+total_price+"/"+username+"/"+phonenumber+"/"+address+"/"+uid+"/"+delivery_message+"/"
+    var url="complete"+"/"+option+"/"+total_price+"/"+username+"/"+phonenumber+"/"+address+"/"+uid+"/"+delivery_message+"/"+product_id+"/"
     // 결제요청
     IMP.request_pay({
         // name과 amount만 있어도 결제 진행가능
