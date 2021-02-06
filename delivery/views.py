@@ -2,6 +2,7 @@ from django.shortcuts import render
 from firebase_admin import firestore
 from delivery.models import Delivery
 from myapp.models  import Cart,Product
+import requests
 
 db=firestore.client()
 
@@ -12,6 +13,7 @@ def index(request):
     return render(request,'index.html')
    
 def getdata(request,option,price,username,phonenum,address,uid,delivery_message,product_id):
+    
     delivery_lis=[]
   
 
@@ -45,7 +47,7 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
             ,img
             ,product_id
             ).to_dict()   
-        )
+            )
         user_doc=db.collection("users").document(uid).collection("delivery").document(doc_ref_random.id)
         user_doc.set(
             Delivery(
@@ -65,9 +67,25 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
             ,img
             ,product_id
             ).to_dict()   
-        )
+            )
       
-        delievery_par=Delivery.from_dict(Delivery(brandname,product_name,option,price,username,phonenum,address,firestore.SERVER_TIMESTAMP,"배송전","","",uid,delivery_message,img,product_id).to_dict())
+        delievery_par=Delivery.from_dict(
+            Delivery(
+                brandname
+                ,product_name
+                ,option,price
+                ,username
+                ,phonenum
+                ,address
+                ,firestore.SERVER_TIMESTAMP
+                ,"배송전"
+                ,""
+                ,""
+                ,uid
+                ,delivery_message
+                ,img
+                ,product_id).to_dict()
+                )
        # delivery=Delivery.from_dict(delivery_docs.to_dict())
         delivery_lis.append(delievery_par)
         print(delivery_lis)
@@ -133,7 +151,7 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
         ,cart.documentId
         ).to_dict()   
         )
-        delievery_par=Delivery.from_dict(Delivery(brandname,product_name,option,price,username,phonenum,address,firestore.SERVER_TIMESTAMP,"배송전","","",uid,delivery_message,img,product_id).to_dict())
+        delievery_par=Delivery.from_dict(Delivery(cart.brand,cart.name,cart.sizedic,cart.price,username,phonenumber,address,firestore.SERVER_TIMESTAMP,"배송전","","",uid,delivery_message,cart.downloadurl,cart.documentId).to_dict())
        # delivery=Delivery.from_dict(delivery_docs.to_dict())
         delivery_lis.append(delievery_par)
         print(delivery_lis)
@@ -159,3 +177,39 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
 
     return render(request,'getdata.html',{'delivery_lis':delivery_lis})
 
+def finishedpay(request,option,price,username,phonenum,address,uid,delivery_message,product_id):
+    uid=None
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        user_doc=db.collection("users").document(uid).collection("delivery")
+        user_alldocs=user_doc.stream()
+        print("??")
+        deliverylist=[]
+        for doc in user_alldocs:
+            delivery=Delivery.from_dict(doc.to_dict())
+            #print(delivery)
+            deliverylist.append(delivery)
+        
+        return render(request, 'orderinfo.html',{'uid':uid,'deliverylist':deliverylist})
+    except:
+        return render(request, 'signin.html',{'uid':uid})
+
+def cartfinishedpay(request,total_price,username,phonenumber,address,uid,delivery_message):
+    uid=None
+    try:
+        print("카트"+request.session['uid'])
+        uid=request.session['uid']
+        user_doc=db.collection("users").document(uid).collection("delivery")
+        user_alldocs=user_doc.stream()
+        print("??")
+        deliverylist=[]
+        for doc in user_alldocs:
+            delivery=Delivery.from_dict(doc.to_dict())
+            #print(delivery)
+            deliverylist.append(delivery)
+        
+        return render(request, 'orderinfo.html',{'uid':uid,'deliverylist':deliverylist})
+    except:
+        return render(request, 'signin.html',{'uid':uid})
+    

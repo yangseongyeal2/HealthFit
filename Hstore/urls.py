@@ -60,6 +60,8 @@ urlpatterns = [
     path('order/complete/<str:option>/<int:price>/<str:username>/<int:phonenum>/<str:address>/<str:uid>/<str:delivery_message>/<str:product_id>/', delivery.views.getdata,name="complete"),
     path('cart/order/complete/<int:total_price>/<str:username>/<int:phonenumber>/<str:address>/<str:uid>/<str:delivery_message>/', delivery.views.cart_order_complete,name="cart_order_complete"),
    
+    path('order/complete/<str:option>/<int:price>/<str:username>/<int:phonenum>/<str:address>/<str:uid>/<str:delivery_message>/<str:product_id>/complete/', delivery.views.finishedpay,name="finishedpay"),
+    path('cart/order/complete/<int:total_price>/<str:username>/<int:phonenumber>/<str:address>/<str:uid>/<str:delivery_message>/complete/', delivery.views.cartfinishedpay,name="cart_order_complete"),
     path('mypage/profile/modify/', mypage.views.modify,name="modify"),
 
    
