@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'admincrawling',
     'mypage',
     'delivery',
+    'adminDelivery',
     
 ]
 

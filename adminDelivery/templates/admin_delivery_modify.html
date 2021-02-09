@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+
+ 
+
+
+
+
+
+
+<div class="contents">
+
+  <div class="location">
+      <div class="location-text">프로필</div>
+  </div>
+
+  <div class="content-form">
+    <form action="/admin/delivery/modify/" method="POST">
+    {% csrf_token %}
+    <ul role="list" class="signup__ulist">
+    <input type="hidden" name="documentId" value="{{id}}">
+        <li class="signup__list">
+            <div class="form-text">
+                상품이름
+            </div>
+            <input type="text" readonly
+            class="text-field w-input" maxlength="256" 
+             name="email" data-name="Email" placeholder="emailID@email.com" id="email" required="" value={{delivery.product_name}}>
+            <!-- <input type="submit" formaction="/signup/check_email/" class="btn-normal btn-check" value="중복확인"> -->
+           
+        </li>
+       
+        <li class="signup__list">
+            <div class="form-text">
+                option
+            </div>
+            <input type="text" readonly
+            class="text-field w-input" value={{option}}>
+            <!-- <input type="submit" formaction="/signup/check_email/" class="btn-normal btn-check" value="중복확인"> -->
+           
+        </li>
+       
+        <li class="signup__list">
+            <div class="form-text">
+                받는사람
+            </div>
+            <input type="text" class="text-field w-input" maxlength="256" readonly
+                name="name" data-name="Name" placeholder="" id="name" value="{{delivery.username}}" >
+        </li>
+        
+            
+
+
+     
+        <li class="signup__list">
+            <div class="form-text">주소</div>
+            <!-- <input type="text" class="text-field w-input"
+                maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
+            <a href="#" class="btn-check ">check</a> -->
+            <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{delivery.address}} readonly>
+           
+        </li>
+
+        <li class="signup__list">
+            <div class="form-text">
+                배송메세지
+            </div>
+            <input type="text" class="text-field w-input" maxlength="256" 
+                name="delivery_message" data-name="Name" placeholder="" id="delivery_message" value="{{delivery.delivery_message}}" readonly >
+        </li>
+        <li class="signup__list">
+            <div class="form-text">
+               현재 배송상태
+            </div>
+            <input type="text" class="text-field w-input" maxlength="256" 
+                name="delivery_message" data-name="Name" placeholder="" id="delivery_message" value="{{delivery.deliverystate}}" readonly >
+        </li>
+
+     
+        <li class="signup__list">
+            <div class="form-text">
+               배송상태(변경하기)
+            </div>
+           <td>
+            <select name="deliveryState" id="deliveryState" >
+                <option value="배송전">배송전</option>
+                <option value="배송중">배송 중</option>
+                <option value="배송완료">배송 완료</option>
+
+            </select>
+          </td>
+        </li>
+
+        <li class="signup__list">
+            <div class="form-text">
+                전 운송장코드
+            </div>
+             <input type="text" class="text-field w-input" maxlength="256" 
+                value="{{delivery.deliverycode}}" readonly >
+        </li>
+
+        <li class="signup__list">
+            <div class="form-text">
+                운송장코드 변경하기
+            </div>
+            <td>
+            <select name="deliverycode" id="deliverycode">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+            </select>
+          </td>
+        </li>
+
+        <li class="signup__list">
+            <div class="form-text">
+                운송 번호
+            </div>
+            <input type="text" class="text-field w-input" maxlength="256" 
+                name="deliverynum" data-name="Name" placeholder="" id="deliverynum" value="{{delivery.deliverynum}}"  >
+        </li>
+
+
+        
+
+     
+
+        
+    </ul>
+ 
+  </div>
+
+  <div class="wrap-submit">
+    <input type="submit" value="수정하기" data-wait="Please wait..." class="btn-normal btn-black">
+    <a href="{% url 'home' %}" class="btn-normal btn-white">취소</a>
+  </div>
+
+</div>
+</form>
+
+
+
+
+
+
+
+
+{% endblock content %}

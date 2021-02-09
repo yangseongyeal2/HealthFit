@@ -1,0 +1,16 @@
+어드민홈
+
+{% for delivery,id in comb_lis %}
+
+    <div class="card-colums" style="width: 20%; ">
+     
+      <a href="{% url 'delivery_modify' id %}" class="card-img-top"><img src="{{delivery.img}}"></a> 
+      
+      <div class="card-body">
+        <h5 class="card-title">{{delivery.product_name}}</h5>
+        <p class="card-text">{{delivery.price}}</p>
+        
+      </div>
+    
+    </div> 
+{% endfor %}

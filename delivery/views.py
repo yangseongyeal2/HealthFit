@@ -3,6 +3,7 @@ from firebase_admin import firestore
 from delivery.models import Delivery
 from myapp.models  import Cart,Product
 import requests
+from ast import literal_eval
 
 db=firestore.client()
 
@@ -20,6 +21,14 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
     prd_ref = db.collection(u'product').document(product_id)
 
     prd_docs = prd_ref.get()
+
+
+
+   
+    dictionary = literal_eval(option)
+
+    
+    
     if prd_docs.exists:
         products=Product.from_dict(prd_docs.to_dict())
         img=products.downloadurl
@@ -33,7 +42,7 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
             Delivery(
             brandname
             ,product_name
-            ,option
+            ,dictionary
             ,price
             ,username
             ,phonenum
@@ -53,7 +62,7 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
             Delivery(
             brandname
             ,product_name
-            ,option
+            ,dictionary
             ,price
             ,username
             ,phonenum
@@ -73,7 +82,8 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
             Delivery(
                 brandname
                 ,product_name
-                ,option,price
+                ,dictionary
+                ,price
                 ,username
                 ,phonenum
                 ,address
@@ -107,6 +117,12 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
     delivery_lis=[]
     cart_ref=db.collection("users").document(uid).collection('cart')
     cart_alldoc=cart_ref.stream()
+
+
+
+
+
+
     for doc in cart_alldoc:
         cart=Cart.from_dict(doc.to_dict())
         doc_ref=db.collection("delivery")

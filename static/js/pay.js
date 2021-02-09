@@ -26,16 +26,16 @@ function inisispay() {
         alert("주소를 입력하십시오")
         return
     }
-    // if (address_detail){
-    //     alert(address_detail)
-    //     address+=" "+address_detail+ " "+address_extra
+    if (address_detail){
+        alert(address_detail)
+        address+=" "+address_detail
 
-    // }
+    }
     if (!delivery_message){
         alert("배송시 필요한 요구사항을 입력하시오")
        return
     }
-    var url="complete"+"/"+option+"/"+total_price+"/"+username+"/"+phonenumber+"/"+address+"/"+uid+"/"+delivery_message+"/"+product_id+"/"
+    var url="complete"+"/"+option+"/"+total_price+"/"+recipient+"/"+phonenumber+"/"+address+"/"+uid+"/"+delivery_message+"/"+product_id+"/"
     // 결제요청
     IMP.request_pay({
         // name과 amount만 있어도 결제 진행가능

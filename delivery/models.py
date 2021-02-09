@@ -82,7 +82,7 @@ class Delivery(object):
         if u'deliverycode' in source:
             delivery.deliverycode=source[u'deliverycode']
         if u'uid' in source:
-            delivery.deliverycode=source[u'uid']
+            delivery.uid=source[u'uid']
         if u'img' in source:
             delivery.img=source[u'img']
         if u'delivery_message' in source:
