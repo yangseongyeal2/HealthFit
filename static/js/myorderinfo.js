@@ -1,9 +1,12 @@
 "use strict";
 const dataInPage = 5; //한 화면에 나타낼 리스트 수
 const pageCount = 5; //한 화면에 나타낼 페이지 수
+//오브젝트 저장하기 위한 전역변수
+let savingData = null;
 
 function init(data) {
- paging(1, data);
+  savingData = data;
+  paging(1, savingData);
 }
 
 
@@ -36,13 +39,8 @@ function paintingData(currentPage, totalData) {
   }
 }
 
-//오브젝트 저장하기 위한 전역변수
-let savingData;
-
 function paging(currentPage, totalData) {
   
-  savingData = totalData;
-
   const totalPage = Math.ceil(totalData.length / dataInPage); //총 페이지 수
   const pageGroup = Math.ceil(currentPage / pageCount); // 1 = 현재 페이지 1 = 1~5, 2 = 6~10
 
