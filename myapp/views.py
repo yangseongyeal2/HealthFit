@@ -12,6 +12,7 @@ from .models import Product
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import UserModel
 from .models import Cart
+from delivery.models import Delivery
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import requests
@@ -59,84 +60,9 @@ def home(request):
         print("로그인안댐")
   
    
-    #if request.session['uid']:
-        #uid=authe.current_user['localId']
-      
-    # doc_ref_random=db.collection("product").document()
-    # doc_ref_random.set(
-    #     Product('양성열','25',doc_ref_random).to_dict()
-    # )
-    # # doc_ref.document().set(
-    # #     Product('남종경','25').to_dict()
-    # # )
-    
-    # try:
-    #     docs=doc_ref.document('test').get()
-    #     print('Document data: {}'.format(docs.to_dict()))
-    #     #print(product)
-    #     products=Product.from_dict(docs.to_dict())
-       
-    # except:
-    #     print('No such document!')
-
-   #파이어스토어 데이터 불러오기
-    # doc_ref=db.collection("product")
-    # alldocs=doc_ref.stream()
-    # name_lis=[]
-    # age_lis=[]
-    # documentId_lis=[]
-    # url_lis=[]
-    # for doc in alldocs:
-    #     products=Product.from_dict(doc.to_dict())
-    #     #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
-    #     name_lis.append(products.name)
-    #     age_lis.append(products.price)
-    #     documentId_lis.append(products.documentId)
-    #     url_lis.append(products.downloadurl)
-    #     # print(products.name)
-    #     # print(products.age)
-    #     # print(products.documentId)
-
-    # comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
-
-    #로그인 유무
-   # user = auth.get_user(uid)
-   # print('Successfully fetched user data: {0}'.format(user.uid))
-    # if user :
-    #     print(user)
-    # else:
-    #     print(user)
-    
-    # uid=auth.get_user()
-    # print(uid)
-    #return render(request,'home.html',{'comb_lis':comb_lis,'uid':uid})
-
-    # email=request.POST.get('email')
-    # #print(email)
-    # passw=request.POST.get('pass')
-    # #print(passw)
-    
-    # if email != None :
-    #     try:
-    #         user=authe.sign_in_with_email_and_password(email,passw)
-            
-    #     except:
-    #         message="Invalid credentials"
-    #         return render(request,"signIn.html",{"messg":message})
-    #         #return redirect('/signIn/')
-    #         #return render(request,"welcom.html",{"messg":message})
-    #         # print(user['localId'])    
-    #     #uid=user['localId']
-    #     uid=authe.current_user['localId']
-    #     print(uid)
-       
-        #print(uid)
-        #session_id=user['idToken']
-        #request.session['uid']=str(session_id)
-
-    #return render(request,'home.html',{'comb_lis':comb_lis,'uid':uid})
+   
     return render(request,'home.html',{'uid':uid})
-    #return render(request,'base2.html')
+
     
 
 def hello(request):
@@ -703,7 +629,9 @@ def order(request):
         return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price,'inisisPrice':inisisPrice})
 
     except:
-        return render(request, 'signIn.html')
+        expath=request.POST.get('path')
+        print(expath)
+        return render(request, 'order_login.html',{'expath':expath})
     # if authe.current_user:
     #     uid=authe.current_user['localId']
     #     products_name=request.POST.get('product_name')
@@ -1079,6 +1007,96 @@ def cart_order(request):
     except:
         print("로그인안댐")
         return render(request, 'signIn.html')
+def nonmember(request):
+    expath=request.POST.get('path')
+
+    print(expath)
+    return render(request, 'nonmember_login.html',{'expath':expath})
+def nonmember_create(request):
+
+    expath=request.POST.get('path')
+    name=request.POST.get('name')
+    password=request.POST.get('pass')
+    passwordre=request.POST.get('passre')
+    tel=request.POST.get('tel')
+    msg=""
+    if password==passwordre :
+        msg="비밀번호가 같다."
+        request.session['uid']=tel
+        return redirect(expath)
+    else :
+        msg="비밀번호 확인과 비밀번호가 일치하지 않습니다."
+        return render(request, 'nonmember_login.html',{'msg':msg})
+
+  
+
+    return render(request, 'home.html')
+
+def order_postsign(request):
+    expath=request.POST.get('path')
+    email=request.POST.get('email')
+    passw=request.POST.get('pass')
+    try:
+        user=authe.sign_in_with_email_and_password(email,passw)
+    except:
+        message="Invalid credentials"
+        return render(request,"signIn.html",{"messg":message})
+        #return redirect('/signIn/')
+        #return render(request,"welcom.html",{"messg":message})
+   # print(user['localId'])    
+    uid=user['localId']
+    print("localId: "+uid)
+    session_id=user['idToken']
+    print("idtoken: "+session_id)
+    #request.session['uid']=str(session_id)
+    request.session['uid']=str(uid)
+    print("포스트사인"+request.session['uid'])
+    
+    doc_ref=db.collection("product")
+    alldocs=doc_ref.stream()
+    name_lis=[]
+    age_lis=[]
+    documentId_lis=[]
+    url_lis=[]
+    for doc in alldocs:
+        products=Product.from_dict(doc.to_dict())
+        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+        name_lis.append(products.name)
+        age_lis.append(products.price)
+        documentId_lis.append(products.documentId)
+        url_lis.append(products.downloadurl)
+       # print(products.name)
+       # print(products.age)
+       # print(products.documentId)
+
+    comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
+    #return render(request,"welcom.html",{"e":email})
+    #return render(request,"home.html",{"uid":uid,"comb_lis":comb_lis})
+    #return HttpResponse("OK")
+    
+    return redirect(expath)
+def nonmember_lookup(request):
+    
+    return render(request,"nonmember_lookup.html")
+
+def nonmember_lookup_action(request) :
+    uid=None
+    
+    tel=request.POST.get('tel')
+    uid=tel
+    user_doc=db.collection("users").document(uid).collection("delivery")
+    user_alldocs=user_doc.stream()
+    print("??")
+    deliverylist=[]
+    for doc in user_alldocs:
+        delivery=Delivery.from_dict(doc.to_dict())
+        #print(delivery)
+        deliverylist.append(delivery)
+        
+    return render(request, 'orderinfo.html',{'deliverylist':deliverylist})
+    
+
+    
 
 
 

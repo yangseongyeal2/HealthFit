@@ -1,0 +1,28 @@
+{% if msg != None%}
+<script>
+    alert("{{msg}}");
+</script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Nonmember Login</title>
+    </head>
+    <body>
+        
+        <form action="/login/nonmember/create/" method="POST">
+          <input type="hidden" name="path" value="{{expath}}" />
+            {% csrf_token %}
+            이름:
+            <input type="text" name="name"><br><br>
+            비밀번호:
+            <input type="password" name="pass"><br><br>
+            비밀번호 확인
+            <input type="password" name="passre"><br><br>
+            전화번호
+            <input type="tel" name="tel"><br><br>
+            <input type="submit" value="SignIn">
+        </form>
+    </body>
+</html>

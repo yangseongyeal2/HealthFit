@@ -68,6 +68,11 @@ urlpatterns = [
     path('admin/delivery/home/',adminDelivery.views.home),
     path('admin/delivery/home/detail/<str:id>/',adminDelivery.views.detail,name="delivery_modify"),
     path('admin/delivery/modify/',adminDelivery.views.modify),
+    path('login/nonmember/',myapp.views.nonmember,name="nonmember"),
+    path('login/nonmember/create/',myapp.views.nonmember_create,name="nonmembercreate"),
+    path('order/postsign/',myapp.views.order_postsign,name="order_postsign"),
+    path('login/nonmember/lookup/',myapp.views.nonmember_lookup,name="nonmember_lookup"),
+    path('login/nonmember/lookup/action/',myapp.views.nonmember_lookup_action,name="nonmember_lookup_action"),
    
   
    

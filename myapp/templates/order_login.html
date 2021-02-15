@@ -29,9 +29,10 @@
 
   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-    <form name="loginform" action="/postsign/" method="post" style="width: 600px;">
+    <form name="loginform" action="/order/postsign/" method="post" style="width: 600px;">
       {% csrf_token %}
       <div>
+        <input type="hidden" name="path" value="{{expath}}" />
         <input type="text" name="email" class="text-field w-input" placeholder="이메일(아이디)" style="margin: 10px 0px; width: 100%; height: 50px;">
         <input type="password" name="pass" class="text-field w-input" placeholder="비밀번호" style="margin: 10px 0px; width: 100%; height: 50px;">
         <div style="text-align: right;"><a href="#">아이디 찾기</a> / <a href="#">비밀번호 찾기</a></div>
@@ -40,6 +41,7 @@
       <div class="wrap-submit">
         <input type="submit" value="로그인" data-wait="Please wait..." class="btn-normal btn-black">
         <a href="{% url 'home' %}" class="btn-normal btn-white">취소</a>
+         <input type="submit" value="비회원 주문" data-wait="Please wait..." class="btn-normal btn-black" formaction="{% url 'nonmember' %}">
         
       </div>
     </form>
@@ -63,13 +65,6 @@
         <a href="#" alt="googleLogin">
           <img src="../../static/media/btn_google_signin_dark_pressed_web2x.png" alt="googleLogin">
         </a>
-      </div>
-
-      <div  class="test-login2">
-        <a href="{%url 'nonmember_lookup'%}" alt="googleLogin">
-          비회원 주문 조회
-        </a>
-      </div>
      
      
 
