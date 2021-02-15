@@ -290,9 +290,17 @@ def detail(request,documentId):
     #테스트
     uid=None
     print("홈시작")
-    
-    recentview_lis.append(documentId)
-    request.session['RecentView']=recentview_lis
+    if len(recentview_lis)<6 :
+        recentview_lis.append(documentId)
+        my_set = set(recentview_lis)
+        my_list = list(my_set)
+        request.session['RecentView']=my_list
+    else :
+        recentview_lis.pop(0)
+        recentview_lis.append(documentId)
+        my_set = set(recentview_lis)
+        my_list = list(my_set)
+        request.session['RecentView']=my_list
     try:
         print("홈에서"+request.session['uid'])
         uid=request.session['uid']
