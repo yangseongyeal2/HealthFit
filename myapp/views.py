@@ -46,6 +46,7 @@ database=firebase.database()
 cred=credentials.Certificate('myapp/service-account.json')
 firebase_admin.initialize_app(cred)
 db=firestore.client()
+recentview_lis=[]
 
 
 
@@ -54,6 +55,10 @@ def home(request):
     uid=None
     name=""
     print("홈시작")
+    documentId=request.session.get('RecentView',False)
+    
+
+
     try:
         print("홈에서"+request.session['uid'])
         uid=request.session['uid']
@@ -68,10 +73,12 @@ def home(request):
 
     except:
         print("로그인안댐")
+    
+    
   
    
    
-    return render(request,'home.html',{'uid':uid,'name':name})
+    return render(request,'home.html',{'uid':uid,'name':name,'documentId':documentId})
 
     
 
@@ -283,6 +290,9 @@ def detail(request,documentId):
     #테스트
     uid=None
     print("홈시작")
+    
+    recentview_lis.append(documentId)
+    request.session['RecentView']=recentview_lis
     try:
         print("홈에서"+request.session['uid'])
         uid=request.session['uid']
