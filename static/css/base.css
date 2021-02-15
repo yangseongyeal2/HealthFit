@@ -179,3 +179,7 @@
   border: none;
   padding-right: 0px;
 }
+#headbar__sub .menu__sign ul li span {
+  font-weight: 700;
+  font-size: 18px;
+}
