@@ -66,8 +66,20 @@
         <!-- 유저 메뉴 -->
         <nav class="menu__user">
           <ul>
-            <li>
-              <a href="{% url 'mypage' %}"><span><i class="fas fa-user fa-3x"></i></span></a>
+            <li class="dropdown">
+              <a href="{% url 'mypage' %}" class="dropdown--head"><span><i class="fas fa-user fa-3x"></i></span></a>
+              <div class="dropdown--content">
+                <ul>
+                  <li>주문정보</li>
+                  <li>프로필</li>
+                  <li>관심상품</li>
+                  <li>후기</li>
+                  <li>주소관리</li>
+                  {% if uid != None %}
+                  <li><a href="{% url 'logout' %}">로그아웃</a></li>
+                  {% endif %}
+                </ul>
+              </div>
             </li>
             <li>
               <a href="{% url 'cart' %}"><span><i class="fas fa-shopping-cart fa-3x"></i></span></a>
@@ -79,12 +91,12 @@
       <div id="headbar__sub" class="inner">
     
         <nav class="menu__product dropdown">
-          <ul class="dropdown-head">
+          <ul class="dropdown--head">
             <li>상의</li>
             <li>하의</li>
             <li>악세서리</li>
           </ul>
-          <div class="dropdown-content">
+          <div class="dropdown--content">
             <ul>
               <li><a href="{% url 'product_categoti' "상의" %}">상의</a></li>
               <li><a href="{% url 'product_categoti' "하의" %}">하의</a></li>
@@ -94,12 +106,12 @@
               <li>반바지</li>
             </ul>
             <ul>
-              <li>가방</li>
-              <li>덤벨</li>
+              <li>가방&nbsp;&nbsp;</li>
+              <li>덤벨&nbsp;&nbsp;</li>
             </ul>
           </div>
         </nav>
-        <nav class="menu__sign dropdown">
+        <nav class="menu__sign">
           {% if uid == None %}
           <ul>
             <li><a href="{% url 'signIn' %}">로그인</a></li>
@@ -108,7 +120,7 @@
           {% endif %}
           {% if uid != None %}
           <ul>
-            <li>{{uid}}</li>
+            <li>{{uid}}님, 환영합니다!</li> <!-- 사용자 이름 -->
           </ul>  
           {% endif %}
         </nav>
@@ -116,6 +128,8 @@
       </div>
 
     </div>
+
+
     {% block content %}
     {% endblock %}
 

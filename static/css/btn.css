@@ -1,6 +1,6 @@
 .btn-normal {
   display: inline-block;
-  border: 1px solid #bbb3b3;
+  border: 1px solid #7a7a7a;
   border-radius: 1px;
   background-color: transparent;
   color: #000;
@@ -10,8 +10,8 @@
   transition-duration: 1.2s;
 }
 .btn-normal:hover {
-  background: black;
-  color: #F8F8F8;
+  background: #000000;
+  color: #ffffff;
 }
 .btn-black {
   width: 130px;
@@ -19,7 +19,7 @@
   height: 40px;
   box-sizing: border-box;
   cursor: pointer;
-  background: #393939;
+  background: #7a7a7a;
   color: #F8F8F8;
 }
 .btn-white {
@@ -60,5 +60,5 @@
   font-style: normal;
   text-align: center;
   text-decoration: none;
-  border: 1px solid #bbb3b3;
+  border: 1px solid #7a7a7a;
 }
