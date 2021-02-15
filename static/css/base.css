@@ -1,0 +1,181 @@
+.off {
+  display: none !important;
+}
+
+.dropdown {
+  position: relative;
+}
+.dropdown--content {
+  display: none;
+  position: absolute;
+}
+.dropdown:hover .dropdown--content {
+  display: block;
+}
+
+.header {
+  margin: 0 auto;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #ffffff;
+}
+
+.headbar__main.inner{
+  width: 1300px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f4f4f4;
+}
+.header .headbar__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .headbar__main .logo__main a {
+  font-size: 60px;
+  text-decoration: none;
+  color: #7a7a7a;
+  transition: 1s;
+  line-height: normal;
+}
+.header .headbar__main .logo__main a:hover {
+  text-decoration: none;
+  color: #000000;
+}
+.header .headbar__main .search-wrap {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 5px 2px 5px 10px;
+  height: 50px;
+  border: 2.5px solid #ddd;
+  border-radius: 25px;
+  background: #FDFDFD;
+
+}
+.header .headbar__main .search-wrap .search-bar {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+.header .headbar__main .search-wrap .search-bar:focus {
+  outline: none;
+}
+.header .headbar__main .search-wrap span {
+  display: inline-block;
+  color: #7a7a7a;
+  background-color: #ECECEC;
+  border: 1px solid #ECECEC;
+  border-radius: 100px;
+  padding: 5px;
+}
+.header .headbar__main .menu__user ul {
+  display: flex;
+}
+.header .headbar__main .menu__user ul li {
+  margin-right: 40px;
+}
+.header .headbar__main .menu__user ul li:last-child {
+  margin: 0px;
+}
+.header .headbar__main .menu__user ul li span {
+  color: #7a7a7a;
+}
+.header .headbar__main .menu__user ul li span:hover {
+  transition: 1s;
+  color: #000000;
+}
+.header .headbar__main .menu__user ul li i{
+  padding: 10px 0px;
+}
+.header .headbar__main .menu__user ul .dropdown .dropdown--content {
+  display: none;
+  position: absolute;
+}
+.header .headbar__main .menu__user ul .dropdown:hover .dropdown--content {
+  display: block;
+  min-width: 100px;
+  background: #ffffff;
+  box-shadow: 3px 3px 10px -2px #7a7a7a; 
+}
+.header .headbar__main .menu__user ul .dropdown:hover .dropdown--content ul {
+  display: block;
+}
+.header .headbar__main .menu__user ul .dropdown:hover .dropdown--content ul li {
+  width: 150px;
+  margin: 10px 0px;
+  padding: 10px 5px;
+}
+.header .headbar__main .menu__user ul .dropdown:hover .dropdown--content ul li:hover {
+  background: rgba(122, 122, 122, 0.1);
+}
+
+#headbar__sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#headbar__sub.inner {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+#headbar__sub .menu__product .dropdown--head {
+  display: flex;
+}
+#headbar__sub .menu__product .dropdown--head:hover {
+  border-bottom: 2px solid #7a7a7a;
+}
+#headbar__sub .menu__product .dropdown--head li {
+  font-size: 16px;
+  font-weight: 700;
+  margin-right: 20px;
+  padding: 10px 0px;
+}
+#headbar__sub .dropdown--head li:last-child {
+  margin-right: 0px;
+}
+/* #headbar__sub .menu__product .dropdown--head li:hover {
+  border-bottom: 2px solid #7a7a7a;
+} */
+#headbar__sub .menu__product.dropdown:hover .dropdown--content {
+  display: flex;
+  background: #ffffff;
+  box-shadow: 3px 3px 10px -2px #7a7a7a;
+}
+#headbar__sub .menu__product.dropdown:hover .dropdown--content ul {
+  margin-right: 20px;
+  padding: 10px 0px;
+}
+#headbar__sub .menu__product.dropdown:hover .dropdown--content ul:last-child {
+  margin-right: 0px;
+}
+#headbar__sub .menu__product.dropdown:hover .dropdown--content ul li {
+  font-size: 16px;
+  padding: 5px 0px;
+  font: #7a7a7a;
+}
+#headbar__sub .menu__product.dropdown:hover .dropdown--content ul li:hover {
+  font-weight: 700;
+  color: #000;
+}
+#headbar__sub .menu__product.dropdown:hover .dropdown--content ul li:last-child {
+  padding: 5px 0px;
+}
+
+
+#headbar__sub .menu__sign ul {
+  display: flex;
+}
+#headbar__sub .menu__sign ul li {
+  padding: 0px 10px;
+  border-right: 1px solid #f4f4f4;
+}
+#headbar__sub .menu__sign ul li:last-child {
+  border: none;
+  padding-right: 0px;
+}
