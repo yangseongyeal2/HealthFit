@@ -117,12 +117,20 @@
             <li><a href="{% url 'signIn' %}">로그인</a></li>
             <li><a href="{% url 'signUp' %}">회원가입</a></li>
           </ul>
-          {% endif %}
-          {% if uid != None %}
+          {%else%}
+
+          {% if name != None %}
           <ul>
-            <li>{{uid}}님, 환영합니다!</li> <!-- 사용자 이름 -->
+            <li>{{name}}님, 환영합니다!</li> <!-- 사용자 이름 -->
+          </ul>  
+          {% else %}
+          <ul>
+            <li>회원님, 환영합니다!</li> <!-- 사용자 이름 -->
           </ul>  
           {% endif %}
+
+          {% endif %}
+          
         </nav>
     
       </div>

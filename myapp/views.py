@@ -52,16 +52,26 @@ db=firestore.client()
 # Create your views here.
 def home(request):
     uid=None
+    name=""
     print("홈시작")
     try:
         print("홈에서"+request.session['uid'])
         uid=request.session['uid']
+        user_ref=db.collection("users").document(uid)
+        user_doc=user_ref.get()
+        if user_doc.exists:
+            print(u'Document data: {}'.format(user_doc.to_dict()))
+            usermodel=UserModel.from_dict(user_doc.to_dict())
+            name=usermodel.name
+        else:
+            print(u'No such document!')
+
     except:
         print("로그인안댐")
   
    
    
-    return render(request,'home.html',{'uid':uid})
+    return render(request,'home.html',{'uid':uid,'name':name})
 
     
 
@@ -133,26 +143,37 @@ def postsign(request):
     request.session['uid']=str(uid)
     print("포스트사인"+request.session['uid'])
     
-    doc_ref=db.collection("product")
-    alldocs=doc_ref.stream()
-    name_lis=[]
-    age_lis=[]
-    documentId_lis=[]
-    url_lis=[]
-    for doc in alldocs:
-        products=Product.from_dict(doc.to_dict())
-        #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
-        name_lis.append(products.name)
-        age_lis.append(products.price)
-        documentId_lis.append(products.documentId)
-        url_lis.append(products.downloadurl)
-       # print(products.name)
-       # print(products.age)
-       # print(products.documentId)
+    # doc_ref=db.collection("product")
+    # alldocs=doc_ref.stream()
+    # name_lis=[]
+    # age_lis=[]
+    # documentId_lis=[]
+    # url_lis=[]
+    # for doc in alldocs:
+    #     products=Product.from_dict(doc.to_dict())
+    #     #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
+    #     name_lis.append(products.name)
+    #     age_lis.append(products.price)
+    #     documentId_lis.append(products.documentId)
+    #     url_lis.append(products.downloadurl)
+    #    # print(products.name)
+    #    # print(products.age)
+    #    # print(products.documentId)
 
-    comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
+    # comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
+
     #return render(request,"welcom.html",{"e":email})
-    return render(request,"home.html",{"uid":uid,"comb_lis":comb_lis})
+
+
+    user_ref=db.collection("users").document(uid)
+    user_doc=user_ref.get()
+    if user_doc.exists:
+        print(u'Document data: {}'.format(user_doc.to_dict()))
+        usermodel=UserModel.from_dict(user_doc.to_dict())
+        name=usermodel.name
+    else:
+        print(u'No such document!')
+    return render(request,"home.html",{"uid":uid,'name':name})
     #return HttpResponse("OK")
     
     #return redirect('/homelogined/')
@@ -752,7 +773,20 @@ def oauth(request):
             firebaseuser=authe.sign_in_with_email_and_password(user_email,password)
             uid =firebaseuser['localId']
             request.session['uid']=str(uid)
-            return render(request,"home.html",{"uid":uid})
+
+            user_ref=db.collection("users").document(uid)
+            user_doc=user_ref.get()
+            name=""
+            if user_doc.exists:
+                print(u'Document data: {}'.format(user_doc.to_dict()))
+                usermodel=UserModel.from_dict(user_doc.to_dict())
+                name=usermodel.name
+            else:
+                print(u'No such document!')
+
+
+            
+            return render(request,"home.html",{"uid":uid,'name':name})
             
         except:
             message="Invalid credentials"
@@ -772,7 +806,19 @@ def oauth(request):
         try:
             firebaseuser=authe.sign_in_with_email_and_password(user_email,password)
             uid =firebaseuser['localId']
-            return render(request,"home.html",{"uid":uid})
+
+
+            user_ref=db.collection("users").document(uid)
+            user_doc=user_ref.get()
+            name=""
+            if user_doc.exists:
+                print(u'Document data: {}'.format(user_doc.to_dict()))
+                usermodel=UserModel.from_dict(user_doc.to_dict())
+                name=usermodel.name
+            else:
+                print(u'No such document!')
+
+            return render(request,"home.html",{"uid":uid,'name':user_nickname})
         except:
             message="Invalid credentials"
             return render(request,"signIn.html",{"messg":message})
@@ -792,7 +838,7 @@ def oauth(request):
     #     print(uid)
 
     
-    return render(request, 'home.html')
+    return render(request, 'home.html',{'name':user_nickname})
 
 def navercallback(request):
     NAVER_CLIENT_ID = 'gyHDnkTYKAXVqlUIyVLp'
