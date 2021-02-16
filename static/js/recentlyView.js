@@ -1,15 +1,4 @@
-//hide or show subMenu
-window.onscroll = function() {fixed()};
-
-const subMenu = document.getElementById(`headbar__sub`);
-console.log(subMenu);
-const sticky = subMenu.offsetTop;
-
-
-
-
 //파이어스토어 
-
 var firebaseConfig = {
   apiKey: "AIzaSyAFN2apSBQwHIiGioEKyyQORxceIR22VMs",
   authDomain: "healthstore-de3c3.firebaseapp.com",
@@ -42,44 +31,39 @@ var db = firebase.firestore();
 
 
 
-function init(data) { //0에서 4까지 리스트  savingData[0].uid 이런식으로 불러오기
-  savingData = data;
+function recentInit(data) { //0에서 4까지 리스트  savingData[0].uid 이런식으로 불러오기
+  let savingData = data;
  
 
 
-var step;
-const dataBody = document.getElementById('RecentView_list');
-for (step = 0; step < data.length; step++) {
-  // Runs 5 times, with values of step 0 through 4.
-  var documentId=savingData[step].uid
-  var docRef = db.collection("product").doc(documentId);
-  docRef.get().then(function(doc) {
-    if (doc.exists) {
-      //console.log("Document data:", doc.data());
-     
-      dataBody.innerHTML += `
-      <li>
-      <ul>
-        <li><img src="${doc.data().downloadurl}" alt="product_img"></li>
-        <li>${doc.data().brand}</li>
-        <li>${doc.data().name}</li>
-      </ul>
-      </li>
-      `;
-
-
-
-    } else {
-      // doc.data() will be undefined in this case
-      //console.log("No such document!");
-    }
-  }).catch(function(error) {
-  console.log("Error getting document:", error);
-  });
-
-}
+  var step;
+  const dataBody = document.getElementById('recent-view__list');
+  for (step = 0; step < data.length; step++) {
+    // Runs 5 times, with values of step 0 through 4.
+    var documentId=savingData[step].uid
+    var docRef = db.collection("product").doc(documentId);
+    docRef.get().then(function(doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+      
+        dataBody.innerHTML += `
+        <li>
+          <ul>
+            <li><img src="${doc.data().downloadurl}" alt="product_img"></li>
+            <li>${doc.data().brand}</li>
+            <li>${doc.data().name}</li>
+          </ul>
+        </li>
+        `;
+      } else {
+        // doc.data() will be undefined in this case
+        //console.log("No such document!");
+      }
+    }).catch(function(error) {
+    console.log("Error getting document:", error);
+    });
+  }
  
-  
 }//이닛데이터 끝
 
 //키 몸무게 골격근량 체지방량 체지방률 불러오기
@@ -115,23 +99,3 @@ function retrieveInbody(uid){
   });
 
 }
-
-
-
-function fixed() {
-  if(window.pageYOffset > sticky) {
-    subMenu.classList.add(`off`);
-  } else {
-    subMenu.classList.remove(`off`);
-  }
-}
-
-//go to top
-
-document.getElementById(`go-top`).addEventListener(`click`, () => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth"
-  });
-})

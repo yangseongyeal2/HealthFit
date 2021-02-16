@@ -2,11 +2,11 @@
 const dataInPage = 5; //한 화면에 나타낼 리스트 수
 const pageCount = 5; //한 화면에 나타낼 페이지 수
 //오브젝트 저장하기 위한 전역변수
-let savingData = null;
+let savingPage = null;
 
-function init(data) {
-  savingData = data;
-  paging(1, savingData);
+function pagingInit(data) {
+  savingPage = data;
+  paging(1, savingPage);
 }
 
 
@@ -94,7 +94,7 @@ function paging(currentPage, totalData) {
 
 
 function pageClick(currentNumber) { //100에 DB DATA
-  paging(currentNumber, savingData);
+  paging(currentNumber, savingPage);
 }
 //1 = 1~5 2 = 6~10
 //1=1, 2=6, 3=11, 4=16, 5=21
@@ -102,12 +102,12 @@ function prevClick(pageNumber) {
   const prev = Math.ceil((pageNumber - 5) / pageCount);
   const movePage = 1 + (5 * (prev - 1));
   console.log(movePage);
-  paging(movePage, savingData);
+  paging(movePage, savingPage);
 }
 
 function nextClick(pageNumber) {
   const next = Math.ceil((pageNumber + 5) / pageCount);
   const movePage = 1 + (5 * (next - 1));
   // console.log(movePage);
-  paging(movePage, savingData);
+  paging(movePage, savingPage);
 }

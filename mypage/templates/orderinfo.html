@@ -53,7 +53,7 @@
 </div>
 <script src="{% static 'js/myorderinfo.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
-    let data = [
+    let deliveryData = [
       {% for delivery in deliverylist %}  
 
         {
@@ -68,7 +68,7 @@
       {% endfor %}
     ]
 
-    init(data);
+    pagingInit(deliveryData);
 
 
 </script>
