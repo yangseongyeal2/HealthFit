@@ -63,6 +63,7 @@
           <input type="text" placeholder="검색하기" class="search-bar">
           <span><i class="fas fa-search fa-2x"></i></span>
         </div>
+        
         <!-- 유저 메뉴 -->
         <nav class="menu__user">
           <ul>
@@ -70,7 +71,7 @@
               <a href="{% url 'mypage' %}" class="dropdown--head"><span><i class="fas fa-user fa-3x"></i></span></a>
               <div class="dropdown--content">
                 <ul>
-                  <li>주문정보</li>
+                  <li>{{request.session.RecentView}}</li>
                   <li>프로필</li>
                   <li>관심상품</li>
                   <li>후기</li>
@@ -137,44 +138,18 @@
 
     </div>
 
-    <div class="sidebar__right">
+    <div class="sidebar__right" id="RecentView_list">
       <ul>
 
-        <li>
+        {% comment %} <li>
           <ul>
             <li><img src="" alt="product_img"></li>
             <li>brand name</li>
             <li>product name</li>
           </ul>
-        </li>
-        <li>
-          <ul>
-            <li><img src="" alt="product_img"></li>
-            <li>brand name</li>
-            <li>product name</li>
-          </ul>
-        </li>
-        <li>
-          <ul>
-            <li><img src="" alt="product_img"></li>
-            <li>brand name</li>
-            <li>product name</li>
-          </ul>
-        </li>
-        <li>
-          <ul>
-            <li><img src="" alt="product_img"></li>
-            <li>brand name</li>
-            <li>product name</li>
-          </ul>
-        </li>
-        <li>
-          <ul>
-            <li><img src="" alt="product_img"></li>
-            <li>brand name</li>
-            <li>product name</li>
-          </ul>
-        </li>
+        </li> {% endcomment %}
+        
+        
       </ul>
 
     </div>
@@ -197,5 +172,22 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+
+
+    <script type="text/javascript">
+    let data = [
+      {% for recentview in request.session.RecentView %}  
+
+        {
+          uid: "{{recentview}}"
+        },
+
+      {% endfor %}
+    ]
+
+    init(data);
+
+
+</script>
   </body>
 </html>
