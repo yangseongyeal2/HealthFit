@@ -73,6 +73,9 @@ urlpatterns = [
     path('order/postsign/',myapp.views.order_postsign,name="order_postsign"),
     path('login/nonmember/lookup/',myapp.views.nonmember_lookup,name="nonmember_lookup"),
     path('login/nonmember/lookup/action/',myapp.views.nonmember_lookup_action,name="nonmember_lookup_action"),
+    path('inbody/',myapp.views.inbody,name="inbody"),
+    path('inbody/insert/',myapp.views.inbody_insert,name="inbody_insert"),
+    
    
   
    

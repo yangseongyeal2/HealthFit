@@ -71,7 +71,7 @@
               <a href="{% url 'mypage' %}" class="dropdown--head"><span><i class="fas fa-user fa-3x"></i></span></a>
               <div class="dropdown--content">
                 <ul>
-                  <li>{{request.session.RecentView}}</li>
+                  <li>주문정보</li>
                   <li>프로필</li>
                   <li>관심상품</li>
                   <li>후기</li>
@@ -84,6 +84,9 @@
             </li>
             <li>
               <a href="{% url 'cart' %}"><span><i class="fas fa-shopping-cart fa-3x"></i></span></a>
+            </li>
+            <li>
+              <a href="{% url 'inbody' %}"><span><i class="fas fa-shopping-cart fa-3x"></i></span></a>
             </li>
           </ul>
         </nav>
@@ -113,16 +116,16 @@
           </div>
         </nav>
         <nav class="menu__sign">
-          {% if uid == None %}
+          {% if request.session.uid == None %}
           <ul>
             <li><a href="{% url 'signIn' %}">로그인</a></li>
             <li><a href="{% url 'signUp' %}">회원가입</a></li>
           </ul>
           {%else%}
 
-          {% if name != None %}
+          {% if request.session.name != None %}
           <ul>
-            <li><span>{{name}}</span>님, 환영합니다!</li> <!-- 사용자 이름 -->
+            <li><span>{{request.session.name}}</span>님, 환영합니다!</li> <!-- 사용자 이름 -->
           </ul>  
           {% else %}
           <ul>
@@ -157,6 +160,7 @@
     <div id="go-top"><span><i class="fas fa-arrow-circle-up fa-4x"></i></span></div>
     
     {% block content %}
+
     {% endblock %}
 
 
@@ -186,6 +190,10 @@
     ]
 
     init(data);
+
+     var uid="{{request.session.uid}}";
+
+    retrieveInbody(uid); 
 
 
 </script>

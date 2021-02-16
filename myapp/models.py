@@ -14,6 +14,7 @@ class Product(object):
      ,detail_text
      ,timestamp
      ,fiexdPrice
+     
      #1:top 2:bottom 3:bag 4:etc 
      ):
         self.name = name
@@ -141,6 +142,11 @@ class UserModel(object):
      ,zipcode
      ,adress
      ,adressdetail
+     ,height
+     ,weight
+     ,SkeletalMuscleMass
+     ,BodyFatMass
+     ,BodyFatPercentage
      ): 
         self.email=email
         self.password=password
@@ -150,6 +156,11 @@ class UserModel(object):
         self.zipcode=zipcode
         self.adress=adress
         self.adressdetail=adressdetail
+        self.height=height
+        self.weight=weight
+        self.SkeletalMuscleMass=SkeletalMuscleMass
+        self.BodyFatMass=BodyFatMass
+        self.BodyFatPercentage=BodyFatPercentage
      
        
         
@@ -166,6 +177,11 @@ class UserModel(object):
         ,source[u'zipcode']
         ,source[u'adress']
         ,source[u'adressdetail']
+        ,source[u'height']
+        ,source[u'weight']
+        ,source[u'SkeletalMuscleMass']
+        ,source[u'BodyFatMass']
+        ,source[u'BodyFatPercentage']
         )
         if u'email' in source:
             usermodel.email = source[u'email']
@@ -183,6 +199,21 @@ class UserModel(object):
             usermodel.adress = source[u'adress']
         if u'adressdetail' in source:
             usermodel.adressdetail = source[u'adressdetail']
+        if u'height' in source:
+            usermodel.height = source[u'height']
+
+        if u'weight' in source:
+            usermodel.weight = source[u'weight']
+
+        if u'SkeletalMuscleMass' in source:
+            usermodel.SkeletalMuscleMass = source[u'SkeletalMuscleMass']
+
+        if u'BodyFatMass' in source:
+            usermodel.BodyFatMass = source[u'BodyFatMass']
+
+        if u'BodyFatPercentage' in source:
+            usermodel.BodyFatPercentage = source[u'BodyFatPercentage']
+
 
        
         
@@ -201,6 +232,12 @@ class UserModel(object):
             u'zipcode':self.zipcode,
             u'adress':self.adress,
             u'adressdetail':self.adressdetail,
+
+            u'height':self.height,
+            u'weight':self.weight,
+            u'SkeletalMuscleMass':self.SkeletalMuscleMass,
+            u'BodyFatMass':self.BodyFatMass,
+            u'BodyFatPercentage':self.BodyFatPercentage,
            
         }
 
@@ -228,6 +265,16 @@ class UserModel(object):
 
         if self.adressdetail:
             dest[u'adressdetail']=self.adressdetail
+        if self.height:
+            dest[u'height']=self.height
+        if self.weight:
+            dest[u'weight']=self.weight
+        if self.SkeletalMuscleMass:
+            dest[u'SkeletalMuscleMass']=self.SkeletalMuscleMass
+        if self.BodyFatMass:
+            dest[u'BodyFatMass']=self.BodyFatMass
+        if self.BodyFatPercentage:
+            dest[u'BodyFatPercentage']=self.BodyFatPercentage
         
         
 
@@ -247,6 +294,11 @@ class UserModel(object):
             ,self.zipcode
             ,self.adress
             ,self.adressdetail
+            ,self.height
+            ,self.weight
+            ,self.SkeletalMuscleMass
+            ,self.BodyFatMass
+            ,self.BodyFatPercentage
            
             )
             )

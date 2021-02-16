@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% if messg != None%}
+<script>
+    alert("{{messg}}");
+</script>
+{% endif %}
+
+{% block content %}
+          <div class="contents">
+        <form action="/inbody/insert/" method="POST" style="margin-top=100px">
+            {% csrf_token %}
+             <input type="hidden" id="uid" value={{request.session.uid}}><br><br>
+            키:
+            <input type="number" name="height" id="height"><br><br>
+            몸무게:
+            <input type="number" name="weight" id="weight"><br><br>
+            골격근량:
+            <input type="number" name="SkeletalMuscleMass" id="SkeletalMuscleMass"><br><br>
+            체지방량:
+            <input type="number" name="BodyFatMass"id="BodyFatMass"><br><br>
+            체지방률:
+            <input type="number" name="BodyFatPercentage" id="BodyFatPercentage"><br><br>
+            <input type="submit" value="입력">
+        </form>
+        </div>
+{% endblock %}

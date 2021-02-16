@@ -144,47 +144,26 @@ def postsign(request):
         #return render(request,"welcom.html",{"messg":message})
    # print(user['localId'])    
     uid=user['localId']
-    print("localId: "+uid)
+
     session_id=user['idToken']
-    print("idtoken: "+session_id)
+
     #request.session['uid']=str(session_id)
     request.session['uid']=str(uid)
-    print("포스트사인"+request.session['uid'])
     
-    # doc_ref=db.collection("product")
-    # alldocs=doc_ref.stream()
-    # name_lis=[]
-    # age_lis=[]
-    # documentId_lis=[]
-    # url_lis=[]
-    # for doc in alldocs:
-    #     products=Product.from_dict(doc.to_dict())
-    #     #print('{}=>{}' .format(doc.id,doc.to_dict(),doc.to_dict().name))
-    #     name_lis.append(products.name)
-    #     age_lis.append(products.price)
-    #     documentId_lis.append(products.documentId)
-    #     url_lis.append(products.downloadurl)
-    #    # print(products.name)
-    #    # print(products.age)
-    #    # print(products.documentId)
 
-    # comb_lis=zip(name_lis,age_lis,documentId_lis,url_lis)
-
-    #return render(request,"welcom.html",{"e":email})
+    
+   
 
 
     user_ref=db.collection("users").document(uid)
     user_doc=user_ref.get()
     if user_doc.exists:
-        print(u'Document data: {}'.format(user_doc.to_dict()))
         usermodel=UserModel.from_dict(user_doc.to_dict())
         name=usermodel.name
+        request.session['name']=name
     else:
         print(u'No such document!')
     return render(request,"home.html",{"uid":uid,'name':name})
-    #return HttpResponse("OK")
-    
-    #return redirect('/homelogined/')
 
 
 def logout(request):
@@ -249,7 +228,7 @@ def postsignup(request):
     #data={"name":name,"status":"1","uid":uid}
 
     user_doc_ref.set(
-        UserModel(email,password,checkbox,name,sex,zipcode,adress,adressdetail).to_dict()
+        UserModel(email,password,checkbox,name,sex,zipcode,adress,adressdetail,"","","","","").to_dict()
     )
 
     
@@ -819,7 +798,7 @@ def oauth(request):
         user_doc_ref=db.collection("users").document(uid)
 
         user_doc_ref.set(
-            UserModel(user_email,password,"",user_nickname,"","","","").to_dict()
+            UserModel(user_email,password,"",user_nickname,"","","","","","","","","").to_dict()
         )
 
         try:
@@ -908,7 +887,7 @@ def navercallback(request):
         user_doc_ref=db.collection("users").document(uid)
 
         user_doc_ref.set(
-            UserModel(user_email,password,"",user_nickname,"","","","").to_dict()
+            UserModel(user_email,password,"",user_nickname,"","","","","","","","","").to_dict()
         )
 
         try:
@@ -938,7 +917,7 @@ def googlelogin(request,uid):
         print(u'Document data: {}'.format(doc.to_dict()))
     else:
         user_doc_ref.set(
-        UserModel("","","","","","","","").to_dict()
+        UserModel("","","","","","","","","","","","","").to_dict()
         )
         print(u'No such document!')
 
@@ -1159,6 +1138,41 @@ def nonmember_lookup_action(request) :
         deliverylist.append(delivery)
         
     return render(request, 'orderinfo.html',{'deliverylist':deliverylist})
+
+def inbody(request):
+    try:
+        uid=request.session['uid']
+        user_ref=db.collection("users").document(uid)
+        
+    except:
+         return render(request, 'signin.html')
+    
+
+    return render(request, 'inbody.html')
+
+def inbody_insert(request):
+    height=request.POST.get('height')
+    weight=request.POST.get('weight')
+    SkeletalMuscleMass=request.POST.get('SkeletalMuscleMass')
+    BodyFatMass=request.POST.get('BodyFatMass')
+    BodyFatPercentage=request.POST.get('BodyFatPercentage')
+    try:
+        
+        uid=request.session['uid']
+        user_ref=db.collection("users").document(uid)
+        user_ref.update({u'height': height})
+        user_ref.update({u'weight': weight})
+        user_ref.update({u'SkeletalMuscleMass': SkeletalMuscleMass})
+        user_ref.update({u'BodyFatMass': BodyFatMass})
+        user_ref.update({u'BodyFatPercentage': BodyFatPercentage})
+     
+
+    except:
+         return render(request, 'signin.html')
+    
+          
+
+    return render(request, 'home.html')
     
 
     
