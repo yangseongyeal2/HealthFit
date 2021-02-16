@@ -35,13 +35,13 @@
 }
 .header .headbar__main .logo__main a {
   font-size: 60px;
-  text-decoration: none;
+  text-decoration: none !important;
   color: #7a7a7a;
   transition: 1s;
   line-height: normal;
 }
 .header .headbar__main .logo__main a:hover {
-  text-decoration: none;
+  text-decoration: none !important;
   color: #000000;
 }
 .header .headbar__main .search-wrap {
@@ -182,4 +182,35 @@
 #headbar__sub .menu__sign ul li span {
   font-weight: 700;
   font-size: 18px;
+}
+
+.sidebar__right {
+  position: fixed;
+  right: 10px;
+  top: 30%;
+  
+}
+.sidebar__right ul {
+  background: green;
+}
+.sidebar__right ul li {
+  background: yellow;
+}
+.sidebar__right ul li ul {
+  background: tomato;
+}
+.sidebar__right ul li ul li {
+  background: blue;
+}
+#go-top {
+  position: fixed;
+  bottom: 100px;
+  right: 35px;
+}
+#go-top span {
+  color: #7a7a7a;
+  transition: 1s;
+}
+#go-top span:hover {
+  color: #000;
 }
