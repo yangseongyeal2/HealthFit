@@ -6,6 +6,7 @@ let savingPage = null;
 
 function pagingInit(data) {
   savingPage = data;
+  console.log(savingPage.length);
   paging(1, savingPage);
 }
 
@@ -17,6 +18,11 @@ function paintingData(currentPage, totalData) {
   let end = start + pageCount;
   console.log(`end : ${end}`);
 
+  if(end > totalData.length) {
+    end = totalData.length;
+  }
+
+  console.log(`if문 엔드값: ${end}`);
   const dataBody = document.querySelector(`tbody`);
 
   while (dataBody.hasChildNodes()) {
@@ -25,6 +31,7 @@ function paintingData(currentPage, totalData) {
 
   for (start; start < end; start++) {
     console.log(`forstart : ${start}`);
+    console.log(totalData[start].state);
     dataBody.innerHTML += `
     <tr>
     <td>${totalData[start].timestamp}</td>
@@ -40,7 +47,7 @@ function paintingData(currentPage, totalData) {
 }
 
 function paging(currentPage, totalData) {
-  
+  console.log(totalData);
   const totalPage = Math.ceil(totalData.length / dataInPage); //총 페이지 수
   const pageGroup = Math.ceil(currentPage / pageCount); // 1 = 현재 페이지 1 = 1~5, 2 = 6~10
 
