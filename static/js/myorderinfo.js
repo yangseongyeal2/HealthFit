@@ -7,36 +7,29 @@ let savingPage = null;
 
 function pagingInit(data) {
   savingPage = data;
-
-  totalleng=savingPage.length;
-
+  console.log(savingPage);
   paging(1, savingPage);
 }
 
 
 function paintingData(currentPage, totalData) {
-  console.log(`current : ${currentPage}`);
+  
   let start = 5 * (currentPage - 1);
-  console.log(`start : ${start}`);
   let end = start + pageCount;
-  console.log(`end : ${end}`);
 
-
-
-  console.log(`if문 엔드값: ${end}`);
-  const dataBody = document.querySelector(`tbody`);
-
-  while (dataBody.hasChildNodes()) {
-    dataBody.removeChild(dataBody.firstChild);
-  }
   if(end > totalData.length) {
     end = totalData.length;
   }
+
+  const dataBody = document.querySelector(`tbody`);
+  while (dataBody.hasChildNodes()) {
+    dataBody.removeChild(dataBody.firstChild);
+  }
+  
   for (start; start < end; start++) {
-    
-   
     console.log(`forstart : ${start}`);
     console.log(totalData[start].state);
+
     dataBody.innerHTML += `
     <tr>
     <td>${totalData[start].timestamp}</td>
@@ -45,14 +38,19 @@ function paintingData(currentPage, totalData) {
     <td>${totalData[start].option}</td>
     <td>${totalData[start].price}</td>
     <td>${totalData[start].state}</td>
-    <td></td>
+    <td>취소/교환/반품</td>
+    <td><span id="tableReview" class="review--off">후기작성</span></td>
     </tr>
     `;
+
+    if(totalData[start].state === "배송완료") {
+      const tableReview = document.getElementById(`tableReview`);
+      tableReview.setAttribute(`class`, `review--on`);
+    }
   }
 }
 
 function paging(currentPage, totalData) {
-  console.log(totalData);
   const totalPage = Math.ceil(totalData.length / dataInPage); //총 페이지 수
   const pageGroup = Math.ceil(currentPage / pageCount); // 1 = 현재 페이지 1 = 1~5, 2 = 6~10
 

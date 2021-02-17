@@ -37,7 +37,7 @@ document.addEventListener('keydown', function(event) {
 
 function paintOption(size) {
    
-    var sizevalue=size.value
+    var sizevalue=size.value;
     if (!mySet.has(sizevalue)){
 
 
