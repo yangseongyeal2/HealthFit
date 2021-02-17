@@ -109,7 +109,7 @@
                 <!-- <input type="text" class="text-field w-input"
                     maxlength="256" name="zipcode" data-name="Zipcode" placeholder="" id="zipcode">
                 <a href="#" class="btn-check ">check</a> -->
-                <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{zipcode}}>
+                <input type="text" id="sample6_postcode" placeholder="우편번호" name="zipcode" class="text-field w-input" value={{usermodel.zipcode}}>
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn-check"><br>
               </li>
 
@@ -117,14 +117,14 @@
                   <!-- <input type="text" maxlength="256" name="address1" data-name="address1" placeholder=""
                       class="text-field w-input"> -->
                   <!-- <div class="text-block-4">기본 주소</div> -->
-                  <input type="text" id="sample6_address" placeholder="주소" name="adress" class="text-field w-input" style="width: 300px;" value={{adress}}><br>
+                  <input type="text" id="sample6_address" placeholder="주소" name="adress" class="text-field w-input" style="width: 300px;" value={{usermodel.adress}}><br>
               </li>
 
               <li class="form-address">
                   <!-- <input type="text" maxlength="256" name="address2"
                       data-name="address2" placeholder="" class="text-field w-input"> -->
                   <!-- <div class="text-block-5">상세 주소</div> -->
-                  <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{adressdetail}}>
+                  <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="adressdetail" class="text-field w-input" value={{usermodel.adressdetail}}>
                  
               </li>
 

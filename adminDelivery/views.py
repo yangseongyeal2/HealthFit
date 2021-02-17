@@ -68,15 +68,12 @@ def modify(request):
     deliverystate=request.POST.get('deliveryState')
     deliverycode=request.POST.get('deliverycode')
     deliverynum=request.POST.get('deliverynum')
-    print(deliverystate)
-    print(deliverycode)
-    print(deliverynum)
+ 
     doc_ref=db.collection("delivery").document(documentId)
     doc=doc_ref.get()
     if doc.exists:
         delivery=Delivery.from_dict(doc.to_dict())
-        print(type(delivery.option))
-        print(delivery.option['s'])
+  
         option="s:"+str(delivery.option['s'])+"m:"+str(delivery.option['m'])+"l:"+str(delivery.option['l'])+"xl:"+str(delivery.option['xl'])
         # doc_ref.set(
         # Delivery(delivery.brandname,delivery.product_name,checkbox,name,sex,zipcode,adress,adressdetail).to_dict()
@@ -84,6 +81,13 @@ def modify(request):
         doc_ref.update({u'deliverystate': deliverystate})
         doc_ref.update({u'deliverycode': deliverycode})
         doc_ref.update({u'deliverynum': deliverynum})
+        user_uid=delivery.uid
+        user_ref=db.collection("users").document(user_uid).collection("delivery").document(documentId)
+        user_ref.update({u'deliverystate': deliverystate})
+        user_ref.update({u'deliverycode': deliverycode})
+        user_ref.update({u'deliverynum': deliverynum})
+        
+
     else:
         print(u'No such document!')
 
