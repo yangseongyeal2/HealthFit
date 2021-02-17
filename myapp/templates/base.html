@@ -56,6 +56,11 @@
       <div class="headbar__main inner">
         <!-- 로고 -->
         <div class="logo__main">
+          <div class="btn__menu-left--wrap">
+            <div class="btn__menu-left"></div>
+            <div class="btn__menu-left"></div>
+            <div class="btn__menu-left"></div>
+          </div>
           <a href="{% url 'home' %}">HF</a>
         </div>
         <!-- 검색 바 -->
@@ -141,20 +146,33 @@
 
     </div>
 
-    <div class="sidebar__right" id="RecentView_list">
-      <ul>
+    <div class="sidebar--left">
+      <div class="category--group">
+        <div class="category__name">
+          <span>브랜드</span>
+        </div>
 
-        {% comment %} <li>
+        <nav class="category__list">
           <ul>
-            <li><img src="" alt="product_img"></li>
-            <li>brand name</li>
-            <li>product name</li>
+            <li>덤브스트럭</li>
+            <li>포즈다운</li>
+            <li>피두씨</li>
+            <li>하덱스</li>
+            <li>매버릭</li>
+            <li>테이크폼</li>
+            <li>머슬암드</li>
           </ul>
-        </li> {% endcomment %}
-        
+        </nav>
+      </div>
+    </div>
+
+    <div class="sidebar--right">
+      <span>
+        최근 본 상품
+      </span>
+      <ul id="recent-view__list">
         
       </ul>
-
     </div>
     
     <div id="go-top"><span><i class="fas fa-arrow-circle-up fa-4x"></i></span></div>
@@ -169,8 +187,8 @@
       type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
     </script>
     <script src="{% static 'js/webflow.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/base.js' %}"></script>
-
+    <script src="{% static 'js/headbar.js' %}"></script>
+    <script src="{% static 'js/recentlyView.js' %}"></script>
     <script src="{% static 'js/signup.js' %}"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
@@ -179,7 +197,7 @@
 
 
     <script type="text/javascript">
-    let data = [
+    let recentData = [
       {% for recentview in request.session.RecentView %}  
 
         {
@@ -189,11 +207,11 @@
       {% endfor %}
     ]
 
-    init(data);
+    recentInit(recentData);
 
-     var uid="{{request.session.uid}}";
+     var recentUid="{{request.session.uid}}";
 
-    retrieveInbody(uid); 
+    retrieveInbody(recentUid); 
 
 
 </script>
