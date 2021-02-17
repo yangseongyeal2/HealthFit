@@ -24,6 +24,7 @@
   <link href="{% static 'css/sizeList.css'%}" rel="stylesheet" type="text/css">
   <link href="{% static 'css/rasegyeols-blank-site.webflow.css'%}" rel="stylesheet" type="text/css">
   <link href="{% static 'css/mypage.css'%}" rel="stylesheet" type="text/css">
+  <link href="{% static 'css/admincard.css'%}" rel="stylesheet" type="text/css">
   <!--구글 폰트-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap&family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -76,11 +77,11 @@
               <a href="{% url 'mypage' %}" class="dropdown--head"><span><i class="fas fa-user fa-3x"></i></span></a>
               <div class="dropdown--content">
                 <ul>
-                  <li>주문정보</li>
-                  <li>프로필</li>
-                  <li>관심상품</li>
-                  <li>후기</li>
-                  <li>주소관리</li>
+                  <li><a href="#">주문정보</a></li>
+                  <li><a href="#">프로필</a></li>
+                  <li><a href="#">관심상품</a></li>
+                  <li><a href="#">후기</a></li>
+                  <li><a href="#">주소관리</a></li>
                   {% if uid != None %}
                   <li><a href="{% url 'logout' %}">로그아웃</a></li>
                   {% endif %}

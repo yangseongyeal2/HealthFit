@@ -1,16 +1,30 @@
-어드민홈
+{% extends 'base.html' %}
 
-{% for delivery,id in comb_lis %}
+{% block content %}
+{% load static %}
 
-    <div class="card-colums" style="width: 20%; ">
-     
-      <a href="{% url 'delivery_modify' id %}" class="card-img-top"><img src="{{delivery.img}}"></a> 
-      
-      <div class="card-body">
-        <h5 class="card-title">{{delivery.product_name}}</h5>
-        <p class="card-text">{{delivery.price}}</p>
-        
-      </div>
-    
-    </div> 
-{% endfor %}
+<div class="contents">
+  <div class="location">
+    <div class="location-text">관리자페이지</div>
+  </div>
+
+  <div class="card-wrap">
+  {% for delivery,id in comb_lis %}
+      <div class="card-colums">
+        <div class="card-head">
+          <a href="{% url 'delivery_modify' id %}" class="card-img-top">
+          <img src="{{delivery.img}}">
+          </a> 
+        </div>
+        <div class="card-body">
+          상품명: <span class="card-title">{{delivery.product_name}}</span>
+          <br>
+          구매가격: <span class="card-text">{{delivery.price}}</span>
+        </div>
+      </div> 
+  {% endfor %}
+  </div>
+
+</div>
+
+{% endblock content %}
