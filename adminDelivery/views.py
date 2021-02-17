@@ -19,25 +19,25 @@ def home(request):
     email=request.POST.get('email')
     passw=request.POST.get('pass')
     if adminemail != email or passw != adminpass  :
-        # try :
-        #     request.session['uid']
-        #     delivery_lis=[]
-        #     delivery_id=[]
-        #     delivery_ref=db.collection("delivery")
-        #     delivery_docs=delivery_ref.stream()
-        #     for doc in delivery_docs:
-        #         #print(f'{doc.id} => {doc.to_dict()}')
-        #         delivery=Delivery.from_dict(doc.to_dict())
-        #         delivery_lis.append(delivery)
-        #         delivery_id.append(doc.id)
-        #     comb_lis=zip(delivery_lis,delivery_id)
-        #     return render(request,"admin_delivery_home.html",{"e":email,'comb_lis':comb_lis})
+        try :
+            request.session['admin_delivey_uid']
+            delivery_lis=[]
+            delivery_id=[]
+            delivery_ref=db.collection("delivery")
+            delivery_docs=delivery_ref.stream()
+            for doc in delivery_docs:
+                #print(f'{doc.id} => {doc.to_dict()}')
+                delivery=Delivery.from_dict(doc.to_dict())
+                delivery_lis.append(delivery)
+                delivery_id.append(doc.id)
+            comb_lis=zip(delivery_lis,delivery_id)
+            return render(request,"admin_delivery_home.html",{"e":email,'comb_lis':comb_lis})
 
-        # except:
-        message="Invalid credentials"
-        return render(request,"admin_delivery_login.html",{"messg":message})
+        except:
+            message="Invalid credentials"
+            return render(request,"admin_delivery_login.html",{"messg":message})
     else :
-        #request.session['uid']=adminemail
+        request.session['admin_delivey_uid']=adminemail
         delivery_lis=[]
         delivery_id=[]
         delivery_ref=db.collection("delivery")
