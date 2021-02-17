@@ -37,7 +37,7 @@ def home(request):
         message="Invalid credentials"
         return render(request,"admin_delivery_login.html",{"messg":message})
     else :
-        request.session['uid']=adminemail
+        #request.session['uid']=adminemail
         delivery_lis=[]
         delivery_id=[]
         delivery_ref=db.collection("delivery")
