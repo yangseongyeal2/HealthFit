@@ -39,7 +39,7 @@
 }
 /* MYPAGE ORDERINFO */
 .orderinfo {
-  width: 800px;  
+  width: 900px;  
 }
 .orderinfo table th {
   text-align: center;
@@ -51,12 +51,6 @@
 .orderinfo table tbody tr td img {
   width: 75px;
   height: 75px;
-}
-#tableReview {
-  display: none;
-}
-.orderinfo table tbody tr td .review--on {
-  display: inline-block;
 }
 .orderinfo nav {
   text-align: center;

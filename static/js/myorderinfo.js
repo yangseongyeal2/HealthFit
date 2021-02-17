@@ -29,7 +29,6 @@ function paintingData(currentPage, totalData) {
   for (start; start < end; start++) {
     console.log(`forstart : ${start}`);
     console.log(totalData[start].state);
-
     dataBody.innerHTML += `
     <tr>
     <td>${totalData[start].timestamp}</td>
@@ -39,14 +38,17 @@ function paintingData(currentPage, totalData) {
     <td>${totalData[start].price}</td>
     <td>${totalData[start].state}</td>
     <td>취소/교환/반품</td>
-    <td><span id="tableReview" class="review--off">후기작성</span></td>
+    <td><span id="tableReview${start}"></span></td>
     </tr>
     `;
-
+    
     if(totalData[start].state === "배송완료") {
-      const tableReview = document.getElementById(`tableReview`);
-      tableReview.setAttribute(`class`, `review--on`);
+      const tableReview = document.getElementById(`tableReview${start}`);
+      tableReview.innerHTML = `
+        <a href="#">후기작성</a>
+      `;
     }
+    
   }
 }
 
