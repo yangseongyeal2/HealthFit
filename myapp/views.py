@@ -46,7 +46,7 @@ database=firebase.database()
 cred=credentials.Certificate('myapp/service-account.json')
 firebase_admin.initialize_app(cred)
 db=firestore.client()
-recentview_lis=[]
+#recentview_lis=[]
 
 
 
@@ -56,6 +56,11 @@ def home(request):
     name=""
     print("홈시작")
     documentId=request.session.get('RecentView',False)
+    try:
+        request.session['RecentView']
+        recentview_lis=request.session['RecentView']
+    except :
+        request.session['RecentView']=[]
     
 
 
@@ -270,6 +275,7 @@ def detail(request,documentId):
     #테스트
     uid=None
     print("홈시작")
+    recentview_lis=request.session['RecentView']
     if len(recentview_lis)<6 :
         recentview_lis.append(documentId)
         my_set = set(recentview_lis)
