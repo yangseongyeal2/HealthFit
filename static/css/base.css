@@ -113,13 +113,19 @@
   display: block;
 }
 .header .headbar__main .menu__user ul .dropdown:hover .dropdown--content ul li {
-  width: 150px;
   margin: 10px 0px;
-  padding: 10px 5px;
+  padding: 0px;
 }
-.header .headbar__main .menu__user ul .dropdown:hover .dropdown--content ul li:hover {
+.header .headbar__main .menu__user ul .dropdown:hover .dropdown--content ul li a{
+  display: inline-block;
+  width: 150px;
+  margin: 0px;
+  padding: 10px 5px; 
+}
+.header .headbar__main .menu__user ul .dropdown:hover .dropdown--content ul li a:hover {
   background: rgba(122, 122, 122, 0.1);
 }
+
 
 #headbar__sub {
   display: flex;
@@ -235,8 +241,6 @@
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
 }
-
-
 #go-top {
   position: fixed;
   bottom: 50px;
@@ -258,22 +262,24 @@
   top: 70px;
   z-index: 50;
   width: 200px;
+  background: rgba(122, 122, 122, 0.1);
+  padding-top: 20px;
 }
 .sidebar--left .category--group {
-  margin-left: 20px;
 }
 .sidebar--left .category--group .category__name {
   margin: 0px;
+  padding-left: 10px;
 }
 .sidebar--left .category--group .category__name span {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
 }
 .sidebar--left .category--group .category__list {
   padding: 10px 0px;
 }
 .sidebar--left .category--group .category__list ul li {
-  padding: 10px 0px 10px 5px;
+  padding: 10px 0px 10px 10px;
 }
 .sidebar--left .category--group .category__list ul li:hover {
   background: rgba(122, 122, 122, 0.3);
