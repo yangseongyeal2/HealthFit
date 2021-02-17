@@ -175,6 +175,7 @@ def logout(request):
     #auth.logout(request)
     #authe.current_user = None
     request.session['uid']=None
+    request.session['name']=None
    
     
     
