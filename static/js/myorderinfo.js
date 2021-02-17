@@ -44,6 +44,7 @@ function paintingData(currentPage, totalData) {
     `;
 
     if(totalData[start].state === "배송완료") {
+      
       const tableReview = document.getElementById(`tableReview`);
       tableReview.setAttribute(`class`, `review--on`);
     }
