@@ -1077,7 +1077,7 @@ def nonmember_create(request):
         return redirect(expath)
     else :
         msg="비밀번호 확인과 비밀번호가 일치하지 않습니다."
-        return render(request, 'nonmember_login.html',{'msg':msg})
+        return render(request, 'nonmember_login.html',{'msg':msg,'expath':expath})
 
   
 

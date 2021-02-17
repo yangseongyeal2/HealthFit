@@ -98,7 +98,7 @@ def getdata(request,option,price,username,phonenum,address,uid,delivery_message,
                 )
        # delivery=Delivery.from_dict(delivery_docs.to_dict())
         delivery_lis.append(delievery_par)
-        print(delivery_lis)
+        #print(delivery_lis)
 
 
         #유저에서 딜리버리 가져오기
@@ -170,7 +170,7 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
         delievery_par=Delivery.from_dict(Delivery(cart.brand,cart.name,cart.sizedic,cart.price,username,phonenumber,address,firestore.SERVER_TIMESTAMP,"배송전","","",uid,delivery_message,cart.downloadurl,cart.documentId).to_dict())
        # delivery=Delivery.from_dict(delivery_docs.to_dict())
         delivery_lis.append(delievery_par)
-        print(delivery_lis)
+        #print(delivery_lis)
     #for문끝
    
     
