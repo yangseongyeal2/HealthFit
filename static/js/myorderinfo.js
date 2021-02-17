@@ -1,11 +1,15 @@
 "use strict";
 const dataInPage = 5; //한 화면에 나타낼 리스트 수
 const pageCount = 5; //한 화면에 나타낼 페이지 수
+let totalleng=0; //데이터의 갯수
 //오브젝트 저장하기 위한 전역변수
 let savingPage = null;
 
 function pagingInit(data) {
   savingPage = data;
+  totalleng=savingPage.length;
+  console.log("이닛")
+  console.log(savingPage.length)
   paging(1, savingPage);
 }
 
@@ -22,8 +26,13 @@ function paintingData(currentPage, totalData) {
   while (dataBody.hasChildNodes()) {
     dataBody.removeChild(dataBody.firstChild);
   }
-
+  if (totalleng<start+5)
+   {
+     end=totalleng
+   }
   for (start; start < end; start++) {
+    
+   
     console.log(`forstart : ${start}`);
     dataBody.innerHTML += `
     <tr>

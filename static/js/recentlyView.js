@@ -67,35 +67,35 @@ function recentInit(data) { //0에서 4까지 리스트  savingData[0].uid 이�
 }//이닛데이터 끝
 
 //키 몸무게 골격근량 체지방량 체지방률 불러오기
-function retrieveInbody(uid){
+// function retrieveInbody(uid){
 
-  var docRef = db.collection("users").doc(uid);
-  docRef.get().then(function(doc) {
-    if (doc.exists) {
-      console.log("Document data:", doc.data());
+//   var docRef = db.collection("users").doc(uid);
+//   docRef.get().then(function(doc) {
+//     if (doc.exists) {
+//       console.log("Document data:", doc.data());
 
-      var height =doc.data().height
-      var weight= doc.data().weight
-      var SkeletalMuscleMass= doc.data().SkeletalMuscleMass
-      var BodyFatMass= doc.data().BodyFatMass
-      var BodyFatPercentage= doc.data().BodyFatPercentage
+//       var height =doc.data().height
+//       var weight= doc.data().weight
+//       var SkeletalMuscleMass= doc.data().SkeletalMuscleMass
+//       var BodyFatMass= doc.data().BodyFatMass
+//       var BodyFatPercentage= doc.data().BodyFatPercentage
 
-      document.getElementById('height').value=height;
-      document.getElementById('weight').value=weight;
-      document.getElementById('SkeletalMuscleMass').value=SkeletalMuscleMass;
-      document.getElementById('BodyFatMass').value=BodyFatMass;
-      document.getElementById('BodyFatPercentage').value=BodyFatPercentage;
+//       document.getElementById('height').value=height;
+//       document.getElementById('weight').value=weight;
+//       document.getElementById('SkeletalMuscleMass').value=SkeletalMuscleMass;
+//       document.getElementById('BodyFatMass').value=BodyFatMass;
+//       document.getElementById('BodyFatPercentage').value=BodyFatPercentage;
 
       
        
 
 
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }).catch(function(error) {
-  console.log("Error getting document:", error);
-  });
+//     } else {
+//       // doc.data() will be undefined in this case
+//       console.log("No such document!");
+//     }
+//   }).catch(function(error) {
+//   console.log("Error getting document:", error);
+//   });
 
-}
+// }
