@@ -65,7 +65,7 @@ urlpatterns = [
     path('cart/order/complete/<int:total_price>/<str:username>/<int:phonenumber>/<str:address>/<str:uid>/<str:delivery_message>/complete/', delivery.views.cartfinishedpay,name="cart_order_complete"),
     path('mypage/profile/modify/', mypage.views.modify,name="modify"),
     path('admin/delivery/',adminDelivery.views.login),
-    path('admin/delivery/home/',adminDelivery.views.home),
+    path('admin/delivery/home/',adminDelivery.views.home,name="delivery_home"),
     path('admin/delivery/home/detail/<str:id>/',adminDelivery.views.detail,name="delivery_modify"),
     path('admin/delivery/modify/',adminDelivery.views.modify),
     path('login/nonmember/',myapp.views.nonmember,name="nonmember"),

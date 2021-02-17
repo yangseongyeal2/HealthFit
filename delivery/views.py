@@ -132,7 +132,7 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
         cart.brand
         ,cart.name
         ,cart.sizedic
-        ,cart.price
+        ,total_price
         ,username
         ,phonenumber
         ,address
@@ -153,7 +153,7 @@ def cart_order_complete(request,total_price,username,phonenumber,address,uid,del
         cart.brand
         ,cart.name
         ,cart.sizedic
-        ,cart.price
+        ,total_price
         ,username
         ,phonenumber
         ,address
