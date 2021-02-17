@@ -75,6 +75,7 @@ urlpatterns = [
     path('login/nonmember/lookup/action/',myapp.views.nonmember_lookup_action,name="nonmember_lookup_action"),
     path('inbody/',myapp.views.inbody,name="inbody"),
     path('inbody/insert/',myapp.views.inbody_insert,name="inbody_insert"),
+    path('orderinfo/review/write/<str:delivery_uid>/',myapp.views.review_write,name="review_write"),
     
    
   

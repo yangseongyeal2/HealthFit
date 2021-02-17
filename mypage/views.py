@@ -28,12 +28,17 @@ def orderinfo(request):
         user_alldocs=user_doc.stream()
         print("??")
         deliverylist=[]
+        doc_id_lis=[]
         for doc in user_alldocs:
             delivery=Delivery.from_dict(doc.to_dict())
-            #print(delivery)
+
+            
             deliverylist.append(delivery)
+            doc_id_lis.append(doc.id)
         
-        return render(request, 'orderinfo.html',{'uid':uid,'deliverylist':deliverylist})
+        comb_lis=zip(deliverylist,doc_id_lis)
+        
+        return render(request, 'orderinfo.html',{'uid':uid,'comb_lis':comb_lis})
     except:
         return render(request, 'signin.html',{'uid':uid})
 

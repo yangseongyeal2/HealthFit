@@ -1180,6 +1180,9 @@ def inbody_insert(request):
           
 
     return render(request, 'home.html')
+
+def review_write(request,delivery_uid):
+    return render(request, 'reviewIndex.html')
     
 
     
