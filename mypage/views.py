@@ -29,14 +29,40 @@ def orderinfo(request):
         print("??")
         deliverylist=[]
         doc_id_lis=[]
+        krtime_lis=[]
+        option_lis=[]
+        
         for doc in user_alldocs:
-            delivery=Delivery.from_dict(doc.to_dict())
 
+            option=""
+            delivery=Delivery.from_dict(doc.to_dict())
             
+           
+            ustime=str(delivery.timestamp)[0:10]
+
+            print("도큐아이디"+str(doc.id))
+
+
+            ##옵션 만들기
+            
+            if delivery.option['s'] !=0:
+                option+="S:"+str(delivery.option['s'])+"  "
+            if delivery.option['m'] !=0:
+                option+="M:"+str(delivery.option['m'])+"  "
+            if delivery.option['l'] !=0:
+                option+="L:"+str(delivery.option['l'])+"  "
+            if delivery.option['xl'] !=0:
+                option+="XL:"+str(delivery.option['xl'])+"  "
+
+            print(option)
+           
+
+            krtime_lis.append(ustime)
             deliverylist.append(delivery)
             doc_id_lis.append(doc.id)
+            option_lis.append(option)
         
-        comb_lis=zip(deliverylist,doc_id_lis)
+        comb_lis=zip(deliverylist,doc_id_lis,krtime_lis,option_lis)
         
         return render(request, 'orderinfo.html',{'uid':uid,'comb_lis':comb_lis})
     except:

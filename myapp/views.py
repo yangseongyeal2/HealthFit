@@ -554,17 +554,32 @@ def addcart(request):
         aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
         alldocs=aldoc_ref.stream()
         product_lis=[]
+        ViewOption_lis=[]
         total_price=0
        
         for doc in alldocs:
+            ViewOption=""
             cart=Cart.from_dict(doc.to_dict())
             print("카트포문")
             product_lis.append(cart)
             total_price+=cart.totalprice
+            
+            if cart.sizedic['s'] !=0:
+                ViewOption+="S:"+str(cart.sizedic['s'])+"  "
+            if cart.sizedic['m'] !=0:
+                ViewOption+="M:"+str(cart.sizedic['m'])+"  "
+            if cart.sizedic['l'] !=0:
+                ViewOption+="L:"+str(cart.sizedic['l'])+"  "
+            if cart.sizedic['xl'] !=0:
+                ViewOption+="XL:"+str(cart.sizedic['xl'])+"  "
+
+            ViewOption_lis.append(ViewOption)
+
+        comb_lis=zip(product_lis,ViewOption_lis)
         inisisPrice=int(total_price)
         total_price =  format(inisisPrice, ',')
            
-        return render(request, 'cart.html',{'product_lis':product_lis,'option':option,'uid':uid,'usermodel':usermodel,'total_price':total_price,'inisisPrice':inisisPrice})
+        return render(request, 'cart.html',{'comb_lis':comb_lis,'option':option,'uid':uid,'usermodel':usermodel,'total_price':total_price,'inisisPrice':inisisPrice})
 
     except:
         print("로그인안댐")
@@ -652,74 +667,25 @@ def order(request):
      
         inisisPrice=int(price3)*total_amount
         total_price =  format(inisisPrice, ',')
-        return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price,'inisisPrice':inisisPrice})
+
+
+        ##옵션 재 구성
+        viewoption=""
+        if option['s'] !=0:
+            viewoption+="S:"+str(option['s'])+"  "
+        if option['m'] !=0:
+            viewoption+="M:"+str(option['m'])+"  "
+        if option['l'] !=0:
+            viewoption+="L:"+str(option['l'])+"  "
+        if option['xl'] !=0:
+            viewoption+="XL:"+str(option['xl'])+"  "
+        return render(request, 'order.html',{'products':products,'option':viewoption,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price,'inisisPrice':inisisPrice})
 
     except:
         expath=request.POST.get('path')
         print(expath)
         return render(request, 'order_login.html',{'expath':expath})
-    # if authe.current_user:
-    #     uid=authe.current_user['localId']
-    #     products_name=request.POST.get('product_name')
-    #     product_price=request.POST.get('product_price')
-    #     product_id=request.POST.get('product_id')
-    #     amount_s=request.POST.get('amount_s')
-    #     amount_m=request.POST.get('amount_m')
-    #     amount_l=request.POST.get('amount_l')
-    #     amount_xl=request.POST.get('amount_xl')
-    #     option={'s':0,'m':0,'l':0,'xl':0}
-    # #user=authe.currentUser
-    # #print(user)
-    #     if amount_s !='':
-    #         option.update(s=int(amount_s))
-    #         total_amount+=int(amount_s)
-    #     if amount_m !='':
-    #         option.update(m=int(amount_m))
-    #         total_amount+=int(amount_m)
-    #     if amount_l !='':
-    #         option.update(l=int(amount_l))
-    #         total_amount+=int(amount_l)
-    #     if amount_xl !='':
-    #         option.update(xl=int(amount_xl))
-    #         total_amount+=int(amount_xl)
-    #     print(amount_s)
-    #     #print(int(amount_s))
-    #     print(total_amount)
-    #     #수량 선택이 안되었을때 파이썬편
-    #     if total_amount <1 :
-    #         return HttpResponseRedirect(request.POST['path'])
-        
-            
-
-       
-    #     doc_ref=db.collection(u'product').document(product_id)
-    #     doc = doc_ref.get()
-    #     products=None
-    #     if doc.exists:
-    #     #print(u'Document data: {}'.format(doc.to_dict()))
-    #         products=Product.from_dict(doc.to_dict())
-    #     else:
-    #         print(u'No such document!')
-
-    #     doc_ref2=db.collection(u'users').document(uid)
-    #     doc2 = doc_ref2.get()
-    #     usermodel=None
-    #     if doc2.exists:
-    #         print(u'Document data: {}'.format(doc2.to_dict()))
-    #         usermodel=UserModel.from_dict(doc2.to_dict())
-    #     else:
-    #         print(u'No such document!')
-    #     price3=""
-    #     price=products.price.split('원')[0]
-    #     price2=price.split(',')
-    #     for a in price2:
-    #         price3+=a
-        
-
-    #     total_price=int(price3)*total_amount
-    #     return render(request, 'order.html',{'products':products,'option':option,'uid':uid,'usermodel':usermodel,'total_amount':total_amount,'total_price':total_price})
-    # else :
-    #      return render(request, 'signIn.html')
+   
 
 
 
@@ -1035,26 +1001,40 @@ def cart_order(request):
         aldoc_ref=db.collection(u'users').document(uid).collection(u'cart')
         alldocs=aldoc_ref.stream()
         product_lis=[]
+        ViewOption_lis=[]
         option={}
         for doc in alldocs:
+            ViewOption=""
             cart=Cart.from_dict(doc.to_dict())
             product_lis.append(cart)
             total_price+=cart.totalprice
             total_amount+=cart.sizedic['s']+cart.sizedic['m']+cart.sizedic['l']+cart.sizedic['xl']
+            ##옵션 리스트 만들기
+            if cart.sizedic['s'] !=0:
+                ViewOption+="S:"+str(cart.sizedic['s'])+"  "
+            if cart.sizedic['m'] !=0:
+                ViewOption+="M:"+str(cart.sizedic['m'])+"  "
+            if cart.sizedic['l'] !=0:
+                ViewOption+="L:"+str(cart.sizedic['l'])+"  "
+            if cart.sizedic['xl'] !=0:
+                ViewOption+="XL:"+str(cart.sizedic['xl'])+"  "
+            ViewOption_lis.append(ViewOption)
+        com_lis=zip(product_lis,ViewOption_lis)
         inisisPrice=int(total_price)
         total_price =  format(inisisPrice, ',')
         doc_ref=db.collection(u'users').document(uid)
+
         userdoc = doc_ref.get()
         products=None
-        if doc.exists:
-            print(u'Document data: {}'.format(doc.to_dict()))
+        if userdoc.exists:
             userModel=UserModel.from_dict(userdoc.to_dict())
+            print(u'유저모댈 data: {}'.format(userdoc.to_dict()))
 
         else:
             print(u'No such document!')
 
         
-        return render(request, 'cart_order.html',{'product_lis':product_lis,'uid':uid,'total_price':total_price,'inisisPrice':inisisPrice,'userModel':userModel})
+        return render(request, 'cart_order.html',{'com_lis':com_lis,'uid':uid,'total_price':total_price,'inisisPrice':inisisPrice,'usermodel':userModel})
     except:
         print("로그인안댐")
         return render(request, 'signIn.html')
@@ -1182,7 +1162,57 @@ def inbody_insert(request):
     return render(request, 'home.html')
 
 def review_write(request,delivery_uid):
-    return render(request, 'reviewIndex.html')
+    delivery_ref=db.collection("delivery").document(delivery_uid)
+    delivery_doc=delivery_ref.get()
+    if delivery_doc.exists:
+        delivery=Delivery.from_dict(delivery_doc.to_dict())
+        return render(request, 'reviewIndex.html',{"delivery_uid":delivery_uid,"delivery":delivery})
+        
+
+    else:
+        print(u'No such document!')
+    return render(request, 'reviewIndex.html',{"delivery_uid":delivery_uid})
+
+def review_create(request,delivery_uid):
+
+    try:
+
+        uid=request.session['uid']
+        user_doc=db.collection("users").document(uid).collection("delivery")
+        user_alldocs=user_doc.stream()
+
+        deliverylist=[]
+        doc_id_lis=[]
+        krtime_lis=[]
+        option_lis=[]
+        
+        for doc in user_alldocs:
+
+            option=""
+            delivery=Delivery.from_dict(doc.to_dict())
+            ustime=str(delivery.timestamp)[0:10]
+            ##옵션 만들기
+            
+            if delivery.option['s'] !=0:
+                option+="S:"+str(delivery.option['s'])+"  "
+            if delivery.option['m'] !=0:
+                option+="M:"+str(delivery.option['m'])+"  "
+            if delivery.option['l'] !=0:
+                option+="L:"+str(delivery.option['l'])+"  "
+            if delivery.option['xl'] !=0:
+                option+="XL:"+str(delivery.option['xl'])+"  "
+
+
+            krtime_lis.append(ustime)
+            deliverylist.append(delivery)
+            doc_id_lis.append(doc.id)
+            option_lis.append(option)
+        
+        comb_lis=zip(deliverylist,doc_id_lis,krtime_lis,option_lis)
+        
+        return render(request, 'orderinfo.html',{'uid':uid,'comb_lis':comb_lis})
+    except:
+        return render(request, 'signin.html',{'uid':uid})
     
 
     

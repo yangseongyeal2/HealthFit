@@ -433,3 +433,131 @@ class Cart(object):
             ,self.fixedPrice
             )
             )
+
+class Review(object):
+    
+    def __init__(self
+     ,StarPoint
+     ,user_uid
+     ,delivery_uid
+     ,text
+     ,SizePoint
+     ,BrightPoint
+     ,ColorPoint
+     ,ThickPoint
+     ,timestamp
+     
+    
+     ):
+        self.StarPoint = StarPoint
+        self.user_uid=user_uid
+        self.delivery_uid=delivery_uid
+        self.text=text
+        self.SizePoint=SizePoint
+        self.BrightPoint=BrightPoint
+        self.ColorPoint=ColorPoint
+        self.ThickPoint=ThickPoint
+        self.timestamp=timestamp
+       
+       
+        
+
+    @staticmethod
+    def from_dict(source):
+       
+        review=Review(
+         source[u'StarPoint']
+        ,source[u'user_uid']
+        ,source[u'delivery_uid']
+        ,source[u'text']
+        ,source[u'SizePoint']
+        ,source[u'BrightPoint']
+        ,source[u'ColorPoint']
+        ,source[u'ThickPoint']
+        ,source[u'timestamp']
+     
+        )
+        if u'StarPoint' in source:
+            review.StarPoint = source[u'StarPoint']
+        if u'user_uid' in source:
+            review.user_uid = source[u'user_uid']
+        if u'delivery_uid' in source:
+            review.delivery_uid = source[u'delivery_uid']
+        if u'text' in source:
+            review.text = source[u'text']
+        if u'SizePoint' in source:
+            review.SizePoint = source[u'SizePoint']
+        if u'BrightPoint' in source:
+            review.BrightPoint=source[u'BrightPoint']
+        if u'ColorPoint' in source:
+            review.ColorPoint=source[u'ColorPoint']
+        if u'ThickPoint' in source:
+            review.ThickPoint=source[u'ThickPoint']
+        if u'timestamp' in source:
+            review.timestamp=source[u'timestamp']
+     
+        
+        return review
+      
+
+        
+    def to_dict(self):
+       
+        dest = {
+            u'StarPoint':self.StarPoint,
+            u'user_uid':self.user_uid,
+            u'delivery_uid':self.delivery_uid,
+            u'text':self.text,
+            u'SizePoint':self.SizePoint,
+            u'BrightPoint':self.BrightPoint,
+            u'ColorPoint':self.ColorPoint,
+            u'ThickPoint':self.ThickPoint,
+            u'timestamp':self.timestamp,
+           
+          
+        }
+
+        if self.StarPoint:
+            dest[u'StarPoint'] = self.StarPoint
+
+        if self.user_uid:
+            dest[u'user_uid'] = self.user_uid
+
+        if self.delivery_uid:
+            dest[u'delivery_uid'] = self.delivery_uid
+        
+        if self.text:
+            dest[u'text']=self.text
+
+        if self.SizePoint:
+            dest[u'SizePoint']=self.SizePoint
+
+        if self.BrightPoint:
+            dest[u'BrightPoint']=self.BrightPoint
+
+        if self.ColorPoint:
+            dest[u'ColorPoint']=self.ColorPoint
+        if self.ThickPoint:
+            dest[u'ThickPoint']=self.ThickPoint
+        if self.timestamp:
+                dest[u'timestamp']=self.timestamp
+    
+
+        return dest
+
+    def __repr__(self):
+        return(
+             u'Review(name={}, price={})'
+            .format(
+            self.StarPoint
+            ,self.user_uid 
+            ,self.delivery_uid
+            ,self.text
+            ,self.SizePoint
+            ,self.BrightPoint
+            ,self.ColorPoint
+            ,self.ThickPoint
+            ,self.timestamp
+        
+            )
+            )
