@@ -29,7 +29,7 @@
         <div class="board-left">
           
           <div class="board-left__head-text">상품 정보</div>
-          {% for products in product_lis%}
+          {% for products,ViewOption in com_lis%}
           {% comment %} <input type="hidden" value={{products.documentId}} id="products_documentId"> {% endcomment %}
         
           
@@ -40,7 +40,7 @@
                     sizes="(max-width: 479px) 25.296875px, 7vw" alt=""></li>
             <li>
               <a href="{% url 'detail' products.documentId %}">{{products.name}}</a>
-              {{products.sizedic}}
+              {{ViewOption}}
             </li>
             <li>
               {{products.fixedPrice}}원

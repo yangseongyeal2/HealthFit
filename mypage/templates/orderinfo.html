@@ -56,14 +56,14 @@
 <script type="text/javascript">
     
     let deliveryData = [
-      {% for delivery,id,time in comb_lis %}  
+      {% for delivery,id,time,option in comb_lis %}  
         
         { 
           uid: "{{id}}",
           timestamp: "{{time}}",
           image: "{{delivery.img}}",
           name:  "{{delivery.product_name}}",
-          option: "{{delivery.option}}",
+          option: "{{option}}",
           price: "{{delivery.price}}",
           state: "{{delivery.deliverystate}}"
         },

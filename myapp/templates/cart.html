@@ -24,7 +24,7 @@
           <li>수량</li>
           <li>제거</li>
         </ul>
-        {% for products in product_lis%}
+        {% for products ,viewoption in comb_lis%}
         <input type="hidden" value={{products.documentId}} id="products_documentId">
          <input type="hidden" name="data[]" value="{{products}}">
         
@@ -35,7 +35,7 @@
                   sizes="(max-width: 479px) 25.296875px, 7vw" alt=""></li>
           <li>
             <a href="{% url 'detail' products.documentId %}">{{products.name}}</a>
-            {{products.sizedic}}
+            {{viewoption}}
           </li>
           <li>
             {{products.fixedPrice}}원
