@@ -29,14 +29,22 @@ def orderinfo(request):
         print("??")
         deliverylist=[]
         doc_id_lis=[]
+        krtime_lis=[]
         for doc in user_alldocs:
             delivery=Delivery.from_dict(doc.to_dict())
+            
+           
+            ustime=str(delivery.timestamp)[0:10]
+
+            print("타임스탬프"+str(delivery.timestamp))
+            print("도큐아이디"+str(doc.id))
+            krtime_lis.append(ustime)
 
             
             deliverylist.append(delivery)
             doc_id_lis.append(doc.id)
         
-        comb_lis=zip(deliverylist,doc_id_lis)
+        comb_lis=zip(deliverylist,doc_id_lis,krtime_lis)
         
         return render(request, 'orderinfo.html',{'uid':uid,'comb_lis':comb_lis})
     except:
