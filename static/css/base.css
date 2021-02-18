@@ -266,6 +266,7 @@
   padding-top: 20px;
 }
 .sidebar--left .category--group {
+  display: none;
 }
 .sidebar--left .category--group .category__name {
   margin: 0px;
