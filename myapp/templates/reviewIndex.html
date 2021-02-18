@@ -46,11 +46,31 @@
           별점
         </div>
         <div class="review--write__startpoint__content review--table-cell">
-          <button><span><i class="fas fa-star fa-2x"></i></span></button>
-          <button><span><i class="fas fa-star fa-2x"></i></span></button>
-          <button><span><i class="fas fa-star fa-2x"></i></span></button>
-          <button><span><i class="fas fa-star fa-2x"></i></span></button>
-          <button><span><i class="fas fa-star fa-2x"></i></span></button>
+          <button type="button" id="star1" onclick="drawStar(this)" value="1">
+            <span class="star-draw">
+              <i class="fas fa-star fa-2x"></i>
+            </span>
+          </button>
+          <button type="button" id="star2" onclick="drawStar(this)" value="2">
+            <span class="star-draw">
+              <i class="fas fa-star fa-2x"></i>
+            </span>
+          </button>
+          <button type="button" id="star3" onclick="drawStar(this)" value="3">
+            <span class="star-draw">
+              <i class="fas fa-star fa-2x"></i>
+            </span>
+          </button>
+          <button type="button" id="star4" onclick="drawStar(this)" value="4">
+            <span class="star-draw">
+              <i class="fas fa-star fa-2x"></i>
+            </span>
+          </button>
+          <button type="button" id="star5" onclick="drawStar(this)" value="5">
+            <span class="star-draw">
+              <i class="fas fa-star fa-2x"></i>
+            </span>
+          </button>
         </div>
       </div>
 
@@ -87,4 +107,5 @@
 
 </div>
 <script src="{% static 'js/inputimg.js' %}"></script>
+<script src="{% static 'js/starpoint.js' %}"></script>
 {% endblock content %}

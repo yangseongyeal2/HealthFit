@@ -125,6 +125,12 @@
 .review--write .review--write__startpoint .review--write__startpoint__content button span {
   color: #CECECE;
 }
+.review--write .review--write__startpoint .review--write__startpoint__content button span.staroff {
+  color: #CECECE;
+}
+.review--write .review--write__startpoint .review--write__startpoint__content button span.staron {
+  color: yellow;
+}
 
 .review--write .review--write__text .review--write__text__title {
   padding: 0px;
