@@ -18,7 +18,7 @@
     <div class="review--write__product">
       
       <div class="review--write__product__img">
-        <img src="../../static/media/test.jpg" alt="test">
+        {% comment %} <img src="../../static/media/test.jpg" alt="test"> {% endcomment %}
       </div>
       
       <div class="review--write__product__detail--wrap">
@@ -38,7 +38,7 @@
     
         
           
-            
+    <form>
     <div class="review--write__startpoint review--table">
       <div class="review--write__startpoint__title review--title review--table-cell">
         별점
@@ -66,14 +66,16 @@
         사진첨부
       </div>
       <div class="review--write__input-img__content review--table-cell">
-        <input type="file" accept="img/*" multiple class="file-input-img">
-        <button class="btn-normal btn-white btn-input-img">사진첨부하기</button>
+        <input type="file" accept="img/*" multiple class="file-input-img " >
+        
         <div id="imgPreview">
         </div>
       </div>
     </div>    
        
     <div>submit</div>
+    
+    </form>
             
         
       
@@ -81,4 +83,5 @@
 
 </div>
 <script src="{% static 'js/inputimg.js' %}"></script>
+
 {% endblock content %}

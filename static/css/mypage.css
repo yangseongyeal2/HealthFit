@@ -146,7 +146,7 @@
 }
 
 .review--write .review--write__input-img .review--write__input-img__content input[type=file] {
-  display: none;
+  display: block;
 }
 .review--write .review--write__input-img .review--write__input-img__content button {
   margin: 0px;
