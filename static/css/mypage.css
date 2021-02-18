@@ -146,12 +146,31 @@
 }
 
 .review--write .review--write__input-img .review--write__input-img__content input[type=file] {
+<<<<<<< HEAD
   display: block;
+=======
+  width: 0;
+  height: 0;
+>>>>>>> d099cdd1d0c6b212efa3829c7f4240e9ec1c1b90
 }
-.review--write .review--write__input-img .review--write__input-img__content button {
+.review--write .review--write__input-img .review--write__input-img__content label {
   margin: 0px;
 }
-
+#imgPreview li {
+  display: flex;
+  list-style: none;
+  margin: 10px  0px;
+  width: 150px;
+  height: 100px;
+}
+#imgPreview li:nth-child() {
+  margin: 0px;
+}
+#imgPreview li img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
 
 
 

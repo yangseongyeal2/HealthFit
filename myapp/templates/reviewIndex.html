@@ -38,47 +38,54 @@
     
         
           
+
+            
     <form>
-    <div class="review--write__startpoint review--table">
-      <div class="review--write__startpoint__title review--title review--table-cell">
-        별점
-      </div>
-      <div class="review--write__startpoint__content review--table-cell">
-        <button><span><i class="fas fa-star fa-2x"></i></span></button>
-        <button><span><i class="fas fa-star fa-2x"></i></span></button>
-        <button><span><i class="fas fa-star fa-2x"></i></span></button>
-        <button><span><i class="fas fa-star fa-2x"></i></span></button>
-        <button><span><i class="fas fa-star fa-2x"></i></span></button>
-      </div>
-    </div>
 
-    <div class="review--write__text review--table">
-      <div class="review--write__text__title review--title review--table-cell">
-        구매후기
-      </div>
-      <div class="review--write__text__content review--table-cell">
-        <textarea placeholder="자세한 구매후기는 고객의 구매에 많은 도움이 됩니다."></textarea>
-      </div>
-    </div>
 
-    <div class="review--write__input-img review--table">
-      <div class="review--write__input-img__title review--title review--table-cell">
-        사진첨부
-      </div>
-      <div class="review--write__input-img__content review--table-cell">
-        <input type="file" accept="img/*" multiple class="file-input-img " >
-        
-        <div id="imgPreview">
+      <div class="review--write__startpoint review--table">
+        <div class="review--write__startpoint__title review--title review--table-cell">
+          별점
+        </div>
+        <div class="review--write__startpoint__content review--table-cell">
+          <button><span><i class="fas fa-star fa-2x"></i></span></button>
+          <button><span><i class="fas fa-star fa-2x"></i></span></button>
+          <button><span><i class="fas fa-star fa-2x"></i></span></button>
+          <button><span><i class="fas fa-star fa-2x"></i></span></button>
+          <button><span><i class="fas fa-star fa-2x"></i></span></button>
         </div>
       </div>
-    </div>    
-       
-    <div>submit</div>
-    
+
+      <div class="review--write__text review--table">
+        <div class="review--write__text__title review--title review--table-cell">
+          구매후기
+        </div>
+        <div class="review--write__text__content review--table-cell">
+          <textarea placeholder="자세한 구매후기는 고객의 구매에 많은 도움이 됩니다."></textarea>
+        </div>
+      </div>
+
+
+      <div class="review--write__input-img review--table">
+        <div class="review--write__input-img__title review--title review--table-cell">
+          사진첨부
+        </div>
+        <div class="review--write__input-img__content review--table-cell">
+          <label for="file-input-img" class="btn-normal btn-white">업로드</label>
+          <input type="file" accept="img/*" multiple id="file-input-img">
+          <!-- <button class="btn-normal btn-white btn-input-img">사진첨부하기</button> -->
+          <div>
+            <ul id="imgPreview">
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div><input type="submit" class="btn-normal btn-black" value="작성하기"></div>
+
     </form>
             
-        
-      
   </div> 
 
 </div>
