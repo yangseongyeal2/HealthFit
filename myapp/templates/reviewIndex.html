@@ -18,18 +18,18 @@
     <div class="review--write__product">
       
       <div class="review--write__product__img">
-        {% comment %} <img src="../../static/media/test.jpg" alt="test"> {% endcomment %}
+         <img src="{{delivery.img}}" alt="test"> 
       </div>
       
       <div class="review--write__product__detail--wrap">
         <div class="review--write__product__detail--name review--title">
-          제품명
+          {{delivery.product_name}}
         </div>
         <div class="review--write__product__detail--brand">
-          제품 브랜드
+           {{delivery.brandname}}
         </div>
         <div class="review--write__product__detail--date">
-          2021.02.18 배송
+          {{delivery.timestamp}}
         </div>
       </div>      
 
@@ -40,8 +40,8 @@
           
 
             
-    <form>
-
+    <form action="{%url 'review_create' delivery_uid %}" method="post">
+       {% csrf_token %}
 
       <div class="review--write__startpoint review--table">
         <div class="review--write__startpoint__title review--title review--table-cell">
@@ -72,7 +72,11 @@
         </div>
         <div class="review--write__input-img__content review--table-cell">
           <label for="file-input-img" class="btn-normal btn-white">업로드</label>
-          <input type="file" accept="img/*" multiple id="file-input-img">
+          <input type="file" name="file[]" id="file-input-img" accept="img/*" multiple id="file-input-img">
+          <input type="hidden" name="url" id="url" >
+          <input type="hidden" name="delivery_uid" id="delivery_uid" value={{delivery_uid}} >
+          <input type="hidden" name="path"  value={{expath}} >
+
           <!-- <button class="btn-normal btn-white btn-input-img">사진첨부하기</button> -->
           <div>
             <ul id="imgPreview">
@@ -82,7 +86,7 @@
         </div>
       </div>
 
-      <div><input type="submit" class="btn-normal btn-black" value="작성하기"></div>
+      <div><input type="submit" class="btn-normal btn-black" onclick="ReviewUpload()" value="작성하기"></div>
 
     </form>
             
@@ -90,5 +94,6 @@
 
 </div>
 <script src="{% static 'js/inputimg.js' %}"></script>
+<script src="{% static 'js/ReviewUpload.js' %}"></script>
 
 {% endblock content %}

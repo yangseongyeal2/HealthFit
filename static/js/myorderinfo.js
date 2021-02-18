@@ -45,9 +45,11 @@ function paintingData(currentPage, totalData) {
     if(totalData[start].state === "배송완료") {
 
       const tableReview = document.getElementById(`tableReview${start}`);
+      //  <a href="review/write/${totalData[start].uid}/">후기작성</a>
       tableReview.innerHTML = `
         
-        <a href="review/write/${totalData[start].uid}/">후기작성</a>
+      <a href="http://127.0.0.1:8000/orderinfo/review/write/${totalData[start].uid}/">후기작성</a>
+        
       `;
 
     }

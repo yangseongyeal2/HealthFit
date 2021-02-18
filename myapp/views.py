@@ -1162,7 +1162,57 @@ def inbody_insert(request):
     return render(request, 'home.html')
 
 def review_write(request,delivery_uid):
-    return render(request, 'reviewIndex.html')
+    delivery_ref=db.collection("delivery").document(delivery_uid)
+    delivery_doc=delivery_ref.get()
+    if delivery_doc.exists:
+        delivery=Delivery.from_dict(delivery_doc.to_dict())
+        return render(request, 'reviewIndex.html',{"delivery_uid":delivery_uid,"delivery":delivery})
+        
+
+    else:
+        print(u'No such document!')
+    return render(request, 'reviewIndex.html',{"delivery_uid":delivery_uid})
+
+def review_create(request,delivery_uid):
+
+    try:
+
+        uid=request.session['uid']
+        user_doc=db.collection("users").document(uid).collection("delivery")
+        user_alldocs=user_doc.stream()
+
+        deliverylist=[]
+        doc_id_lis=[]
+        krtime_lis=[]
+        option_lis=[]
+        
+        for doc in user_alldocs:
+
+            option=""
+            delivery=Delivery.from_dict(doc.to_dict())
+            ustime=str(delivery.timestamp)[0:10]
+            ##옵션 만들기
+            
+            if delivery.option['s'] !=0:
+                option+="S:"+str(delivery.option['s'])+"  "
+            if delivery.option['m'] !=0:
+                option+="M:"+str(delivery.option['m'])+"  "
+            if delivery.option['l'] !=0:
+                option+="L:"+str(delivery.option['l'])+"  "
+            if delivery.option['xl'] !=0:
+                option+="XL:"+str(delivery.option['xl'])+"  "
+
+
+            krtime_lis.append(ustime)
+            deliverylist.append(delivery)
+            doc_id_lis.append(doc.id)
+            option_lis.append(option)
+        
+        comb_lis=zip(deliverylist,doc_id_lis,krtime_lis,option_lis)
+        
+        return render(request, 'orderinfo.html',{'uid':uid,'comb_lis':comb_lis})
+    except:
+        return render(request, 'signin.html',{'uid':uid})
     
 
     
