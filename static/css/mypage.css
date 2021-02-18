@@ -61,66 +61,98 @@
 
 
 /* REVIEW */
-.review--page {
+.review--write {
   width: 800px;
 }
-.review--page .review--title {
+.review--write .review--title {
   font-size: 16px;
   font-weight: 600;
+  width: 130px;
 }
-.review--page .review--write__title{
+.review--write .review--write__title{
   border-top: 1px solid #000;
   border-bottom: 1px solid rgba(122, 122, 122, 0.3);
   padding: 15px 0px;
+  width: 100%;
 }
-.review--page .review--write__product {
+.review--write button {
+  background: transparent;
+  padding: 0px;
+}
+.review--write button:focus {
+  outline: none;
+}
+
+.review--write .review--write__product {
   display: flex;
   border-bottom: 1px solid #000;
   padding: 15px 0px;
   align-items: center;
   height: 140px;
 }
-.review--page .review--write__product .review--write__product__img {
+.review--write .review--write__product .review--write__product__img {
   width: 100px;
   height: 100px;
 }
-.review--page .review--write__product .review--write__product__detail--wrap {
+.review--write .review--write__product .review--write__product__detail--wrap {
   display: block;
 }
-.review--page .review--write__product .review--write__product__detail--name {
+.review--write .review--write__product .review--write__product__detail--name {
   font-size: 16px;
   font-weight: 600;
-  
 }
-.review--page .review--write__product .review--write__product__detail--brand {
+.review--write .review--write__product .review--write__product__detail--brand {
   padding: 5px 0px;
 }
-.review--page .review--write__product .review--write__product__detail--date {
+.review--write .review--write__product .review--write__product__detail--date {
   margin-top: 20px;
   font-size: 12px;
   color: #878787;
 }
 
-.review--page .startpoint--wrap {
+.review--write .review--table {
   display: table;
   padding: 15px 0px;
   width: 100%;
   border-bottom: 1px solid rgba(122, 122, 122, 0.3);
 }
-.review--page .startpoint--wrap .startpoint__title {
+.review--write .review--table-cell {
   display: table-cell;
 }
-.review--page .startpoint--wrap .startpoint__content {
-  display: table-cell;
-}
-.review--page .startpoint--wrap .startpoint__content button {
-  background: transparent;
+.review--write .review--write__startpoint .review--write__startpoint__content button {
   border: none;
+}
+.review--write .review--write__startpoint .review--write__startpoint__content button span {
+  color: #CECECE;
+}
+
+.review--write .review--write__text .review--write__text__title {
   padding: 0px;
+  vertical-align: top;
 }
-.review--page .startpoint--wrap .startpoint__content button:focus {
+.review--write .review--write__text .review--write__text__content {
+  padding-left: 10px;
+  border: 1px solid #ddd;
+}
+.review--write .review--write__text .review--write__text__content textarea {
+  width: 100%;
+  height: 146px;
+  padding: 10px 0px;
+  margin-bottom: 20px;
+  border: none;
+  color: #111;
   outline: none;
+  resize: none;
 }
+
+.review--write .review--write__input-img .review--write__input-img__content input[type=file] {
+  display: none;
+}
+.review--write .review--write__input-img .review--write__input-img__content button {
+  margin: 0px;
+}
+
+
 
 
 
