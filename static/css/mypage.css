@@ -146,12 +146,27 @@
 }
 
 .review--write .review--write__input-img .review--write__input-img__content input[type=file] {
-  display: none;
+  width: 0;
+  height: 0;
 }
-.review--write .review--write__input-img .review--write__input-img__content button {
+.review--write .review--write__input-img .review--write__input-img__content label {
   margin: 0px;
 }
-
+#imgPreview li {
+  display: flex;
+  list-style: none;
+  margin: 10px  0px;
+  width: 150px;
+  height: 100px;
+}
+#imgPreview li:nth-child() {
+  margin: 0px;
+}
+#imgPreview li img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
 
 
 
