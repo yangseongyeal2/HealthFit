@@ -179,24 +179,37 @@
           </div>
 
           <div>
-            <span>
-              <span class="star-draw">
+          <span>
+          {% for i in "x"|rjust:review.StarPoint %}
+
+	        <span class="star-draw">
                 <i class="fas fa-star fa-0.5x"></i>
-              </span>
-              <span class="star-draw">
-                <i class="fas fa-star fa-0.5x"></i>
-              </span>
-              <span class="star-draw">
-                <i class="fas fa-star fa-0.5x"></i>
-              </span>
-              <span class="star-draw">
-                <i class="fas fa-star fa-0.5x"></i>
-              </span>
-              <span class="star-draw">
-                <i class="fas fa-star fa-0.5x"></i>
-              </span>
+          </span>
+
+          {% endfor %}
             </span>
-            <span>writedate</span>
+             <span>writedate</span>
+
+
+{% comment %}       
+              <span class="star-draw">
+                <i class="fas fa-star fa-0.5x"></i>
+              </span>
+
+              <span class="star-draw">
+                <i class="fas fa-star fa-0.5x"></i>
+              </span>
+              <span class="star-draw">
+                <i class="fas fa-star fa-0.5x"></i>
+              </span>
+              <span class="star-draw">
+                <i class="fas fa-star fa-0.5x"></i>
+              </span>
+              <span class="star-draw">
+                <i class="fas fa-star fa-0.5x"></i>
+              </span> {% endcomment %}
+          
+           
           </div>
 
         </div>
