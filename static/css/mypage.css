@@ -153,10 +153,12 @@
 
 .review--write .review--write__input-img .review--write__input-img__content input[type=file] {
 
+
   display: block;
 
   width: 0;
   height: 0;
+
 
 }
 .review--write .review--write__input-img .review--write__input-img__content label {
