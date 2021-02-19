@@ -276,7 +276,10 @@ def detail(request,documentId):
     #테스트
     uid=None
     print("홈시작")
-    recentview_lis=request.session['RecentView']
+    try:
+        recentview_lis=request.session['RecentView']
+    except:
+        print("recentview 없음")
     if len(recentview_lis)<6 :
         recentview_lis.append(documentId)
         my_set = set(recentview_lis)
