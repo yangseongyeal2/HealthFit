@@ -6,13 +6,12 @@ function drawStar(star) {
   const del = document.querySelectorAll(`.star-draw`);
 
   del.forEach(function(del){
+    del.classList.replace(`staron`, `staroff`);
     console.log(del);
-    del.classList.add(`staroff`)
-    del.classList.remove(`staron`);
   });
 
   for(let i = 0; i < point; i++) {
-    del[i].classList.add(`staron`);
+    del[i].classList.replace(`staroff`, `staron`);
   }
   console.log(`value:: ${point}`);
 }
