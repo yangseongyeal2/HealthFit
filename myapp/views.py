@@ -10,7 +10,7 @@ from firebase_admin import auth
 #from firebase_admin import auth
 from .models import Product
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import UserModel
+from .models import UserModel,Review
 from .models import Cart
 from delivery.models import Delivery
 from bs4 import BeautifulSoup
@@ -275,6 +275,7 @@ def postsignup(request):
 def detail(request,documentId):
     #테스트
     uid=None
+    com_lis=[]
     print("홈시작")
     try:
         recentview_lis=request.session['RecentView']
@@ -299,9 +300,37 @@ def detail(request,documentId):
     doc_ref=db.collection(u'product').document(documentId)
     doc = doc_ref.get()
     products=None
+    review_lis=[]
+    user_lis=[]
+    delivery_lis=[]
     if doc.exists:
         print(u'Document data: {}'.format(doc.to_dict()))
         products=Product.from_dict(doc.to_dict())
+        review_ref=db.collection(u'product').document(documentId).collection('review')
+        review_alldocs=review_ref.stream()
+       
+
+        for doc in review_alldocs:
+            review=Review.from_dict(doc.to_dict())
+            print("딜리버리 UID"+review.delivery_uid)
+            review_lis.append(review)
+            #review user
+            review_user_ref=db.collection(u'users').document(review.user_uid)
+            review_user_doc=review_user_ref.get()
+            if review_user_doc.exists:
+                user=UserModel.from_dict(review_user_doc.to_dict())
+                user_lis.append(user)
+            #review delivery
+            review_delivery_ref=db.collection(u'delivery').document(review.delivery_uid)
+            review_delivery_doc=review_delivery_ref.get()
+            if review_delivery_doc.exists:
+                delivery=Delivery.from_dict(review_delivery_doc.to_dict())
+                delivery_lis.append(delivery)
+            com_lis=zip(review_lis,user_lis,delivery_lis)
+
+
+
+
 
     else:
         print(u'No such document!')
@@ -309,7 +338,7 @@ def detail(request,documentId):
     
    
 
-    return render(request,"detail.html",{'products':products,'documentId':documentId,'uid':uid})
+    return render(request,"detail.html",{'products':products,'documentId':documentId,'uid':uid,'com_lis':com_lis })
 
 def index(request):
     return render(request,"index.html")

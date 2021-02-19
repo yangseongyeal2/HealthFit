@@ -39,7 +39,7 @@
         
           
 
-      {% comment %} <form action="{%url 'review_create' delivery_uid %}"> {% endcomment %}
+       {% comment %} <form action="{%url 'review_create' delivery_uid %}"> {% endcomment %}
        {% csrf_token %}
 
       <div class="review--write__startpoint review--table">
@@ -111,10 +111,10 @@
       </div>
 
       <div>
-       {% comment %} <input type="submit" class="btn-normal btn-black" onclick="ReviewUpload()" value="작성하기">  {% endcomment %}
+        {% comment %} <input type="submit" class="btn-normal btn-black" onclick="ReviewUpload()" value="작성하기">   {% endcomment %}
         <button type="button"  class="btn-normal btn-black"  onclick="ReviewUpload()" value="작성하기"> 
       </div>
-      {% comment %} </form> {% endcomment %}
+       {% comment %} </form>  {% endcomment %}
       
 
     
@@ -124,7 +124,7 @@
 </div>
 <script src="{% static 'js/inputimg.js' %}"></script>
 <script src="{% static 'js/starpoint.js' %}"></script>
-<script src="{% static 'js/ReviewUpload.js' %}"></script>
+
 
 
 {% endblock content %}
