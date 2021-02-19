@@ -55,30 +55,41 @@
     <div class="details__product--wrap">
 
       <img src="{{products.downloadurl}}" loading="lazy" alt="productimage" class="img-detail">
+
       <div class="details-info">
+
         <div class="details-info-wrap">
           <a href="#" class="link-category">{{products.categori}}</a>
         </div>
+
         <div class="details-info-wrap">
           <div class="detail-title">{{products.name}}</div>
         </div>
+
         <div class="w-form">
           <form id="email-form" name="form" data-name="Email Form" action="/order/" method="POST" >
             {% csrf_token %}
             <input type="hidden" name="path" value="{{request.path}}" />
+
             <div class="details-info-wrap">
+
               <ul role="list" class="detail-price__list">
+
                 <li>
                   <div>PRICE</div>
                 </li>
+
                 <li>
                   <div>{{products.fiexdPrice}}원</div>
                   <input type="hidden" id="product_price" name="product_price" value="{{ products.price }}">
                   <input type="hidden" id="product_name" name="product_name" value="{{ products.name}}">
                   <input type="hidden" id="product_id" name="product_id" value="{{documentId}}">
                 </li>
+
               </ul>
+
             </div>
+
             <div class="details-info-wrap">
               <ul role="list" class="size__ulist">
                 <li>
@@ -91,12 +102,15 @@
                     <option value="M">M</option>
                     <option value="L">L</option>
                     <option value="XL">XL</option>
-                  </select></li>
+                  </select>
+                </li>
               </ul>
             </div>
+
             <div id="optionList">
               <!-- optionListAlign -->
             </div>
+
             <div class="details-info-wrap">
               <ul role="list" class="list-7">
                 <li class="list-item-7">
@@ -108,20 +122,23 @@
                 </li>
               </ul>
             </div>
+
             <div class="details-info-wrap__submit">
-      
               <input type="submit" value="바로 구매" data-wait="Please wait..." class="btn-normal btn-black" id="buynow"
                 onclick="checkstock('a')"  >
               <input type="submit" value="장바구니에 추가" data-wait="Please wait..." class="btn-normal btn-white"
                 id="addtocart" onclick="checkstock('b')" formaction="/addcart/">
             </div>
+
           </form>
+
           <div class="w-form-done">
             <div>Thank you! Your submission has been received!</div>
           </div>
           <div class="w-form-fail">
             <div>Oops! Something went wrong while submitting the form.</div>
           </div>
+
           <div data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
             <div class="tabs-menu w-tab-menu">
               <a data-w-tab="DETAILS" class="w-inline-block w-tab-link">
@@ -134,6 +151,7 @@
                 <div>RETURN &amp; EXCHANGE</div>
               </a>
             </div>
+
             <div class="tabs-content w-tab-content">
               <div data-w-tab="DETAILS" class="w-tab-pane">
                 <div>- 고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다.<br>  확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이  아니라고 판단될
@@ -164,96 +182,41 @@
           </div>
       
         </div>
+
       </div>
 
     </div>
      
     <div class="details__review--wrap">
-
-    {%for review,user,delivery in com_lis%}
-      <article>
-
-        <div class="details__review__userinfo">
-
-          <div class="details__review__userinfo__nickname">
-            <span>{{user.name}}</span>
-          </div>
-
-
-          <div class="details__review__userinfo__info">
-          
-          <span id="starwrap">
-          {% comment %} {% for i in "x"|rjust:review.StarPoint %}
-
-	        <span class="star-draw">
-                <i class="fas fa-star fa-0.5x"></i>
-          </span>
-
-          {% endfor %} {% endcomment %}
-          <script>
-         
-          let starpoint={{review.StarPoint}}
-          let starwrap=document.getElementById('starwrap')
-          alert(starpoint);
-
-          for(i=0;i<starpoint;i++){
-           starwrap.innerHTML += `
-        
-           <span class="star-draw">
-                <i class="fas fa-star fa-0.5x"></i>
-           </span>
       
-            `; 
-          }
-         
-       
-          </script>
 
-            </span>
-             <span>writedate</span>
-
-
-
-
-            <span>{{ review.timestamp }}</span>
-
-
-           
-
-
-
-        </div>
-
-        <div class="details__review__delivery__info">
-          <span>{{ delivery.product_name }}, {{ delivery.option }}</span>
-        </div>
-
-        <div class="details__review__product-img">
-          {% if review.downloadUrl %}
-          <img src="{{ review.downloadUrl }}" alt="userReviewImg">
-          {% endif %}
-        </div>
-
-        <div class="details__review__text">
-          <pre>{{ review.text }}</pre>
-        </div>
-
-      </article>
-      {%endfor%}
     </div>
-
+      
   </div>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="{% static 'js/preorder.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/reviewShow.js' %}" type="text/javascript"></script>
 <script>
+  let reviewData = [
+    {% for review,user,delivery in com_lis %}
 
-  let drawStar = {{review.StarPoint}};
-  console.log(`123:${drawStar}`);
+      {
+        nickname: `{{user.name}}`,
+        point: `{{review.StarPoint}}`,
+        time: `{{review.timestamp}}`,
+        productName: `{{delivery.product_name}}`,
+        productOption: `{{delivery.option}}`,
+        reviewImg: `{{review.downloadUrl}}`,
+        reviewText: `{{review.text}}`
+      },
 
+    {% endfor %}
+  ]
+  
+  detailReviewInit(reviewData);
 </script>
-
 {% endblock %}
 
    
