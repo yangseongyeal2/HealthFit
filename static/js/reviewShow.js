@@ -53,7 +53,7 @@ function drawReviewShow(data) {
   }
   
 }
-
+// 섹스
 function detailDrawStar(data) {
   let point = "";
   console.log(`point:${data.point}`);
