@@ -475,6 +475,12 @@ a:visited {
   flex-wrap: wrap;
   margin: 0 auto;
 }
+.details__product--wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
 .details-info {
   min-width: 400px;
 }
@@ -535,6 +541,31 @@ a:visited {
   font-size: 12px;
   list-style-type: none;
 }
+
+.details__review--wrap {
+  width: 100%;
+}
+.details__review--wrap article {
+
+}
+.details__review--wrap article .details__review__userinfo {
+
+}
+.details__review--wrap article .details__review__userinfo .details__review__userinfo__nickname span{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+
+.details__review--wrap article .details__review__product-img {
+  display: flex;
+}
+.details__review--wrap article .details__review__product-img img {
+  width: 70px;
+  height: 70px;
+}
+
 
 
 

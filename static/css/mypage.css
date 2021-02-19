@@ -152,12 +152,9 @@
 }
 
 .review--write .review--write__input-img .review--write__input-img__content input[type=file] {
-<<<<<<< HEAD
   display: block;
-=======
-  width: 0;
-  height: 0;
->>>>>>> d099cdd1d0c6b212efa3829c7f4240e9ec1c1b90
+  width: 0px;
+  height: 0px;
 }
 .review--write .review--write__input-img .review--write__input-img__content label {
   margin: 0px;

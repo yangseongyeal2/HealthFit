@@ -203,10 +203,6 @@
 
     <script type="text/javascript">
    
-
-
-
-
     let recentData = [
       {% for recentview in request.session.RecentView %}  
 
@@ -220,9 +216,6 @@
     recentInit(recentData);
 
      var recentUid="{{request.session.uid}}";
-
-   
-
 
 </script>
   </body>

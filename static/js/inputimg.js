@@ -75,16 +75,16 @@ function readInputFile(e){
         reader.readAsDataURL(f);
 
         //스토리지에 업로드
-      var storage= firebase.storage();
-      var file=document.getElementById("file-input-img").files[0];
-      var storageRef=storage.ref();
-      var thisref=storageRef.child("file.name").put(file);
+      let storage= firebase.storage();
+      let file=document.getElementById("file-input-img").files[0];
+      let storageRef=storage.ref();
+      let thisref=storageRef.child("file.name").put(file);
       
 
       thisref.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       function(snapshot) {
     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
       case firebase.storage.TaskState.PAUSED: // or 'paused'
