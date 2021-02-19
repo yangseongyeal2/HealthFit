@@ -1,3 +1,11 @@
+.staroff {
+  color: #CECECE;
+}
+.staron {
+  color: orange;
+}
+
+
 /* MYAPAGE INDEX */
 .mypage__list ul{
   display: flex;
@@ -122,15 +130,16 @@
 .review--write .review--write__startpoint .review--write__startpoint__content button {
   border: none;
 }
-.review--write .review--write__startpoint .review--write__startpoint__content button span {
+/* .review--write .review--write__startpoint .review--write__startpoint__content button span {
   color: #CECECE;
-}
-.review--write .review--write__startpoint .review--write__startpoint__content button span.staroff {
+} */
+/* .review--write .review--write__startpoint .review--write__startpoint__content button span.staroff {
   color: #CECECE;
 }
 .review--write .review--write__startpoint .review--write__startpoint__content button span.staron {
   color: yellow;
-}
+} */
+
 
 .review--write .review--write__text .review--write__text__title {
   padding: 0px;
