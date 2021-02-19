@@ -1,19 +1,19 @@
 
 
 
-var firebaseConfig = {
-    apiKey: "AIzaSyAFN2apSBQwHIiGioEKyyQORxceIR22VMs",
-    authDomain: "healthstore-de3c3.firebaseapp.com",
-    databaseURL: "https://healthstore-de3c3-default-rtdb.firebaseio.com",
-    projectId: "healthstore-de3c3",
-    storageBucket: "healthstore-de3c3.appspot.com",
-    messagingSenderId: "838060678239",
-    appId: "1:838060678239:web:d861eca1e8639cc3a14fea",
-    measurementId: "G-3T3MCBWTZ8"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+// var firebaseConfig = {
+//     apiKey: "AIzaSyAFN2apSBQwHIiGioEKyyQORxceIR22VMs",
+//     authDomain: "healthstore-de3c3.firebaseapp.com",
+//     databaseURL: "https://healthstore-de3c3-default-rtdb.firebaseio.com",
+//     projectId: "healthstore-de3c3",
+//     storageBucket: "healthstore-de3c3.appspot.com",
+//     messagingSenderId: "838060678239",
+//     appId: "1:838060678239:web:d861eca1e8639cc3a14fea",
+//     measurementId: "G-3T3MCBWTZ8"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+//   firebase.analytics();
 
 
 function naverLogin() { // 네이버 로그인

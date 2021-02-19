@@ -1,4 +1,5 @@
 //파이어스토어 
+
 var firebaseConfig = {
   apiKey: "AIzaSyAFN2apSBQwHIiGioEKyyQORxceIR22VMs",
   authDomain: "healthstore-de3c3.firebaseapp.com",
@@ -17,6 +18,11 @@ firebase.analytics();
 // Required for side-effects
 
 var db = firebase.firestore();
+
+
+
+
+
 
 
 

@@ -4,7 +4,7 @@ stotal=0
 ltotal=0
 xltotal=0
 xxltotal=0;
-let mySet = new Set();
+let sizeSet = new Set();
 
 document.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
@@ -38,7 +38,7 @@ document.addEventListener('keydown', function(event) {
 function paintOption(size) {
    
     var sizevalue=size.value;
-    if (!mySet.has(sizevalue)){
+    if (!sizeSet.has(sizevalue)){
 
 
     const paint = document.getElementById(`optionList`);
@@ -105,7 +105,7 @@ function paintOption(size) {
     priceList.appendChild(priceDiv);
     priceDiv.appendChild(priceText);
 
-    mySet.add(sizevalue)
+    sizeSet.add(sizevalue)
 
     }
     
@@ -220,7 +220,7 @@ function optionshow(e) {
             //document.getElementById("S_amount").innerHTML=String(int_price)+"원";
             var ul=document.getElementById("ulidS")
             ul.remove()
-            mySet.delete('S')
+            sizeSet.delete('S')
         }else if (e=='M') {
             mtotal=0
             $("#option_ul_m").hide();
@@ -234,7 +234,7 @@ function optionshow(e) {
             //document.getElementById("M_amount").innerHTML=String(int_price)+"원";
             var ul=document.getElementById("ulidM")
             ul.remove()
-            mySet.delete('M')
+            sizeSet.delete('M')
         }else if (e=='L'){
             ltotal=0;
             //document.getElementById("total").innerHTML= document.getElementById("total").value;
@@ -246,7 +246,7 @@ function optionshow(e) {
             //document.getElementById("L_amount").innerHTML=String(int_price)+"원";
             var ul=document.getElementById("ulidL")
             ul.remove()
-            mySet.delete('L')
+            sizeSet.delete('L')
             
         }else if(e=='XL'){
             xltotal=0;
@@ -260,7 +260,7 @@ function optionshow(e) {
             //document.getElementById("XL_amount").innerHTML=String(int_price)+"원";
             var ul=document.getElementById("ulidXL")
             ul.remove()
-            mySet.delete('XL')
+            sizeSet.delete('XL')
         }
         else if(e=='XXL'){
             xxltotal=0;
@@ -273,7 +273,7 @@ function optionshow(e) {
            // document.getElementById("XXL_amount").innerHTML=String(int_price)+"원";
             var ul=document.getElementById("ulidXXL")
             ul.remove()
-            mySet.delete('XXL')
+            sizeSet.delete('XXL')
         }
   }
 

@@ -44,7 +44,8 @@
 
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script> 
+
   <script src="http://code.jquery.com/jquery-1.12.4.min.js" ></script>
   <script src="http://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   
@@ -192,12 +193,20 @@
     <script src="{% static 'js/recentlyView.js' %}"></script>
     <script src="{% static 'js/signup.js' %}"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    {% comment %} <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script> {% endcomment %}
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    
 
 
     <script type="text/javascript">
+   
+
+
+
+
     let recentData = [
       {% for recentview in request.session.RecentView %}  
 

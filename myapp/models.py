@@ -446,6 +446,7 @@ class Review(object):
      ,ColorPoint
      ,ThickPoint
      ,timestamp
+     ,downloadUrl
      
     
      ):
@@ -458,6 +459,7 @@ class Review(object):
         self.ColorPoint=ColorPoint
         self.ThickPoint=ThickPoint
         self.timestamp=timestamp
+        self.downloadUrl=downloadUrl
        
        
         
@@ -475,6 +477,7 @@ class Review(object):
         ,source[u'ColorPoint']
         ,source[u'ThickPoint']
         ,source[u'timestamp']
+        ,source[u'downloadUrl']
      
         )
         if u'StarPoint' in source:
@@ -495,6 +498,8 @@ class Review(object):
             review.ThickPoint=source[u'ThickPoint']
         if u'timestamp' in source:
             review.timestamp=source[u'timestamp']
+        if u'downloadUrl' in source:
+            review.downloadUrl=source[u'downloadUrl']
      
         
         return review
@@ -513,6 +518,7 @@ class Review(object):
             u'ColorPoint':self.ColorPoint,
             u'ThickPoint':self.ThickPoint,
             u'timestamp':self.timestamp,
+            u'downloadUrl':self.downloadUrl,
            
           
         }
@@ -541,6 +547,8 @@ class Review(object):
             dest[u'ThickPoint']=self.ThickPoint
         if self.timestamp:
                 dest[u'timestamp']=self.timestamp
+        if self.downloadUrl:
+            dest[u'downloadUrl']=self.downloadUrl
     
 
         return dest
@@ -558,6 +566,7 @@ class Review(object):
             ,self.ColorPoint
             ,self.ThickPoint
             ,self.timestamp
+            ,self.downloadUrl
         
             )
             )

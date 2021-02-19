@@ -1,6 +1,7 @@
 "use strict";
 
 function drawStar(star) {
+  document.getElementById('starPoint').value=star.value
   let point = star.value;
   const del = document.querySelectorAll(`.star-draw`);
 
