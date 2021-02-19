@@ -179,14 +179,33 @@
           </div>
 
           <div>
-          <span>
-          {% for i in "x"|rjust:review.StarPoint %}
+          <span id="starwrap">
+          {% comment %} {% for i in "x"|rjust:review.StarPoint %}
 
 	        <span class="star-draw">
                 <i class="fas fa-star fa-0.5x"></i>
           </span>
 
-          {% endfor %}
+          {% endfor %} {% endcomment %}
+          <script>
+         
+          let starpoint={{review.StarPoint}}
+          let starwrap=document.getElementById('starwrap')
+          alert(starpoint);
+
+          for(i=0;i<starpoint;i++){
+           starwrap.innerHTML += `
+        
+           <span class="star-draw">
+                <i class="fas fa-star fa-0.5x"></i>
+           </span>
+      
+            `; 
+          }
+         
+       
+          </script>
+
             </span>
              <span>writedate</span>
 
