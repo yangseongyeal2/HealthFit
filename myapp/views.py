@@ -276,6 +276,7 @@ def detail(request,documentId):
     #테스트
     uid=None
     com_lis=[]
+    recentview_lis=[]
     print("홈시작")
     try:
         recentview_lis=request.session['RecentView']
@@ -312,7 +313,7 @@ def detail(request,documentId):
 
         for doc in review_alldocs:
             review=Review.from_dict(doc.to_dict())
-            print("딜리버리 UID"+review.delivery_uid)
+            print(review.text)
             review_lis.append(review)
             #review user
             review_user_ref=db.collection(u'users').document(review.user_uid)

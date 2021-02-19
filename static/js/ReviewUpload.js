@@ -63,7 +63,7 @@ function ReviewUpload(){
         if (doc.exists) {
             console.log("Document data:", doc.data());
             //데이터 review 추가.
-            db.collection("product").doc(doc.data().product_id).collection('review').add({
+            db.collection("product").doc(doc.data().product_id).collection('review').doc(doc.data().uid).set({
                 StarPoint:starPoint,
                 user_uid: doc.data().uid,
                 delivery_uid: doc.id,
@@ -75,9 +75,8 @@ function ReviewUpload(){
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 downloadUrl:imgurl
             })
-            .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
-                
+            .then(() => {
+                console.log("Document written with ID: ");
                 history.back();
             })
             .catch((error) => {
