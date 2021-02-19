@@ -276,6 +276,7 @@ def detail(request,documentId):
     #테스트
     uid=None
     com_lis=[]
+    recentview_lis=[]
     print("홈시작")
     try:
         recentview_lis=request.session['RecentView']
