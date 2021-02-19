@@ -50,7 +50,7 @@ function paintingData(currentPage, totalData) {
       //  <a href="http://3.35.247.69/orderinfo/review/write/${totalData[start].uid}/">후기작성</a>
       tableReview.innerHTML = `
         
-      <a href="http://127.0.0.1:8000/orderinfo/review/write/${totalData[start].uid}/">후기작성</a>
+      <a href="review/write/${totalData[start].uid}/">후기작성</a>
       
       `;
 
