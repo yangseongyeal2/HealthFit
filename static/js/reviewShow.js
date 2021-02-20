@@ -11,10 +11,9 @@ function drawReviewShow(data) {
   const painter = document.querySelector(`.details__review--wrap`);
   console.log(data.length);
 
-
+  let str = "";
   for(let i = 0; i < data.length; i++) {
-    painter.innerHTML += 
-    `
+    str += `
       <article>
 
         <div class="details__review__userinfo">
@@ -51,9 +50,10 @@ function drawReviewShow(data) {
     `;
     
   }
+  painter.innerHTML += str;
   
 }
-
+// 섹스
 function detailDrawStar(data) {
   let point = "";
   console.log(`point:${data.point}`);
