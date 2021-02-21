@@ -3,6 +3,7 @@
 {% block content %}
 {% load static %}
 
+
 <div class="contents">
 
   <div class="location">
@@ -40,6 +41,9 @@
           
 
        {% comment %} <form action="{%url 'review_create' delivery_uid %}"> {% endcomment %}
+       {% comment %} <form id="form1" name="form1" method="post" action="" onsubmit="ReviewUpload(this);">  {% endcomment %}
+
+
        {% csrf_token %}
 
       <div class="review--write__startpoint review--table">
@@ -96,9 +100,11 @@
           <input type="file" name="file[]" id="file-input-img" accept="img/*" multiple id="file-input-img">
 
           <input type="hidden" name="url" id="url">
+          <input type="hidden" name="user_uid" id="user_uid" value={{request.session.uid}}>
           <input type="hidden" name="delivery_uid" id="delivery_uid" value={{delivery_uid}}>
           <input type="hidden" name="path" value={{expath}}>
-          <input type="hidden" id="downloadURL">
+          <div id="downloadURL"></div>
+          <input type="hidden" id="downloadURL[]"name="downloadURL[]">
           
 
           <!-- <button class="btn-normal btn-white btn-input-img">사진첨부하기</button> -->
@@ -113,6 +119,10 @@
       <div>
         {% comment %} <input type="submit" class="btn-normal btn-black" onclick="ReviewUpload()" value="작성하기">   {% endcomment %}
         <button type="button"  class="btn-normal btn-black"  onclick="ReviewUpload()" value="작성하기"> 
+        {% comment %} <input type="submit" name="Submit" id="button" value="Submit" /> {% endcomment %}
+
+
+
       </div>
        {% comment %} </form>  {% endcomment %}
       
@@ -124,6 +134,7 @@
 </div>
 <script src="{% static 'js/inputimg.js' %}"></script>
 <script src="{% static 'js/starpoint.js' %}"></script>
+<script src="{% static 'js/ReviewUpload.js' %}"></script>
 
 
 
