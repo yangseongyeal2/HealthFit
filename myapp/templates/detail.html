@@ -208,13 +208,12 @@
         time: `{{review.timestamp}}`,
         productName: `{{delivery.product_name}}`,
         productOption: `{{delivery.option}}`,
-        reviewImg: `{{review.downloadUrl}}`,
+        reviewImg: {{review.downloadUrl|safe}},
         reviewText: `{{review.text}}`
       },
-
+      
     {% endfor %}
   ]
-  
   detailReviewInit(reviewData);
 </script>
 {% endblock %}
