@@ -3,13 +3,12 @@ let savingReviewShow = null;
 
 function detailReviewInit(e){
   savingReviewShow = e;
-  console.log(savingReviewShow);
   drawReviewShow(savingReviewShow);
 }
 
 function drawReviewShow(data) {
   const painter = document.querySelector(`.details__review--wrap`);
-  console.log(data.length);
+  
 
   let str = "";
   for(let i = 0; i < data.length; i++) {
@@ -53,10 +52,9 @@ function drawReviewShow(data) {
   painter.innerHTML += str;
   
 }
-// 섹스
+// 별점에 맞는 별 그리는 함수
 function detailDrawStar(data) {
   let point = "";
-  console.log(`point:${data.point}`);
   for(let i = 0; i < data.point; i++) {
     point += 
     `
@@ -76,10 +74,15 @@ function detailDrawStar(data) {
   return point;
 }
 
+//유저가 업로드한 이미지를 저장하는 함수
 function detailDrawImg(data) {
-  let img ="";
-  if(data.reviewImg) {
-    img += `<img src="${data.reviewImg}" alt="userReviewImg"></img>`;
-  }
+  let img = "";
+  let array = data.reviewImg;
+  console.log(`array : ${array}`);
+    
+  array.forEach(element => {
+    console.log(`이미지 경로: ${element}`);
+    img += `<img src="${element}" alt="userReviewImg"></img>`;  
+  });
   return img;
 }
