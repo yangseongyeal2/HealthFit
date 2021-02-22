@@ -131,6 +131,12 @@ a:visited {
 .inner {
   margin: 10px auto;
 }
+
+.loading-img {
+  width: 100px;
+  height: 100px;
+}
+
 /* COMMON END */
 
 
@@ -584,6 +590,7 @@ a:visited {
 .details__review--wrap article .details__review__product-img img {
   width: 100px;
   height: 100px;
+  margin: 0px 10px;
 }
 
 .details__review--wrap article .details__review__text pre {
