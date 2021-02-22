@@ -33,7 +33,8 @@ function ReviewUpload(){
             })
             .then(() => {
                 console.log("Document written with ID: ");
-                //history.back();
+                history.back();
+                download_url_lis=[]
             })
             .catch((error) => {
                 console.error("Error adding document: ", error);

@@ -56,6 +56,7 @@ function readInputFile(e){
   let fileArr = Array.prototype.slice.call(files);
   let index = 0;
   let i=0
+   //todo : 프로그래스바 시작
   fileArr.forEach(function(f){
     console.log(`2`);
     if(!f.type.match("image/.*")){
@@ -63,6 +64,7 @@ function readInputFile(e){
           return;
       };
     if(files.length < 11){
+     
         console.log(`3`);
         console.log("테스트"+files[0]);
         sel_files.push(f);
@@ -89,10 +91,11 @@ function readInputFile(e){
       let storageRef=storage.ref();
 
       
-        filename=filename+String(i)
+        filename=filename+"??"+String(i)
         
 
         let thisref=storageRef.child(filename).put(files[i]);
+        i++
 
         thisref.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         function(snapshot) {
@@ -126,7 +129,7 @@ function readInputFile(e){
       }, function() {
     // Upload completed successfully, now we can get the download URL
       thisref.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-      i++;
+     
       console.log('File available at', downloadURL);
       //document.getElementById('downloadURL[]').value+=downloadURL
       // let downloadURL_reviewindex=document.getElementById('downloadURL')
@@ -147,6 +150,8 @@ function readInputFile(e){
     
       }//if문 끝
     })//for each문 끝
+    
+     //todo : 프로그래스바 끝
     
    
     
