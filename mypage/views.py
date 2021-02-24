@@ -15,7 +15,7 @@ def mypage(request):
         uid=request.session['uid']
         return render(request, 'mypage.html',{'uid':uid})
     except:
-        return render(request, 'signin.html',{'uid':uid})
+        return render(request, 'signIn.html',{'uid':uid})
    
 
 def orderinfo(request):
