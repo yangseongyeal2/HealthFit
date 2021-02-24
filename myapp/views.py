@@ -1165,7 +1165,7 @@ def inbody(request):
         user_ref=db.collection("users").document(uid)
         
     except:
-         return render(request, 'signin.html')
+         return render(request, 'signIn.html')
     
 
     return render(request, 'inbody.html')
@@ -1188,7 +1188,7 @@ def inbody_insert(request):
      
 
     except:
-         return render(request, 'signin.html')
+         return render(request, 'signIn.html')
     
           
 
@@ -1245,7 +1245,12 @@ def review_create(request,delivery_uid):
         
         return render(request, 'orderinfo.html',{'uid':uid,'comb_lis':comb_lis})
     except:
-        return render(request, 'signin.html',{'uid':uid})
+        return render(request, 'signIn.html',{'uid':uid})
+
+
+def findId(request):
+    return render(request, 'find_id.html')
+
     
 
     

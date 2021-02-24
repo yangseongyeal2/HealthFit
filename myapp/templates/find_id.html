@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div class="contents">
+       
+            {% csrf_token %}
+             
+            이메일:
+            <input type="email" name="email" Id="email_firebase"><br><br>
+          
+            <button onclick="find_id()" value="입력">
+    
+    </div>
+    <script>
+    function find_id(){
+        var auth = firebase.auth();
+        var emailAddress = document.getElementById('email_firebase').value;
+      
+        auth.sendPasswordResetEmail(emailAddress).then(function() {
+  // Email sent.
+         alert("자신의 Email을 확인해서 링크를 클릭해주시기바랍니다.");
+         history.back();
+        }).catch(function(error) {
+  // An error happened.
+             alert("등록되지않은 email 입니다");
+        });
+    }
+    </script>
+        
+{% endblock content %}
